@@ -1,7 +1,10 @@
 # Materijali iz kolegija: Analiza podataka i obrada informacija (APOI)
 
 <div >
-
+  <img style="width: 64px; height: 64px;"
+    src="https://github.com/user-attachments/assets/2927def3-877a-46f3-b14e-5bae4917eb73">
+  <img style="height: 64px;"
+    src="https://github.com/user-attachments/assets/76f97e58-87c8-491c-861c-7dfb12620c46">
 </div>
 
 **Nositelj**: [izv. prof. dr. sc. Siniša Sovilj](https://fipu.unipu.hr/fipu/sinisa.sovilj)  
