@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>R osnove</title>
+		<meta
+			http-equiv="Content-type"
+			content="text/html;charset=UTF-8" />
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet" />
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+			/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+			/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+			:not(code *, .MathJax *) {
+				font-family: "Poppins", sans-serif;
+			}
+            html {
+                display: flex;
+                justify-content: center;
+            }
+			body {
+				font-family: var(
+					--vscode-markdown-font-family,
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe WPC",
+					"Segoe UI",
+					"Ubuntu",
+					"Droid Sans",
+					sans-serif
+				);
+				font-size: var(--vscode-markdown-font-size, 14px);
+				line-height: var(--vscode-markdown-line-height, 22px);
+				word-wrap: break-word;
+				color: #3b3b3b;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                width: full;
+			}
+			.body {
+                max-width: 1012px;
+			}
+
+			#code-csp-warning {
+				position: fixed;
+				top: 0;
+				right: 0;
+				color: white;
+				margin: 16px;
+				text-align: center;
+				font-size: 12px;
+				font-family: sans-serif;
+				background-color: #444444;
+				cursor: pointer;
+				padding: 6px;
+				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			}
+
+			#code-csp-warning:hover {
+				text-decoration: none;
+				background-color: #007acc;
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+			}
+
+			body.scrollBeyondLastLine {
+				margin-bottom: calc(100vh - 22px);
+			}
+
+			body.showEditorSelection .code-line {
+				position: relative;
+			}
+
+			body.showEditorSelection .code-active-line:before,
+			body.showEditorSelection .code-line:hover:before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0;
+				left: -12px;
+				height: 100%;
+			}
+
+			body.showEditorSelection li.code-active-line:before,
+			body.showEditorSelection li.code-line:hover:before {
+				left: -30px;
+			}
+
+			.vscode-light.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.15);
+			}
+
+			.vscode-light.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.4);
+			}
+
+			.vscode-light.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-dark.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.4);
+			}
+
+			.vscode-dark.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.6);
+			}
+
+			.vscode-dark.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 160, 0, 0.7);
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 160, 0, 1);
+			}
+
+			.vscode-high-contrast.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+				border-radius: 8px;
+				filter: drop-shadow(-0 2px 2px rgba(0, 0, 0, 0.07));
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+
+			a:focus,
+			input:focus,
+			select:focus,
+			textarea:focus {
+				outline: 1px solid -webkit-focus-ring-color;
+				outline-offset: -1px;
+			}
+
+			hr {
+				border: 0;
+				height: 2px;
+				border-bottom: 2px solid;
+			}
+
+			h1 {
+				padding-bottom: 0.3em;
+				line-height: 1.2;
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+			}
+
+			h1,
+			h2,
+			h3 {
+				font-weight: normal;
+			}
+
+			table {
+				border-collapse: collapse;
+			}
+
+			table > thead > tr > th {
+				text-align: left;
+				border-bottom: 1px solid;
+			}
+
+			table > thead > tr > th,
+			table > thead > tr > td,
+			table > tbody > tr > th,
+			table > tbody > tr > td {
+				padding: 5px 10px;
+			}
+
+			table > tbody > tr + tr > td {
+				border-top: 1px solid;
+			}
+
+			blockquote {
+				margin: 0 7px 0 5px;
+				padding: 0 16px 0 10px;
+				border-left-width: 5px;
+				border-left-style: solid;
+			}
+
+			code {
+				font-family: Menlo, Monaco, Consolas, "Droid Sans Mono",
+					"Courier New", monospace, "Droid Sans Fallback";
+				font-size: 1em;
+				line-height: 1.357em;
+			}
+
+			body.wordWrap pre {
+				white-space: pre-wrap;
+			}
+
+			pre:not(.hljs),
+			pre.hljs code > div {
+				padding: 16px;
+				border-radius: 3px;
+				overflow: auto;
+			}
+
+			pre code {
+				color: var(--vscode-editor-foreground);
+				tab-size: 4;
+			}
+
+			/** Theming */
+
+			.vscode-light pre {
+				background-color: rgba(220, 220, 220, 0.4);
+			}
+
+			.vscode-dark pre {
+				background-color: rgba(10, 10, 10, 0.4);
+			}
+
+			.vscode-high-contrast pre {
+				background-color: rgb(0, 0, 0);
+			}
+
+			.vscode-high-contrast h1 {
+				border-color: rgb(0, 0, 0);
+			}
+
+			.vscode-light table > thead > tr > th {
+				border-color: rgba(0, 0, 0, 0.69);
+			}
+
+			.vscode-dark table > thead > tr > th {
+				border-color: rgba(255, 255, 255, 0.69);
+			}
+
+			.vscode-light h1,
+			.vscode-light hr,
+			.vscode-light table > tbody > tr + tr > td {
+				border-color: rgba(0, 0, 0, 0.18);
+			}
+
+			.vscode-dark h1,
+			.vscode-dark hr,
+			.vscode-dark table > tbody > tr + tr > td {
+				border-color: rgba(255, 255, 255, 0.18);
+			}
+		</style>
+
+		<style>
+			/*
+
+Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+
+*/
+			.hljs {
+				background: white;
+				color: black;
+			}
+
+			.hljs-comment,
+			.hljs-quote,
+			.hljs-variable {
+				color: #008000;
+			}
+
+			.hljs-keyword,
+			.hljs-selector-tag,
+			.hljs-built_in,
+			.hljs-name,
+			.hljs-tag {
+				color: #00f;
+			}
+
+			.hljs-string,
+			.hljs-title,
+			.hljs-section,
+			.hljs-attribute,
+			.hljs-literal,
+			.hljs-template-tag,
+			.hljs-template-variable,
+			.hljs-type,
+			.hljs-addition {
+				color: #a31515;
+			}
+
+			.hljs-deletion,
+			.hljs-selector-attr,
+			.hljs-selector-pseudo,
+			.hljs-meta {
+				color: #2b91af;
+			}
+
+			.hljs-doctag {
+				color: #808080;
+			}
+
+			.hljs-attr {
+				color: #f00;
+			}
+
+			.hljs-symbol,
+			.hljs-bullet,
+			.hljs-link {
+				color: #00b0e8;
+			}
+
+			.hljs-emphasis {
+				font-style: italic;
+			}
+
+			.hljs-strong {
+				font-weight: bold;
+			}
+		</style>
+
+		<style>
+			/*
+ * Markdown PDF CSS
+ */
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC",
+					"Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+			}
+
+			pre {
+				background-color: #f8f8f8;
+				border: 1px solid #cccccc;
+				border-radius: 3px;
+				overflow-x: auto;
+				white-space: pre-wrap;
+				overflow-wrap: break-word;
+			}
+
+			pre:not(.hljs) {
+				padding: 23px;
+				line-height: 19px;
+			}
+
+			blockquote {
+				background: rgba(127, 127, 127, 0.1);
+				border-color: rgba(0, 122, 204, 0.5);
+			}
+
+			.emoji {
+				height: 1.4em;
+			}
+
+			code {
+				font-size: 14px;
+				line-height: 19px;
+			}
+
+			/* for inline code */
+			:not(pre):not(.hljs) > code {
+				color: #3b3b3b; /* Change the old color so it seems less like an error */
+				font-size: inherit;
+				background: #e0e0e0;
+				border-radius: 4px;
+				padding: 1px 2px;
+				margin: -1px -2px;
+			}
+
+			/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+			.page {
+				page-break-after: always;
+			}
+		</style>
+
+		<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+	</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div class="body">
+<h1 id="analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</h1>
+<p><strong>Nositelj</strong>: izv. prof. dr. sc. Siniša Sovilj
+<strong>Asistent</strong>: mag. inf. Alesandro Žužić</p>
+<p><strong>Ustanova</strong>: Sveučilište Jurja Dobrile u Puli, Fakultet informatike u Puli</p>
+<p style="float: clear; display: flex; gap: 8px; align-items: center;" class="font-brioni text-sm whitespace-nowrap">
+    <img src="../Logo/fipu_logo.svg" style="height: 96px; box-shadow: none !important;" class="mr-4"></img>
+    Fakultet informatike u Puli
+</p>
+<h1 id="1-r-osnove">[1] R osnove</h1>
+<div style="display: flex; justify-content: space-between; text-align: justify; gap: 32px;">
+    <p>
+        R je programski jezik i okruženje za statističku analizu i grafičku vizualizaciju podataka. Nudi bogat skup funkcija za <b>statističko modeliranje</b>, <b>analizu podataka</b> i <b>strojno učenje</b>. Zbog svoje fleksibilnosti i velikog broja biblioteka, R je široko korišten u znanstvenim istraživanjima i industriji.
+    </p>
+    <img src="../Icons/R_1.svg" style="width: 96px; height: 96px; margin: 0px;"></img>
+</div>
+<p><strong>Posljednje ažurirano:</strong> 12. ožujka 2025.</p>
+<!-- TOC -->
+<ul>
+<li><a href="#analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</a></li>
+<li><a href="#1-r-osnove">[1] R osnove</a>
+<ul>
+<li><a href="#rstudio">RStudio</a>
+<ul>
+<li><a href="#preuzimanje-i-instalacija-r-a">Preuzimanje i instalacija R-a</a></li>
+<li><a href="#preuzimanje-i-instalacija-rstudia">Preuzimanje i instalacija RStudia</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#uvod">Uvod</a>
+<ul>
+<li><a href="#osnovna-sintaksa">Osnovna sintaksa</a>
+<ul>
+<li><a href="#osnovne-operacije">Osnovne operacije</a></li>
+<li><a href="#generiranje-sekvenci-brojeva">Generiranje sekvenci brojeva</a></li>
+<li><a href="#ispis-podataka">Ispis podataka</a>
+<ul>
+<li><a href="#paste">paste</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#varijable-i-dodjela-vrijednosti">Varijable i dodjela vrijednosti</a>
+<ul>
+<li><a href="#imena-varijabli">Imena varijabli</a></li>
+<li><a href="#osnovne-vrste-podataka">Osnovne vrste podataka</a></li>
+</ul>
+</li>
+<li><a href="#uvjeti">Uvjeti</a>
+<ul>
+<li><a href="#if-uvjet">IF uvjet</a></li>
+<li><a href="#ifelse-uvjet">IFELSE uvjet</a></li>
+</ul>
+</li>
+<li><a href="#petlje">Petlje</a>
+<ul>
+<li><a href="#for-petlja">FOR petlja</a></li>
+<li><a href="#while-petlja">WHILE petlja</a></li>
+<li><a href="#repeat-petlja">REPEAT petlja</a></li>
+</ul>
+</li>
+<li><a href="#funkcije">Funkcije</a></li>
+</ul>
+</li>
+<li><a href="#strukture-podataka">Strukture podataka</a>
+<ul>
+<li><a href="#podatkovni-skupovi-datasets">Podatkovni skupovi Datasets</a>
+<ul>
+<li><a href="#varijable-prema-mjernim-skalama">Varijable prema mjernim skalama</a></li>
+</ul>
+</li>
+<li><a href="#vrste-struktura-podataka">Vrste struktura podataka</a>
+<ul>
+<li><a href="#vektor-vector">Vektor Vector</a></li>
+<li><a href="#primjer">Primjer</a></li>
+<li><a href="#matrica-matrix">Matrica Matrix</a></li>
+<li><a href="#polje-array">Polje Array</a></li>
+<li><a href="#okvir-podataka-data-frame">Okvir podataka Data Frame</a></li>
+<li><a href="#faktori-factors">Faktori Factors</a></li>
+<li><a href="#liste-lists">Liste Lists</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#u%C4%8Ditavanje-podataka">Učitavanje podataka</a>
+<ul>
+<li><a href="#u%C4%8Ditavanje-iz-tekstualnih-datoteka">Učitavanje iz tekstualnih datoteka</a>
+<ul>
+<li><a href="#u%C4%8Ditavanje-csv-datoteka">Učitavanje CSV datoteka</a></li>
+<li><a href="#u%C4%8Ditavanje-txt-datoteka">Učitavanje TXT datoteka</a></li>
+</ul>
+</li>
+<li><a href="#u%C4%8Ditavanje-iz-excel-datoteka">Učitavanje iz Excel datoteka</a></li>
+<li><a href="#u%C4%8Ditavanje-s-interneta">Učitavanje s interneta</a></li>
+<li><a href="#u%C4%8Ditavanje-ugra%C4%91enih-podataka">Učitavanje ugrađenih podataka</a></li>
+<li><a href="#provjera-i-%C4%8Di%C5%A1%C4%87enje-podataka">Provjera i čišćenje podataka</a>
+<ul>
+<li><a href="#provjera-strukture-podataka">Provjera strukture podataka</a></li>
+<li><a href="#provjera-nedostaju%C4%87ih-vrijednosti">Provjera nedostajućih vrijednosti</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#samostalni-zadatak-za-vje%C5%BEbu-1">Samostalni zadatak za vježbu 1</a></li>
+</ul>
+<!-- /TOC -->
+<div class="page"></div>
+<h2 id="rstudio">RStudio</h2>
+<img src="images/RStudioLogo.png" width="200" style="float: right;"/>
+<p><strong>RStudio</strong> je integrirano razvojno okruženje (IDE) za programski jezik <strong>R</strong>.</p>
+<h3 id="preuzimanje-i-instalacija-r-a">Preuzimanje i instalacija R-a</h3>
+<p>Prije nego što instaliramo RStudio, potrebno je instalirati R, jer je RStudio samo okruženje koje koristi R kao svoj temeljni jezik.</p>
+<p>Sa službene stranice R-a <a href="https://cran.r-project.org">https://cran.r-project.org</a> preuzmite odgovarajuću verziju te pokrenite preuzetu datoteku slijedeći upute za instalaciju (ostavite zadane postavke).</p>
+<h3 id="preuzimanje-i-instalacija-rstudia">Preuzimanje i instalacija RStudia</h3>
+<img src="images/PositLogo.png" width="200" style="float: right;"/>
+<p>Nakon što je R instaliran, možemo instalirati RStudio tako da sa službene stranicu RStudia <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a> preuzmemo <strong>besplatnu verziju</strong> RStudio Desktop <em>Open Source Edition (AGPL v3)</em>. Pokrenite preuzetu datoteku i slijedite upute za instalaciju (ostavite zadane postavke).</p>
+<hr>
+<p>Nakon instalacije, pokrenite RStudio. Prvi prikaz trebao bi izgledati ovako:</p>
+<p><img src="images/RStudioUI.png" alt="alt text"></p>
+<p>RStudio se sastoji od nekoliko ključnih panela:</p>
+<ul>
+<li><strong>Editor (Ime Datoteke/Untitled)</strong> - mjesto gdje pišemo kôd odabrane/nove datoteke</li>
+<li><strong>Konzola (Console)</strong> – mjesto gdje unosimo i izvršavamo R naredbe i vidimo ispis (print)</li>
+<li><strong>Okruženje (Environment)</strong> – prikazuje trenutno učitane varijable i objekte</li>
+<li><strong>Datoteke, Plots, Help, Packages</strong> – panel za pregled datoteka, vizualizaciju grafova, instalaciju paketa i dokumentaciju</li>
+</ul>
+<div class="page"></div>
+<p>Kako bi provjerili je li R ispravno instaliran, u konzolu upišemo <code>version</code>:</p>
+<pre class="hljs"><code><div>&gt; version
+               _                                
+platform       x86_64-w64-mingw32               
+arch           x86_64                           
+os             mingw32                          
+crt            ucrt                             
+system         x86_64, mingw32                  
+status                                          
+major          <span class="hljs-number">4</span>                                
+minor          <span class="hljs-number">4.3</span>                              
+year           <span class="hljs-number">2025</span>                             
+month          <span class="hljs-number">02</span>                               
+day            <span class="hljs-number">28</span>                               
+svn rev        <span class="hljs-number">87843</span>                            
+language       R                                
+version.string R version <span class="hljs-number">4.4</span><span class="hljs-number">.3</span> (<span class="hljs-number">2025</span>-<span class="hljs-number">02</span>-<span class="hljs-number">28</span> ucrt)  
+</div></code></pre>
+<p>Za testiranje rada RStudia, možemo napisati sljedeću naredbu:</p>
+<pre class="hljs"><code><div>&gt; print(<span class="hljs-string">"Pozdrav iz RStudia!"</span>)
+[<span class="hljs-number">1</span>] <span class="hljs-string">"Pozdrav iz RStudia!"</span>
+</div></code></pre>
+<h1 id="uvod">Uvod</h1>
+<p>Prvo što želimo napraviti je stvoriti novu R datoteku u kojoj ćemo spremati kôd koji pišemo. Možemo koristiti kraticu <code>Ctrl+Shift+N</code> ili kliknuti na <em>New File</em> ikonu:</p>
+<p><img src="images/NewRScript.png" alt="alt text"></p>
+<p>Prvo što si želimo namjestiti u RStudiu je trenutni <strong>radni direktorij</strong> (<em>working directory</em>), što je u biti samo mapa (<em>folder</em>) u kojem ćemo raditi i stvarati datoteke.</p>
+<p>Da bi provjerili u kojem se radnom direktoriju nalazimo, koristimo komandu: <code>getwd()</code> - get working directory <br>
+Dok za namještanje novog direktorija, koristimo komandu: <code>setwd(&quot;&lt;value&gt;&quot;)</code> - set working directory</p>
+<blockquote>
+<p>Za <strong>pokretanje</strong> kôda u RStudio-u označimo jednu ili više linije kôda i pritisnemo kombinaciju tipki <code>Ctrl+Enter</code></p>
+</blockquote>
+<div class="page"></div>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>getwd()
+
+<span class="hljs-comment"># primjer ispisa u konzoli</span>
+[<span class="hljs-number">1</span>] <span class="hljs-string">"C:/Users/user/Documents/GitHub/FIPU-APOI/Skripte/Skripta 1. - R Osnove"</span>
+</div></code></pre>
+<pre class="hljs"><code><div>setwd(<span class="hljs-string">"~/GitHub/FIPU-APOI/Skripte/Skripta 1. - R Osnove/primjeri"</span>)
+</div></code></pre>
+<p>Ako ne želimo ručno pisati putanju do željenog radnog direktorija, možemo u panelu <strong>Files</strong> pronaći i namjestiti trenutni radni direktorij.</p>
+<p><img src="images/Files.png" alt="alt text"></p>
+<p>Ukoliko nismo sigurni kako neka ugrađena (<em>built-in</em>) funkcija ili komanda radi, uvijek možemo iću u panel <em>Help</em> te pretražiti dokumentaciju ili ispred funkcije staviti <code>?</code> i pokrenuti je:</p>
+<p><img src="images/Help.png" alt="alt text"></p>
+<div class="page"></div>
+<h2 id="osnovna-sintaksa">Osnovna sintaksa</h2>
+<p>Podsjetnik, u RStudiu možete izvršiti kôd tako da:</p>
+<ul>
+<li>napišete naredbu i pritisnete <code>Ctrl+Enter</code> (Windows/Linux) ili <code>CMD+Enter</code> (Mac)</li>
+<li>označite više linija kôda i pokrenete ih na isti način</li>
+<li>konzolu možete očistiti pomoću <code>Ctrl+L</code>, kroz <em>Edit → Clear Console</em> ili pritiskom na ikonu <em>metle</em></li>
+</ul>
+<blockquote>
+<p>U RStudiu <strong>undo</strong> se vrši kraticom <code>Ctrl+Z</code>, dok kraticom <code>Ctrl+Shift+Z</code> vršimo <strong>redo</strong></p>
+</blockquote>
+<p><em>Jednolinijski (singleline) komentari u R-u se pišu s znakom <code>#</code>, višelinijskih (multiline) komentara nema:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># komentar</span>
+
+<span class="hljs-comment"># jedini način pisanja komentara u</span>
+<span class="hljs-comment"># više linija</span>
+</div></code></pre>
+<blockquote>
+<p>Za zakomentirat/odkomentirat više linija odjednom možemo koristiti kraticu <code>Ctrl+Shift+C</code></p>
+</blockquote>
+<h3 id="osnovne-operacije">Osnovne operacije</h3>
+<p>R podržava standardne matematičke operacije:</p>
+<pre class="hljs"><code><div><span class="hljs-number">2</span> + <span class="hljs-number">2</span>     <span class="hljs-comment"># Zbrajanje</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">4</span>
+
+<span class="hljs-number">5</span> - <span class="hljs-number">3</span>     <span class="hljs-comment"># Oduzimanje</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">2</span>
+
+<span class="hljs-number">4</span> * <span class="hljs-number">2</span>     <span class="hljs-comment"># Množenje</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">8</span>
+
+<span class="hljs-number">7</span> / <span class="hljs-number">2</span>     <span class="hljs-comment"># Dijeljenje</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">3.5</span>
+
+<span class="hljs-number">7</span> %/% <span class="hljs-number">2</span>   <span class="hljs-comment"># Cjelobrojno dijeljenje</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">3</span>
+
+<span class="hljs-number">2</span>^<span class="hljs-number">3</span>       <span class="hljs-comment"># Potenciranje (2 na treću)</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">8</span>
+
+<span class="hljs-number">10</span> %% <span class="hljs-number">3</span>   <span class="hljs-comment"># Modulo (ostatak pri dijeljenju)</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">1</span>
+</div></code></pre>
+<blockquote>
+<p>U svim primjerima i nadalje, uglate zagrade s brojkom <code>[1]</code> će predstavljati ispis u konzoli (<em>kao u RStudiu</em>).</p>
+</blockquote>
+<div class="page"></div>
+<h3 id="generiranje-sekvenci-brojeva">Generiranje sekvenci brojeva</h3>
+<p>R omogućuje jednostavno generiranje sekvenci brojeva pomoću operatora <code>:</code> ili funkcije <code>seq()</code></p>
+<pre class="hljs"><code><div><span class="hljs-number">1</span>:<span class="hljs-number">10</span>           <span class="hljs-comment"># Generira brojeve od 1 do 10</span>
+ [<span class="hljs-number">1</span>]  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">9</span> <span class="hljs-number">10</span>
+
+seq(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)     <span class="hljs-comment"># Isto kao 1:10</span>
+ [<span class="hljs-number">1</span>]  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">9</span> <span class="hljs-number">10</span>
+
+seq(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>)  <span class="hljs-comment"># Generira brojeve od 1 do 10 s korakom 2</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">7</span> <span class="hljs-number">9</span>
+</div></code></pre>
+<hr>
+<h3 id="ispis-podataka">Ispis podataka</h3>
+<p>Za ispis podataka u konzolu koristimo funkciju <code>print()</code> ili jednostavno napišemo ime varijable</p>
+<pre class="hljs"><code><div>print(<span class="hljs-string">"Hello, World!"</span>)    <span class="hljs-comment"># Ispis niza znakova</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Hello, World!"</span>
+
+x &lt;- <span class="hljs-number">42</span>   <span class="hljs-comment"># Dodjeljivanje vrijednosti varijabli x</span>
+x         <span class="hljs-comment"># Ispis varijable x</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">42</span>
+</div></code></pre>
+<h4 id="paste"><code>paste()</code></h4>
+<p>Funkcija <code>paste()</code> u R-u spaja više objekata (stringova, brojeva, varijabli) u jedan tekstualni niz. Možemo postaviti separator između spojenih elemenata koristeći argument <code>sep</code>. Ako ne postavimo separator, koristi se razmak <code>' '</code>.</p>
+<pre class="hljs"><code><div>paste(<span class="hljs-string">"Hello"</span>, <span class="hljs-string">"World"</span>) <span class="hljs-comment"># "Hello World"</span>
+paste(<span class="hljs-string">"2025"</span>, <span class="hljs-string">"03"</span>, <span class="hljs-string">"11"</span>, sep = <span class="hljs-string">"-"</span>) <span class="hljs-comment"># "2025-03-11"</span>
+paste(<span class="hljs-string">"Broj je:"</span>, <span class="hljs-number">10</span>) <span class="hljs-comment"># "Broj je: 10"</span>
+</div></code></pre>
+<p>Funkcija <code>paste0()</code> je varijanta koja ne koristi separator (nema razmaka), no isto je kao da napišemo <code>paste()</code> gdje je <code>sep=&quot;&quot;</code></p>
+<div class="page"></div>
+<h2 id="varijable-i-dodjela-vrijednosti">Varijable i dodjela vrijednosti</h2>
+<p>Varijable u R-u dodjeljuju se pomoću <code>&lt;-</code> ili <code>=</code>. Preporučeni operator je <code>&lt;-</code>.</p>
+<pre class="hljs"><code><div>a &lt;- <span class="hljs-number">10</span>               <span class="hljs-comment"># Dodjela broja 10 varijabli a</span>
+b = <span class="hljs-number">5</span>                 <span class="hljs-comment"># Alternativni način (nije preporučeno)</span>
+ime &lt;- <span class="hljs-string">"Ana"</span>          <span class="hljs-comment"># Tekstualna varijabla</span>
+logicka &lt;- <span class="hljs-literal">TRUE</span>       <span class="hljs-comment"># Logička varijabla</span>
+
+v1 &lt;- v2 &lt;- v3 &lt;- <span class="hljs-string">"jabuka"</span> <span class="hljs-comment"># Dodjela iste vrijednosti više varijabli istovremeno</span>
+</div></code></pre>
+<p><em>Možemo ispisati varijable jednostavnim navođenjem njihovih imena:</em></p>
+<pre class="hljs"><code><div>a
+ [<span class="hljs-number">1</span>] <span class="hljs-number">10</span>
+b
+ [<span class="hljs-number">1</span>] <span class="hljs-number">5</span>
+ime
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Ana"</span>
+logicka
+ [<span class="hljs-number">1</span>] <span class="hljs-literal">TRUE</span>
+</div></code></pre>
+<hr>
+<h3 id="imena-varijabli">Imena varijabli</h3>
+<p>Varijable u R-u mogu imati kratka imena (kao što su <code>x</code> i <code>y</code>) ili opisna imena (kao što su <code>godina</code>, <code>ime</code>, <code>ukupna_količina</code>). Iako postoji fleksibilnost u odabiru imena varijabli, postoji nekoliko pravila koja treba slijediti:</p>
+<ul>
+<li>Ime varijable mora započeti s velikim ili malim slovom</li>
+<li>Ime varijable može se sastojati od slova, brojeva, točke (<code>.</code>) i donje crte (<code>_</code>)</li>
+<li>Ako ime varijable započinje točkom (<code>.</code>), ne može biti praćeno brojem</li>
+<li>Ime varijable ne smije započeti brojem ili donjom crtom (<code>_</code>)</li>
+<li>Varijable su osjetljive na velika i mala slova, što znači da <code>mojavarijabla</code>, <code>MojaVarijabla</code> i <code>MOJAVARIJABLA</code> predstavljaju različite varijable</li>
+<li>Rezervirane riječi, poput <code>TRUE</code>, <code>FALSE</code>, <code>NULL</code> i ključnih riječi poput <code>if</code>, ne mogu se koristiti kao imena varijabli</li>
+</ul>
+<p><em>Primjeri dozvoljenih imena varijabli:</em></p>
+<pre class="hljs"><code><div>mojavarijabla &lt;- <span class="hljs-string">"jabuka"</span>
+moja_varijabla &lt;- <span class="hljs-string">"jabuka"</span>
+mojaVarijabla &lt;- <span class="hljs-string">"jabuka"</span>
+MOJAVARIJABLA &lt;- <span class="hljs-string">"jabuka"</span>
+mojavarijabla.2 &lt;- <span class="hljs-string">"jabuka"</span>
+.mojavarijabla &lt;- <span class="hljs-string">"jabuka"</span>      <span class="hljs-comment"># Izbjegavajte korištenje točki kod naziva varijabli</span>
+._._....___..._  &lt;- <span class="hljs-string">"jabuka"</span>    <span class="hljs-comment"># Samo zato što je moguće nemojte činiti</span>
+
+</div></code></pre>
+<p><em>Primjeri nedozvoljenih imena varijabli:</em></p>
+<pre class="hljs"><code><div>2mojavarijabla &lt;- <span class="hljs-string">"jabuka"</span>  <span class="hljs-comment"># Ne može započeti s brojem</span>
+moja-varijabla &lt;- <span class="hljs-string">"jabuka"</span>  <span class="hljs-comment"># Crtica (-) nije dozvoljena</span>
+moja varijabla &lt;- <span class="hljs-string">"jabuka"</span>  <span class="hljs-comment"># Razmaci nisu dozvoljeni</span>
+_mojavarijabla &lt;- <span class="hljs-string">"jabuka"</span>  <span class="hljs-comment"># Ne smije započeti s donjom crtom</span>
+moja@varijabla &lt;- <span class="hljs-string">"jabuka"</span>  <span class="hljs-comment"># Posebni znakovi nisu dozvoljeni</span>
+.2mojavarijabla &lt;- <span class="hljs-string">"jabuka"</span> <span class="hljs-comment"># Ne smije započeti s točkom i brojem nakon točke</span>
+<span class="hljs-literal">TRUE</span> &lt;- <span class="hljs-string">"jabuka"</span>            <span class="hljs-comment"># Rezervirana riječ 'TRUE' ne može biti korištena</span>
+</div></code></pre>
+<blockquote>
+<p><strong>Environment neće prikazati varijable koje počinju s točkom!</strong></p>
+</blockquote>
+<h3 id="osnovne-vrste-podataka">Osnovne vrste podataka</h3>
+<p>U R-u nije potrebno izričito navoditi tip podataka prilikom kreiranja varijable. R automatski prepoznaje vrstu varijable na temelju dodijeljene vrijednosti. Na primjer, ako dodijelimo brojčanu vrijednost, R će varijablu tretirati kao numeričku (<code>numeric</code>), dok će tekstualnu vrijednost automatski prepoznati kao znakovni tip (<code>character</code>). Također, vrijednost varijable se može kasnije ponovno dodijeliti, pri čemu R ažurira njezin tip ovisno o novoj dodijeljenoj vrijednosti.</p>
+<ul>
+<li>
+<p><strong>Numeric (brojčani podaci)</strong> – cijeli brojevi i decimalni brojevi</p>
+<pre class="hljs"><code><div>broj &lt;- <span class="hljs-number">42</span>
+decimalni &lt;- <span class="hljs-number">3.14</span>
+class(broj)       <span class="hljs-comment"># Provjera vrste podataka</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"numeric"</span>
+class(decimalni)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"numeric"</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Integer (cijeli brojevi)</strong> – koriste se dodavanjem sufiksa <code>L</code></p>
+<pre class="hljs"><code><div>cijeli &lt;- <span class="hljs-number">10L</span>
+class(cijeli)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"integer"</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Character (tekstualni podaci)</strong> – pohranjuju tekstualne vrijednosti (<em>stringove</em>)</p>
+<pre class="hljs"><code><div>ime &lt;- <span class="hljs-string">"Ana"</span>
+class(ime)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"character"</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Logical (logički podaci)</strong> – mogu imati vrijednosti <code>TRUE</code> ili <code>FALSE</code></p>
+<pre class="hljs"><code><div>logicka &lt;- <span class="hljs-literal">TRUE</span>
+class(logicka)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"logical"</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Factor (kategorijske varijable)</strong> – koristi se za rad s diskretnim kategorijama</p>
+<pre class="hljs"><code><div>boja &lt;- factor(c(<span class="hljs-string">"crvena"</span>, <span class="hljs-string">"plava"</span>, <span class="hljs-string">"zelena"</span>))
+class(boja)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"factor"</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Complex (kompleksni brojevi)</strong> – koriste se rjeđe, ali su dostupni u R-u</p>
+<pre class="hljs"><code><div>kompleksni &lt;- <span class="hljs-number">3</span> + <span class="hljs-number">4i</span>
+class(kompleksni)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"complex"</span>
+</div></code></pre>
+</li>
+</ul>
+<hr>
+<br>
+<p>Sve dodane aktivne varijable i podatke možemo vidjeti u panelu <code>Environment</code> u RStudio-u:</p>
+<p><img src="images/Environment.png" alt="alt text"></p>
+<p>Za prikaz svih trenutno definiranih varijabli koristimo naredbu <code>ls()</code>:</p>
+<pre class="hljs"><code><div>ls()
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"a"</span>          <span class="hljs-string">"b"</span>          <span class="hljs-string">"boja"</span>       <span class="hljs-string">"broj"</span>       <span class="hljs-string">"cijeli"</span>     <span class="hljs-string">"decimalni"</span>  <span class="hljs-string">"ime"</span>        <span class="hljs-string">"kompleksni"</span>
+ [<span class="hljs-number">9</span>] <span class="hljs-string">"logicka"</span>    <span class="hljs-string">"x"</span>     
+</div></code></pre>
+<p>Za brisanje određene varijable koristimo naredbu <code>rm(&lt;naziv_varijable&gt;)</code>:</p>
+<pre class="hljs"><code><div>rm(a) <span class="hljs-comment"># Briše varijablu 'a'</span>
+
+rm(list = ls()) <span class="hljs-comment"># Za brisanje svih varijabli</span>
+</div></code></pre>
+<blockquote>
+<p>Za brisanje svih varijabli iz radnog prostora također možemo kliknuti na ikonu <em>metle</em> unutar panela <code>Environment</code></p>
+</blockquote>
+<br>
+<h2 id="uvjeti">Uvjeti</h2>
+<p>Uvjeti omogućuju izvršavanje kôda samo ako je određeni uvjet ispunjen. U R-u možemo koristiti <code>if</code>, <code>else</code> i <code>ifelse</code> za kontrolu toka programa.</p>
+<h3 id="if-uvjet">IF uvjet</h3>
+<p>U slučaju kada želimo provjeriti određeni uvjet i izvršiti odgovarajući blok kôda, koristimo <code>if</code> uvjet:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (<span class="hljs-number">1</span> == <span class="hljs-number">0</span>) {
+  print(<span class="hljs-number">1</span>)
+} <span class="hljs-keyword">else</span> {
+  print(<span class="hljs-number">0</span>)
+}
+
+ [<span class="hljs-number">1</span>] <span class="hljs-number">0</span>
+</div></code></pre>
+<p>U ovom primjeru, uvjet <code>1 == 0</code> nije zadovoljen, pa se izvršava blok u <code>else</code> dijelu. Rezultat će biti:</p>
+<pre class="hljs"><code><div>[1] &quot;0&quot;
+</div></code></pre>
+<h3 id="ifelse-uvjet">IFELSE uvjet</h3>
+<p>Za kraće uvjete koji se mogu izravno koristiti u izrazu, koristi se <code>ifelse</code> funkcija. Ova funkcija omogućava donošenje odluka na temelju uvjeta, bez potrebe za blokovima kôda.</p>
+<pre class="hljs"><code><div>x &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>)
+ifelse(x &lt; <span class="hljs-number">5</span> | x &gt; <span class="hljs-number">8</span>, x, <span class="hljs-number">0</span>)
+
+ [<span class="hljs-number">1</span>]  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>  <span class="hljs-number">9</span> <span class="hljs-number">10</span>
+</div></code></pre>
+<p>Ovdje će se provesti provjera je li element iz vektora <code>x</code> manji od 5 ili veći od 8. Ako je uvjet zadovoljen, vraća se vrijednost iz vektora <code>x</code>, a ako nije, vraća se 0.</p>
+<br>
+<h2 id="petlje">Petlje</h2>
+<p>Petlje u R-u omogućuju ponavljanje određenih operacija više puta, što je korisno za rad s velikim količinama podataka ili kada želimo izvršiti isti zadatak više puta bez potrebe za ponovnim pisanjem kôda. U R-u najčešće korištene petlje su <code>for</code>, <code>while</code> i <code>repeat</code>.</p>
+<h3 id="for-petlja">FOR petlja</h3>
+<p><code>for</code> petlja koristi se za iteriranje kroz nizove vrijednosti, kao što su vektori, liste, ili drugi objekti koji se mogu podijeliti na više elemenata. U svakom koraku petlje, promjenjiva (<code>i</code>) varijabla prima vrijednost iz niza, a zatim se izvršavaju naredbe unutar petlje.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">10</span>) {
+  print(paste(<span class="hljs-string">"i = "</span>, i))
+}
+
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 1"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 2"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 3"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 4"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 5"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 6"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 7"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 8"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 9"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 10"</span>
+</div></code></pre>
+<p><em>Primjer sume brojeva:</em></p>
+<pre class="hljs"><code><div>suma &lt;- <span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">10</span>) {
+  suma &lt;- suma + i
+}
+print(paste(<span class="hljs-string">"Suma brojeva od 1 do 10 je:"</span>, suma))
+
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Suma brojeva od 1 do 10 je: 55"</span>
+</div></code></pre>
+<hr>
+<h3 id="while-petlja">WHILE petlja</h3>
+<p><code>while</code> petlja izvršava blok kôda dok je uvjet istinit. Petlja će se ponavljati sve dok uvjet koji se navede unutar zagrade bude zadovoljen.</p>
+<pre class="hljs"><code><div>i &lt;- <span class="hljs-number">3</span>
+<span class="hljs-keyword">while</span> (i &gt; <span class="hljs-number">0</span>) {
+  print(paste(<span class="hljs-string">"i ="</span>, i))
+  i &lt;- i - <span class="hljs-number">1</span>  <span class="hljs-comment"># Smanjenje vrijednosti i</span>
+}
+
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 3"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 2"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 1"</span>
+</div></code></pre>
+<div class="page"></div>
+<h3 id="repeat-petlja">REPEAT petlja</h3>
+<p><code>repeat</code> petlja je slična <code>while</code> petlji, ali se razlikuje u tome što petlja uvijek mora sadržavati uvjet za izlazak pomoću <code>break</code> naredbe. <code>repeat</code> petlja će se izvršavati besprijekorno dok ne naiđe na uvjet za izlaz. Sintaksa izgleda ovako:</p>
+<pre class="hljs"><code><div>i &lt;- <span class="hljs-number">1</span>
+<span class="hljs-keyword">repeat</span> {
+  print(paste(<span class="hljs-string">"i ="</span>, i))
+  i &lt;- i + <span class="hljs-number">1</span>
+  <span class="hljs-keyword">if</span> (i %% <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">break</span>
+  }
+}
+
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 1"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 2"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 3"</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"i = 4"</span>
+</div></code></pre>
+<br>
+<h2 id="funkcije">Funkcije</h2>
+<p>Funkcije u R-u omogućuju ponovnu upotrebu kôda i povećavaju njegovu čitljivost. One prihvaćaju argumente, izvršavaju određene operacije i mogu vratiti rezultat.</p>
+<p><em>Funkcija se definira pomoću ključne riječi <code>function</code>, a može primati jedan ili više argumenata:</em></p>
+<pre class="hljs"><code><div>naziv_funkcije &lt;- <span class="hljs-keyword">function</span>(argument_1, argument_2, <span class="hljs-keyword">...</span>) {
+  <span class="hljs-comment"># tijelo funkcije/operacije </span>
+  <span class="hljs-keyword">return</span>(varijabla/vrijednost)
+}
+</div></code></pre>
+<p>Funkciju možemo pozvati navođenjem njezina imena i prosljeđivanjem odgovarajućih argumenata.</p>
+<p><em>Funkcija bez argumenata:</em></p>
+<pre class="hljs"><code><div>pozdrav &lt;- <span class="hljs-keyword">function</span>() {
+  <span class="hljs-keyword">return</span>(<span class="hljs-string">"Ahoy!"</span>)
+}
+
+pozdrav()
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Ahoy!"</span>
+</div></code></pre>
+<div class="page"></div>
+<p><em>Funkcija s jednim argumentom:</em></p>
+<pre class="hljs"><code><div>kvadrat &lt;- <span class="hljs-keyword">function</span>(x) {
+  <span class="hljs-keyword">return</span>(x^<span class="hljs-number">2</span>)
+}
+
+kvadrat(<span class="hljs-number">4</span>)
+ [<span class="hljs-number">1</span>] <span class="hljs-number">16</span>
+</div></code></pre>
+<p><em>Funkcija s više argumenata:</em></p>
+<pre class="hljs"><code><div>zbroj &lt;- <span class="hljs-keyword">function</span>(a, b) {
+  <span class="hljs-keyword">return</span>(a + b)
+}
+
+zbroj(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)
+ [<span class="hljs-number">1</span>] <span class="hljs-number">8</span>
+</div></code></pre>
+<p>Argumentima funkcije možemo postaviti zadane (<em>default</em>) vrijednosti, što znači da će se, ako argument nije naveden prilikom poziva funkcije, automatski koristiti njegova unaprijed određena vrijednost.</p>
+<p><em>Funkcija sa zadanim argumentima:</em></p>
+<pre class="hljs"><code><div>ponovi_tekst &lt;- <span class="hljs-keyword">function</span>(tekst = <span class="hljs-string">"R!"</span>, n = <span class="hljs-number">3</span>) {
+  <span class="hljs-keyword">return</span>(rep(tekst, n)) <span class="hljs-comment"># rep() -&gt; ponavlja dani element n puta</span>
+}
+
+ponovi_tekst(n = <span class="hljs-number">5</span>)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"R!"</span> <span class="hljs-string">"R!"</span> <span class="hljs-string">"R!"</span> <span class="hljs-string">"R!"</span> <span class="hljs-string">"R!"</span>
+</div></code></pre>
+<h1 id="strukture-podataka">Strukture podataka</h1>
+<p>U R-u postoji nekoliko osnovnih struktura podataka koje se koriste za pohranu i manipulaciju podacima. Svaka od ovih struktura ima svoje specifične karakteristike i primjene.</p>
+<h2 id="podatkovni-skupovi-datasets">Podatkovni skupovi (<em>Datasets</em>)</h2>
+<p>U analizi podataka, <strong>podatkovni skup</strong> (<em>dataset</em>) predstavlja strukturirane podatke organizirane u obliku tablice. Tablica se sastoji od:</p>
+<ul>
+<li><strong>Redaka (opservacija, primjera)</strong> – predstavljaju pojedinačne zapise, objekte ili slučajeve u skupu podataka</li>
+<li><strong>Stupaca (varijabli, atributa)</strong> – predstavljaju karakteristike ili atribute koji opisuju podatke</li>
+</ul>
+<div class="page"></div>
+<p>Matematički se podatkovni skup može prikazati kao:</p>
+<h2 id="textpodatkovni-skup--textredci-opservacije-times-textstupci-varijable">$$
+\text{podatkovni skup} = \text{redci (opservacije)} \times \text{stupci (varijable)}
+$$</h2>
+<p><em>Primjer tabličnog podatkovnog skupa:</em></p>
+<table>
+<thead>
+<tr>
+<th>PatientID</th>
+<th>AdmDate</th>
+<th>Age</th>
+<th>Diabetes</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10/15/2014</td>
+<td>25</td>
+<td>Type1</td>
+<td>Poor</td>
+</tr>
+<tr>
+<td>2</td>
+<td>11/01/2014</td>
+<td>34</td>
+<td>Type2</td>
+<td>Improved</td>
+</tr>
+<tr>
+<td>3</td>
+<td>10/21/2014</td>
+<td>28</td>
+<td>Type1</td>
+<td>Excellent</td>
+</tr>
+<tr>
+<td>4</td>
+<td>10/28/2014</td>
+<td>52</td>
+<td>Type1</td>
+<td>Poor</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="varijable-prema-mjernim-skalama">Varijable prema mjernim skalama</h3>
+<p>Varijable u podatkovnom skupu mogu se klasificirati prema <strong>mjernim skalama</strong>. Postoje dvije osnovne vrste varijabli:</p>
+<p><strong>1. Kategorijske varijable</strong> (<em>Categorical Variables</em>)
+Kategorijske varijable predstavljaju podatke koji pripadaju određenim grupama ili kategorijama. U R-u se ovakve varijable definiraju kao <strong>faktori (<em>factors</em>)</strong>.</p>
+<ul>
+<li>
+<p><strong>Nominalne varijable</strong> (<em>Nominal variables</em>)</p>
+<ul>
+<li>Vrijednosti su imena kategorija bez prirodnog reda</li>
+<li><strong>Primjer:</strong> Spol (<em>M/Ž</em>), boja očiju, vrsta dijabetesa</li>
+<li><strong>R reprezentacija:</strong> <code>factor(c(&quot;M&quot;, &quot;Ž&quot;, &quot;M&quot;))</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Ordinalne varijable</strong> (<em>Ordinal variables</em>)</p>
+<ul>
+<li>Vrijednosti imaju prirodni redoslijed, ali razmaci između njih nisu nužno jednaki</li>
+<li><strong>Primjer:</strong> Skala tvrdoće materijala (meko, srednje, tvrdo), ocjene (loše, dobro, odlično)</li>
+<li><strong>R reprezentacija:</strong> <code>factor(c(&quot;Low&quot;, &quot;Medium&quot;, &quot;High&quot;), ordered = TRUE)</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>2. Kontinuirane varijable</strong> (<em>Continuous Variables</em>)
+Kontinuirane varijable predstavljaju numeričke podatke koji se mogu mjeriti i koji imaju logičan redoslijed s definiranom skalom mjerenja.</p>
+<ul>
+<li>
+<p><strong>Intervalne varijable</strong> (<em>Interval variables</em>)</p>
+<ul>
+<li>Vrijednosti imaju definiran redoslijed i jednak razmak između jedinica, ali nemaju prirodnu nultu točku</li>
+<li><strong>Primjer:</strong> Temperatura u stupnjevima Celzija (°C) ili Fahrenheita (°F)</li>
+<li><strong>R reprezentacija:</strong> <code>c(10, 20, 30)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Racionalne varijable</strong> (<em>Ratio variables</em>)</p>
+<ul>
+<li>Imaju prirodnu nultu točku, što omogućuje razmjerno uspoređivanje vrijednosti</li>
+<li><strong>Primjer:</strong> Duljina, masa, broj stanovnika u gradu</li>
+<li><strong>R reprezentacija:</strong> <code>c(100, 200, 300)</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="vrste-struktura-podataka">Vrste struktura podataka</h2>
+<p>U R-u postoje različite strukture podataka koje omogućuju učinkovitu pohranu i manipulaciju podacima.</p>
+<p><strong>Klase struktura podataka (classes)</strong></p>
+<ul>
+<li><strong>Vektor (vector)</strong> – osnovna struktura podataka, može sadržavati samo jedan tip podataka</li>
+<li><strong>Matrica (matrix)</strong> – dvodimenzionalna struktura s elementima istog tipa</li>
+<li><strong>Polje (array)</strong> – višedimenzionalna struktura, generalizacija matrice</li>
+<li><strong>Podatkovni okvir (data frame)</strong> – tablična struktura koja može sadržavati različite tipove podataka po stupcima</li>
+<li><strong>Lista (list)</strong> – kolekcija objekata različitih tipova podataka</li>
+<li><strong>Skalar</strong> – jednoelementni vektor</li>
+</ul>
+<p><img src="images/StrukturePodataka.png" alt="alt text"></p>
+<p><strong>Podatkovni okvir (Data Frame)</strong>
+Data frame je glavna struktura podataka za pohranu <strong>podatkovnih skupova</strong> u R-u. Sličan je tablici, pri čemu stupci mogu sadržavati različite tipove podataka.</p>
+<blockquote>
+<p>Svaka struktura podataka može sadržavati jedan ili više tipova podataka, osim vektora, matrica i polja koji moraju imati homogeni tip podataka.</p>
+</blockquote>
+<div class="page"></div>
+<h3 id="vektor-vector">Vektor (<em>Vector</em>)</h3>
+<p>Vektor je osnovna jedinica podataka u R-u. Može sadržavati elemente istog tipa, poput numeričkih, logičkih ili znakova. Vektori se kreiraju pomoću funkcije <code>c()</code>, koja spaja više vrijednosti u jednu sekvencu.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Numerički vektor</span>
+brojevi &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)
+
+<span class="hljs-comment"># Znakovni vektor</span>
+imena &lt;- c(<span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Marko"</span>, <span class="hljs-string">"Iva"</span>)
+
+<span class="hljs-comment"># Logički vektor</span>
+logicki &lt;- c(<span class="hljs-literal">TRUE</span>, <span class="hljs-literal">FALSE</span>, <span class="hljs-literal">TRUE</span>)
+
+<span class="hljs-comment"># Prazan vektor određenog tipa i duljine</span>
+prazan &lt;- vector(mode = <span class="hljs-string">"numeric"</span>, length = <span class="hljs-number">5</span>)
+</div></code></pre>
+<p><img src="images/Vektor.png" alt="alt text"></p>
+<blockquote>
+<p><strong>Indeksi u R-u počinju od <code>1</code></strong> (za razliku od većine programskih jezika koji počinju od 0)</p>
+</blockquote>
+<p><em>Možemo dohvatiti elemente vektora pomoću uglati zagrada <code>[]</code>:</em></p>
+<pre class="hljs"><code><div>brojevi[<span class="hljs-number">2</span>]   <span class="hljs-comment"># Dohvaća drugi element (2)</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">2</span>
+
+imena[<span class="hljs-number">1</span>]     <span class="hljs-comment"># Dohvaća prvi element ("Ana")</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Ana"</span>
+
+logicki[<span class="hljs-number">3</span>]   <span class="hljs-comment"># Dohvaća treći element (TRUE)</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-literal">TRUE</span>
+</div></code></pre>
+<div class="page"></div>
+<p><em>Vektori podržavaju aritmetičke i logičke operacije:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Aritmetičke operacije nad vektorima</span>
+x &lt;- c(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>)
+y &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+
+zbroj &lt;- x + y    <span class="hljs-comment"># Rezultat: c(3, 6, 9)</span>
+umnozak &lt;- x * y  <span class="hljs-comment"># Rezultat: c(2, 8, 18)</span>
+kvadrati &lt;- x^<span class="hljs-number">2</span>   <span class="hljs-comment"># Rezultat: c(4, 16, 36)</span>
+
+<span class="hljs-comment"># Logičke operacije</span>
+logicki_v &lt;- c(<span class="hljs-literal">TRUE</span>, <span class="hljs-literal">FALSE</span>, <span class="hljs-literal">TRUE</span>)
+negacija &lt;- !logicki_v  <span class="hljs-comment"># Rezultat: c(FALSE, TRUE, FALSE)</span>
+</div></code></pre>
+<p><em>Vektore možemo filtrirati koristeći logičke izraze:</em></p>
+<pre class="hljs"><code><div>brojevi &lt;- c(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>)
+
+<span class="hljs-comment"># Dohvat brojeva većih od 25</span>
+veci_od_25 &lt;- brojevi[brojevi &gt; <span class="hljs-number">25</span>]  <span class="hljs-comment"># Rezultat: c(30, 40, 50)</span>
+</div></code></pre>
+<p><em>Osim što možemo stvarati vektore isto ih možemo i kombinirati pomoću <code>c()</code> funkcije:</em></p>
+<pre class="hljs"><code><div>vektor1 &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+vektor2 &lt;- c(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+
+kombinirani &lt;- c(vektor1, vektor2)  <span class="hljs-comment"># Rezultat: c(1, 2, 3, 4, 5, 6)</span>
+</div></code></pre>
+<p><em>R omogućuje generiranje sekvenci pomoću dvotočja <code>:</code> i funkcije <code>seq()</code>:</em></p>
+<pre class="hljs"><code><div>sekvenca1 &lt;- <span class="hljs-number">1</span>:<span class="hljs-number">10</span>  <span class="hljs-comment"># Rezultat: c(1, 2, 3, ..., 10)</span>
+sekvenca2 &lt;- seq(<span class="hljs-number">2</span>, <span class="hljs-number">20</span>, by = <span class="hljs-number">2</span>)  <span class="hljs-comment"># Rezultat: c(2, 4, 6, ..., 20)</span>
+</div></code></pre>
+<p><em>Za ponavljanje elemenata koristimo funkciju <code>rep()</code>, omogućuje ponavljanje cijelog vektora više puta ili ponavljanje svakog njegovog elementa određeni broj puta.:</em></p>
+<pre class="hljs"><code><div>ponovljeni &lt;- rep(<span class="hljs-number">1</span>:<span class="hljs-number">3</span>, times = <span class="hljs-number">2</span>)  <span class="hljs-comment"># Rezultat: c(1, 2, 3, 1, 2, 3)</span>
+ponovljeni2 &lt;- rep(<span class="hljs-number">1</span>:<span class="hljs-number">3</span>, each = <span class="hljs-number">2</span>)  <span class="hljs-comment"># Rezultat: c(1, 1, 2, 2, 3, 3)</span>
+</div></code></pre>
+<p><em>Dodatne funkcije za rad s vektorima:</em></p>
+<pre class="hljs"><code><div>brojevi &lt;- c(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">40</span>, <span class="hljs-number">20</span>, <span class="hljs-number">70</span>, <span class="hljs-number">20</span>)
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Funkcija</th>
+<th>Opis</th>
+<th>Primjer</th>
+<th>Rezultat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>sum()</code></strong></td>
+<td>Zbraja sve elemente u vektoru</td>
+<td><code>sum(brojevi)</code></td>
+<td><code>180</code></td>
+</tr>
+<tr>
+<td><strong><code>min()</code></strong></td>
+<td>Vraća minimalnu vrijednost u vektoru</td>
+<td><code>min(brojevi)</code></td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><strong><code>max()</code></strong></td>
+<td>Vraća maksimalnu vrijednost u vektoru</td>
+<td><code>max(brojevi)</code></td>
+<td><code>70</code></td>
+</tr>
+<tr>
+<td><strong><code>mean()</code></strong></td>
+<td>Vraća prosječnu vrijednost vektora</td>
+<td><code>mean(brojevi)</code></td>
+<td><code>30</code></td>
+</tr>
+<tr>
+<td><strong><code>unique()</code></strong></td>
+<td>Vraća jedinstvene vrijednosti (bez duplikata)</td>
+<td><code>unique(brojevi)</code></td>
+<td><code>10, 20, 40, 70</code></td>
+</tr>
+<tr>
+<td><strong><code>length()</code></strong></td>
+<td>Vraća broj elemenata u vektoru</td>
+<td><code>length(brojevi)</code></td>
+<td><code>6</code></td>
+</tr>
+<tr>
+<td><strong><code>sort()</code></strong></td>
+<td>Sortira elemente vektora (rastući redoslijed)</td>
+<td><code>sort(brojevi)</code></td>
+<td><code>10, 20, 20, 20, 40, 70</code></td>
+</tr>
+<tr>
+<td><strong><code>rev()</code></strong></td>
+<td>Obrće redoslijed elemenata u vektoru</td>
+<td><code>rev(brojevi)</code></td>
+<td><code>20, 70, 20, 40, 20, 10</code></td>
+</tr>
+<tr>
+<td><strong><code>which()</code></strong></td>
+<td>Vraća indekse elemenata koji zadovoljavaju uvjet</td>
+<td><code>which(brojevi &gt; 30)</code></td>
+<td><code>3, 5</code> (indeksi)</td>
+</tr>
+<tr>
+<td><strong><code>any()</code></strong></td>
+<td>Provjerava postoji li barem jedan element koji zadovoljava uvjet</td>
+<td><code>any(brojevi &gt; 50)</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr>
+<td><strong><code>all()</code></strong></td>
+<td>Provjerava zadovoljavaju li svi elementi uvjet</td>
+<td><code>all(brojevi &gt; 15)</code></td>
+<td><code>FALSE</code></td>
+</tr>
+<tr>
+<td><strong><code>cumsum()</code></strong></td>
+<td>Vraća kumulativni zbroj elemenata</td>
+<td><code>cumsum(brojevi)</code></td>
+<td><code>10, 30, 70, 90, 160, 180</code></td>
+</tr>
+<tr>
+<td><strong><code>diff()</code></strong></td>
+<td>Vraća razlike između susjednih elemenata</td>
+<td><code>diff(brojevi)</code></td>
+<td><code>10, 20, -20, 50, -50</code></td>
+</tr>
+<tr>
+<td><strong><code>rep()</code></strong></td>
+<td>Ponavlja elemente vektora</td>
+<td><code>rep(c(1, 2), times = 3)</code></td>
+<td><code>1, 2, 1, 2, 1, 2</code></td>
+</tr>
+<tr>
+<td><strong><code>seq()</code></strong></td>
+<td>Generira sekvencu brojeva</td>
+<td><code>seq(from = 1, to = 10, by = 2)</code></td>
+<td><code>1, 3, 5, 7, 9</code></td>
+</tr>
+<tr>
+<td><strong><code>paste()</code></strong></td>
+<td>Spaja stringove u jedan vektor</td>
+<td><code>paste(&quot;Broj&quot;, 1:3)</code></td>
+<td><code>&quot;Broj 1&quot;, &quot;Broj 2&quot;, &quot;Broj 3&quot;</code></td>
+</tr>
+<tr>
+<td><strong><code>table()</code></strong></td>
+<td>Vraća frekvenciju svake jedinstvene vrijednosti</td>
+<td><code>table(brojevi)</code></td>
+<td><code>10:1, 20:3, 40:1, 70:1</code></td>
+</tr>
+<tr>
+<td><strong><code>range()</code></strong></td>
+<td>Vraća minimalnu i maksimalnu vrijednost</td>
+<td><code>range(brojevi)</code></td>
+<td><code>10, 70</code></td>
+</tr>
+<tr>
+<td><strong><code>median()</code></strong></td>
+<td>Vraća medijan vektora</td>
+<td><code>median(brojevi)</code></td>
+<td><code>20</code></td>
+</tr>
+<tr>
+<td><strong><code>sd()</code></strong></td>
+<td>Vraća standardnu devijaciju vektora</td>
+<td><code>sd(brojevi)</code></td>
+<td><code>22.9089</code></td>
+</tr>
+<tr>
+<td><strong><code>var()</code></strong></td>
+<td>Vraća varijancu vektora</td>
+<td><code>var(brojevi)</code></td>
+<td><code>480</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="page"></div>
+<h3 id="matrica-matrix">Matrica (<em>Matrix</em>)</h3>
+<p>Matrica je dvodimenzionalna struktura podataka u R-u koja sadrži <strong>samo jedan tip podataka</strong> (npr. samo numeričke vrijednosti ili samo znakove). Kreira se pomoću funkcije <code>matrix()</code></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Kreiranje 3x3 matrice s brojevima od 1 do 9 po stupcima</span>
+mat &lt;- matrix(<span class="hljs-number">1</span>:<span class="hljs-number">9</span>, nrow = <span class="hljs-number">3</span>, ncol = <span class="hljs-number">3</span>)
+print(mat)
+
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>] [,<span class="hljs-number">3</span>]
+ [<span class="hljs-number">1</span>,]    <span class="hljs-number">1</span>    <span class="hljs-number">4</span>    <span class="hljs-number">7</span>
+ [<span class="hljs-number">2</span>,]    <span class="hljs-number">2</span>    <span class="hljs-number">5</span>    <span class="hljs-number">8</span>
+ [<span class="hljs-number">3</span>,]    <span class="hljs-number">3</span>    <span class="hljs-number">6</span>    <span class="hljs-number">9</span>
+</div></code></pre>
+<ul>
+<li>Argument <code>nrow</code> određuje broj redaka, a <code>ncol</code> broj stupaca</li>
+<li>R automatski popunjava matricu po stupcima, osim ako se ne koristi <code>byrow = TRUE</code></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Kreiranje 3x3 matrice s brojevima od 1 do 9 po retcima</span>
+mat2 &lt;- matrix(<span class="hljs-number">1</span>:<span class="hljs-number">9</span>, nrow = <span class="hljs-number">3</span>, byrow = <span class="hljs-literal">TRUE</span>)
+print(mat2)
+
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>] [,<span class="hljs-number">3</span>]
+ [<span class="hljs-number">1</span>,]    <span class="hljs-number">1</span>    <span class="hljs-number">2</span>    <span class="hljs-number">3</span>
+ [<span class="hljs-number">2</span>,]    <span class="hljs-number">4</span>    <span class="hljs-number">5</span>    <span class="hljs-number">6</span>
+ [<span class="hljs-number">3</span>,]    <span class="hljs-number">7</span>    <span class="hljs-number">8</span>    <span class="hljs-number">9</span>
+</div></code></pre>
+<p><em>Elementi matrice dohvaćaju se pomoću <code>[redak, stupac]</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Dohvaćanje elementa u drugom retku i trećem stupcu</span>
+mat[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+ [<span class="hljs-number">1</span>] <span class="hljs-number">8</span>
+
+<span class="hljs-comment"># Dohvaćanje cijelog retka</span>
+mat[<span class="hljs-number">2</span>, ]
+ [<span class="hljs-number">1</span>] <span class="hljs-number">2</span> <span class="hljs-number">5</span> <span class="hljs-number">8</span>
+
+<span class="hljs-comment"># Dohvaćanje cijelog stupca</span>
+mat[ ,<span class="hljs-number">3</span>]
+ [<span class="hljs-number">1</span>] <span class="hljs-number">7</span> <span class="hljs-number">8</span> <span class="hljs-number">9</span>
+</div></code></pre>
+<div class="page"></div>
+<p><em>Spajanje vektora u matricu vrši se pomoću funckija <code>cbind()</code> (column bind) i <code>rbind()</code> (row bind):</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Spajanje dvaju vektora u stupce</span>
+v1 &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+v2 &lt;- c(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+mat3 &lt;- cbind(v1, v2)  <span class="hljs-comment"># Kombinira vektore u stupce</span>
+print(mat3)
+
+      v1 v2
+ [<span class="hljs-number">1</span>,]  <span class="hljs-number">1</span>  <span class="hljs-number">4</span>
+ [<span class="hljs-number">2</span>,]  <span class="hljs-number">2</span>  <span class="hljs-number">5</span>
+ [<span class="hljs-number">3</span>,]  <span class="hljs-number">3</span>  <span class="hljs-number">6</span>
+
+<span class="hljs-comment"># Spajanje dvaju vektora u retke</span>
+mat4 &lt;- rbind(v1, v2)  <span class="hljs-comment"># Kombinira vektore u retke</span>
+print(mat4)
+
+    [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>] [,<span class="hljs-number">3</span>]
+ v1    <span class="hljs-number">1</span>    <span class="hljs-number">2</span>    <span class="hljs-number">3</span>
+ v2    <span class="hljs-number">4</span>    <span class="hljs-number">5</span>    <span class="hljs-number">6</span>
+</div></code></pre>
+<p><em>Matrice možemo vizualno pregledati ako kliknemo na njihovu varijablu unutar panela <strong>Environment</strong>:</em></p>
+<p><img src="images/Matrix.png" alt="alt text"></p>
+<hr>
+<h3 id="polje-array">Polje (<em>Array</em>)</h3>
+<p>Polje (<em>array</em>) je višedimenzionalna struktura podataka u R-u. Dok su matrice ograničene na dvije dimenzije (redci i stupci), polja mogu imati tri ili više dimenzija. Ova struktura korisna je za pohranu podataka koji zahtijevaju više od dvije dimenzije, poput vremenskih serija ili složenih eksperimentalnih podataka.</p>
+<div class="page"></div>
+<p><em>Polja se kreiraju pomoću funkcije <code>array()</code>, gdje se definiraju dimenzije pomoću argumenta <code>dim</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Kreiranje polja s 3 reda, 2 stupca i 2 sloja</span>
+arr &lt;- array(<span class="hljs-number">1</span>:<span class="hljs-number">12</span>, dim = c(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>))
+print(arr)
+
+ , , <span class="hljs-number">1</span>
+ 
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>,]    <span class="hljs-number">1</span>    <span class="hljs-number">4</span>
+ [<span class="hljs-number">2</span>,]    <span class="hljs-number">2</span>    <span class="hljs-number">5</span>
+ [<span class="hljs-number">3</span>,]    <span class="hljs-number">3</span>    <span class="hljs-number">6</span>
+ 
+ , , <span class="hljs-number">2</span>
+ 
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>,]    <span class="hljs-number">7</span>   <span class="hljs-number">10</span>
+ [<span class="hljs-number">2</span>,]    <span class="hljs-number">8</span>   <span class="hljs-number">11</span>
+ [<span class="hljs-number">3</span>,]    <span class="hljs-number">9</span>   <span class="hljs-number">12</span>
+</div></code></pre>
+<ul>
+<li>Polje se može vizualizirati kao niz matrica, gdje svaki sloj predstavlja zasebnu matricu</li>
+</ul>
+<p><em>Elementi polja dohvaćaju se pomoću indeksa u obliku <code>[redak, stupac, sloj]</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Dohvaćanje elementa u drugom retku, prvom stupcu i drugom sloju</span>
+arr[<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>] <span class="hljs-number">8</span>
+
+<span class="hljs-comment"># Dohvaćanje cijelog prvog sloja</span>
+arr[ , , <span class="hljs-number">1</span>]  
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>,]    <span class="hljs-number">1</span>    <span class="hljs-number">4</span>
+ [<span class="hljs-number">2</span>,]    <span class="hljs-number">2</span>    <span class="hljs-number">5</span>
+ [<span class="hljs-number">3</span>,]    <span class="hljs-number">3</span>    <span class="hljs-number">6</span>
+
+<span class="hljs-comment"># Dohvaćanje cijelog drugog stupca u svim slojevima</span>
+arr[ , <span class="hljs-number">2</span>, ]  
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>,]    <span class="hljs-number">4</span>   <span class="hljs-number">10</span>
+ [<span class="hljs-number">2</span>,]    <span class="hljs-number">5</span>   <span class="hljs-number">11</span>
+ [<span class="hljs-number">3</span>,]    <span class="hljs-number">6</span>   <span class="hljs-number">12</span>
+</div></code></pre>
+<div class="page"></div>
+<p><em>Polja podržavaju aritmetičke operacije, ali moraju imati iste dimenzije:</em></p>
+<pre class="hljs"><code><div>arr &lt;- array(<span class="hljs-number">1</span>:<span class="hljs-number">12</span>, dim = c(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>))
+arr2 &lt;- array(<span class="hljs-number">13</span>:<span class="hljs-number">24</span>, dim = c(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>))
+
+zbroj &lt;- arr + arr2
+print(zbroj)
+
+ , , <span class="hljs-number">1</span>
+ 
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>,]   <span class="hljs-number">14</span>   <span class="hljs-number">20</span>
+ [<span class="hljs-number">2</span>,]   <span class="hljs-number">16</span>   <span class="hljs-number">22</span>
+ [<span class="hljs-number">3</span>,]   <span class="hljs-number">18</span>   <span class="hljs-number">24</span>
+ 
+ , , <span class="hljs-number">2</span>
+ 
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>,]   <span class="hljs-number">26</span>   <span class="hljs-number">32</span>
+ [<span class="hljs-number">2</span>,]   <span class="hljs-number">28</span>   <span class="hljs-number">34</span>
+ [<span class="hljs-number">3</span>,]   <span class="hljs-number">30</span>   <span class="hljs-number">36</span>
+</div></code></pre>
+<p><strong>Primjeri upotrebe polja:</strong></p>
+<ol>
+<li><strong>Vremenski podaci:</strong> Polja se često koriste za pohranu podataka koji se mijenjaju kroz vrijeme, poput mjerenja temperature u različitim lokacijama i vremenskim intervalima</li>
+<li><strong>Slike i videozapisi:</strong> Polja se mogu koristiti za pohranu piksela slike ili videozapisa, gdje svaki sloj predstavlja različitu komponentu (npr. RGB)</li>
+</ol>
+<p><em>In a nutshell:</em></p>
+<p><img src="images/in_a_nutshell.png" alt="alt text"></p>
+<hr>
+<h3 id="okvir-podataka-data-frame">Okvir podataka (<em>Data Frame</em>)</h3>
+<p>Okvir podataka (<code>data.frame</code>) je jedna od najčešće korištenih struktura podataka u R-u. Omogućuje pohranu podataka u tabličnom formatu, gdje svaki stupac može sadržavati različite tipove podataka (npr. numeričke, znakovne, logičke).</p>
+<p><em>Okvir podataka kreira se pomoću funkcije <code>data.frame()</code>, gdje se svaki stupac definira kao <strong>vektor</strong>:</em></p>
+<pre class="hljs"><code><div>podaci &lt;- data.frame(
+  Ime = c(<span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Marko"</span>, <span class="hljs-string">"Iva"</span>, <span class="hljs-string">"Pero"</span>),
+  Dob = c(<span class="hljs-number">25</span>, <span class="hljs-number">30</span>, <span class="hljs-number">22</span>, <span class="hljs-number">25</span>),
+  Visina = c(<span class="hljs-number">168</span>, <span class="hljs-number">175</span>, <span class="hljs-number">160</span>, <span class="hljs-number">190</span>)
+)
+
+print(podaci)
+
+     Ime Dob Visina
+ <span class="hljs-number">1</span>   Ana  <span class="hljs-number">25</span>    <span class="hljs-number">168</span>
+ <span class="hljs-number">2</span> Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>
+ <span class="hljs-number">3</span>   Iva  <span class="hljs-number">22</span>    <span class="hljs-number">160</span>
+ <span class="hljs-number">4</span>  Pero  <span class="hljs-number">25</span>    <span class="hljs-number">191</span>
+</div></code></pre>
+<ul>
+<li>Svaki stupac može imati različit tip podataka (npr. <code>Ime</code> je znakovni, <code>Dob</code> i <code>Visina</code> su numerički)</li>
+<li>Redovi predstavljaju pojedinačne opservacije, a stupci varijable</li>
+</ul>
+<p><em>Također ih kao i matrice možemo vizualno pregledati ako kliknemo na njihovu varijablu unutar panela <strong>Environment</strong>:</em></p>
+<p><img src="images/DataFrame.png" alt="alt text"></p>
+<p><em>Da bi dobili dimenzije tablice koristimo funkciju <code>dim()</code> ili <code>nrow()</code> za broj redaka i <code>ncol()</code> za broj stupaca:</em></p>
+<pre class="hljs"><code><div>dimenzije &lt;- dim(podaci)
+
+print(paste(<span class="hljs-string">"Broj opservacija (redaka):"</span>, dimenzije[<span class="hljs-number">1</span>]))
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Broj opservacija (redaka): 4"</span>
+
+print(paste(<span class="hljs-string">"Broj varijabli (stupaca):"</span>, dimenzije[<span class="hljs-number">2</span>]))
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Broj varijabli (stupaca): 3"</span>
+
+print(paste(<span class="hljs-string">"Broj opservacija (redaka):"</span>, nrow(podaci)))
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Broj opservacija (redaka): 4"</span>
+
+print(paste(<span class="hljs-string">"Broj varijabli (stupaca):"</span>, ncol(podaci)))
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Broj varijabli (stupaca): 3"</span>
+</div></code></pre>
+<p>Ukoliko želimo ispraviti ili promijeniti neke podatke možemo korisitit funkciju <code>fix()</code> koja otvara grafički editor za interaktivno uređivanje objekata (vektora, okvira podataka, funkcija):</p>
+<p><em>Uređivanje okvira podataka:</em></p>
+<pre class="hljs"><code><div>fix(podaci)  <span class="hljs-comment"># Otvara editor za podatke</span>
+</div></code></pre>
+<hr>
+<p>Podacima u okviru možemo pristupiti na više načina:</p>
+<ol>
+<li>
+<p><strong>Pristup stupcima pomoću <code>$</code>:</strong></p>
+<pre class="hljs"><code><div>podaci$Ime  <span class="hljs-comment"># Vraća vektor imena</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Ana"</span>   <span class="hljs-string">"Marko"</span> <span class="hljs-string">"Iva"</span>   <span class="hljs-string">"Pero"</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Pristup određenom retku i stupcu pomoću <code>[]</code>:</strong></p>
+<pre class="hljs"><code><div>podaci[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]  <span class="hljs-comment"># Vraća vrijednost u drugom retku i trećem stupcu</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">175</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Pristup cijelom retku ili stupcu:</strong></p>
+<pre class="hljs"><code><div>podaci[<span class="hljs-number">2</span>, ]  <span class="hljs-comment"># Vraća drugi redak</span>
+
+     Ime Dob Visina
+ <span class="hljs-number">2</span> Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>
+
+podaci[, <span class="hljs-number">3</span>]  <span class="hljs-comment"># Vraća treći stupac</span>
+ [<span class="hljs-number">1</span>] <span class="hljs-number">168</span> <span class="hljs-number">175</span> <span class="hljs-number">160</span> <span class="hljs-number">191</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Pristup pomoću imena stupaca:</strong></p>
+<pre class="hljs"><code><div>podaci[<span class="hljs-string">"Visina"</span>]  <span class="hljs-comment"># Vraća stupac Visina kao podokvir</span>
+
+   Visina
+ <span class="hljs-number">1</span>    <span class="hljs-number">168</span>
+ <span class="hljs-number">2</span>    <span class="hljs-number">175</span>
+ <span class="hljs-number">3</span>    <span class="hljs-number">160</span>
+ <span class="hljs-number">4</span>    <span class="hljs-number">190</span>
+</div></code></pre>
+</li>
+</ol>
+<div class="page"></div>
+<p><em>Novi stupac možemo dodati jednostavno dodjeljivanjem vrijednosti:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Dodavanje stupca "Težina"</span>
+podaci$Težina &lt;- c(<span class="hljs-number">55</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>, <span class="hljs-number">87</span>)
+print(podaci)
+
+     Ime Dob Visina Težina
+ <span class="hljs-number">1</span>   Ana  <span class="hljs-number">25</span>    <span class="hljs-number">168</span>     <span class="hljs-number">55</span>
+ <span class="hljs-number">2</span> Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>     <span class="hljs-number">80</span>
+ <span class="hljs-number">3</span>   Iva  <span class="hljs-number">22</span>    <span class="hljs-number">160</span>     <span class="hljs-number">60</span>
+ <span class="hljs-number">4</span>  Pero  <span class="hljs-number">25</span>    <span class="hljs-number">191</span>     <span class="hljs-number">87</span>
+</div></code></pre>
+<p><em>Stupac možemo izbrisati postavljanjem tog stupca na <code>NULL</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Brisanje stupca "Težina"</span>
+podaci$Težina &lt;- <span class="hljs-literal">NULL</span>
+print(podaci)
+
+     Ime Dob Visina
+ <span class="hljs-number">1</span>   Ana  <span class="hljs-number">25</span>    <span class="hljs-number">168</span>
+ <span class="hljs-number">2</span> Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>
+ <span class="hljs-number">3</span>   Iva  <span class="hljs-number">22</span>    <span class="hljs-number">160</span>
+ <span class="hljs-number">4</span>  Pero  <span class="hljs-number">25</span>    <span class="hljs-number">191</span>
+</div></code></pre>
+<p><em>Podatke možemo filtrirati koristeći logičke uvjete:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Filtriranje osoba starijih od 23 godine</span>
+stariji_od_23 &lt;- podaci[podaci$Dob &gt; <span class="hljs-number">23</span>, ]
+print(stariji_od_23)
+
+     Ime Dob Visina
+ <span class="hljs-number">1</span>   Ana  <span class="hljs-number">25</span>    <span class="hljs-number">168</span>
+ <span class="hljs-number">2</span> Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>
+ <span class="hljs-number">3</span>  Pero  <span class="hljs-number">25</span>    <span class="hljs-number">191</span>
+</div></code></pre>
+<div class="page"></div>
+<p><em>Podatke možemo sortirati pomoću funkcije <code>order()</code>:</em></p>
+<pre class="hljs"><code><div>podaci &lt;- data.frame(
+  Ime = c(<span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Marko"</span>, <span class="hljs-string">"Iva"</span>, <span class="hljs-string">"Petar"</span>, <span class="hljs-string">"Marija"</span>, <span class="hljs-string">"Ivan"</span>),
+  Dob = c(<span class="hljs-number">25</span>, <span class="hljs-number">30</span>, <span class="hljs-number">25</span>, <span class="hljs-number">28</span>, <span class="hljs-number">25</span>, <span class="hljs-number">30</span>),
+  Visina = c(<span class="hljs-number">168</span>, <span class="hljs-number">175</span>, <span class="hljs-number">160</span>, <span class="hljs-number">180</span>, <span class="hljs-number">165</span>, <span class="hljs-number">178</span>)
+)
+
+
+<span class="hljs-comment"># Sortiranje po dobi (silazno)</span>
+sortirani_podaci &lt;- podaci[order(podaci$Dob, decreasing = <span class="hljs-literal">TRUE</span>), ]
+print(sortirani_podaci)
+
+     Ime Dob Visina
+ <span class="hljs-number">2</span> Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>
+ <span class="hljs-number">1</span>   Ana  <span class="hljs-number">25</span>    <span class="hljs-number">168</span>
+ <span class="hljs-number">3</span>   Iva  <span class="hljs-number">22</span>    <span class="hljs-number">160</span>
+</div></code></pre>
+<p><em>Funkcije poput <code>summary()</code> i <code>aggregate()</code> koriste se za sažimanje podataka:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Sažetak podataka</span>
+summary(podaci)
+
+      Ime                 Dob            Visina     
+  Length:<span class="hljs-number">6</span>           Min.   :<span class="hljs-number">25.00</span>   Min.   :<span class="hljs-number">160.0</span>  
+  Class :character   1st Qu.:<span class="hljs-number">25.00</span>   1st Qu.:<span class="hljs-number">165.8</span>  
+  Mode  :character   Median :<span class="hljs-number">26.50</span>   Median :<span class="hljs-number">171.5</span>  
+                     Mean   :<span class="hljs-number">27.17</span>   Mean   :<span class="hljs-number">171.0</span>  
+                     3rd Qu.:<span class="hljs-number">29.50</span>   3rd Qu.:<span class="hljs-number">177.2</span>  
+                     Max.   :<span class="hljs-number">30.00</span>   Max.   :<span class="hljs-number">180.0</span>  
+
+<span class="hljs-comment"># Agregacija prosječne visine po dobi</span>
+aggregate(Visina ~ Dob, data = podaci, FUN = mean)
+
+   Dob   Visina
+ <span class="hljs-number">1</span>  <span class="hljs-number">25</span> <span class="hljs-number">164.3333</span>
+ <span class="hljs-number">2</span>  <span class="hljs-number">28</span> <span class="hljs-number">180.0000</span>
+ <span class="hljs-number">3</span>  <span class="hljs-number">30</span> <span class="hljs-number">176.5000</span>
+</div></code></pre>
+<p>Funkcija <code>colnames()</code> koristi se za dohvaćanje ili promjenu naziva stupaca u okviru podataka <code>data.frame</code>.</p>
+<div class="page"></div>
+<p><em>Dohvaćanje naziva stupaca:</em></p>
+<pre class="hljs"><code><div>podaci &lt;- data.frame(
+  Ime = c(<span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Marko"</span>),
+  Dob = c(<span class="hljs-number">25</span>, <span class="hljs-number">30</span>),
+  Visina = c(<span class="hljs-number">168</span>, <span class="hljs-number">175</span>)
+)
+
+<span class="hljs-comment"># Dohvaćanje naziva stupaca</span>
+nazivi &lt;- colnames(podaci)
+
+print(nazivi)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Ime"</span>    <span class="hljs-string">"Dob"</span>    <span class="hljs-string">"Visina"</span>
+</div></code></pre>
+<p><em>Promjena naziva stupaca:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Promjena naziva svih stupaca</span>
+colnames(podaci) &lt;- c(<span class="hljs-string">"Name"</span>, <span class="hljs-string">"Age"</span>, <span class="hljs-string">"Height"</span>)
+
+<span class="hljs-comment"># Promjena naziva određenog stupca</span>
+colnames(podaci)[<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Year"</span>
+
+print(podaci)
+
+    Name Year Height
+ <span class="hljs-number">1</span>   Ana   <span class="hljs-number">25</span>    <span class="hljs-number">168</span>
+ <span class="hljs-number">2</span> Marko   <span class="hljs-number">30</span>    <span class="hljs-number">175</span>
+</div></code></pre>
+<hr>
+<h3 id="faktori-factors">Faktori (<em>Factors</em>)</h3>
+<p>Faktori su struktura podataka u R-u koja se koristi za pohranu kategorijskih varijabli. Kategorijske varijable su one koje imaju ograničen broj različitih vrijednosti (npr. spol, boja, razredi). Faktori su posebno korisni u statističkim analizama i modeliranju jer R interno pohranjuje faktore kao brojeve, što omogućuje efikasniju obradu podataka.</p>
+<p><em>Faktori se kreiraju pomoću funkcije <code>factor()</code>. Ona pretvara vektor u faktor i automatski određuje razine (<em>levels</em>) faktora:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Kreiranje faktora za spol</span>
+spol &lt;- factor(c(<span class="hljs-string">"M"</span>, <span class="hljs-string">"Ž"</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"Ž"</span>, <span class="hljs-string">"M"</span>))
+print(spol)
+
+ [<span class="hljs-number">1</span>] M Ž M Ž M
+ Levels: M Ž
+</div></code></pre>
+<ul>
+<li><code>M</code> i <code>Ž</code> su razine (<em>levels</em>) faktora.</li>
+<li>R interno pohranjuje faktore kao brojeve (npr. <code>M</code> = 1, <code>Ž</code> = 2), ali prikazuje ih kao znakovne vrijednosti</li>
+</ul>
+<p><em>Razine faktora mogu se promijeniti pomoću argumenta <code>levels</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Promjena redoslijeda razina</span>
+spol &lt;- factor(spol, levels = c(<span class="hljs-string">"Ž"</span>, <span class="hljs-string">"M"</span>))
+print(spol)
+ [<span class="hljs-number">1</span>] M Ž M Ž M
+ Levels: Ž M   <span class="hljs-comment"># Sada je prva razina `Ž`, a druga `M`</span>
+</div></code></pre>
+<p><em>Ako želimo dodati nove razine koje nisu prisutne u podacima, možemo koristiti argument <code>levels</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Dodavanje nove razine "N" (nepoznato)</span>
+spol &lt;- factor(spol, levels = c(<span class="hljs-string">"M"</span>, <span class="hljs-string">"Ž"</span>, <span class="hljs-string">"N"</span>))
+print(spol)
+
+ [<span class="hljs-number">1</span>] M Ž M Ž M
+ Levels: M Ž N
+</div></code></pre>
+<ul>
+<li>Sada faktor ima tri razine, iako vrijednost <code>N</code> nije prisutna u podacima</li>
+</ul>
+<p><em>Faktori se mogu pretvoriti u znakovne vektore pomoću funkcije <code>as.character()</code> ili numeričke vektore pomoću funkcije <code>as.numeric()</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Pretvorba faktora u znakovni vektor</span>
+spol_znakovni &lt;- as.character(spol)
+print(spol_znakovni)
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"M"</span> <span class="hljs-string">"Ž"</span> <span class="hljs-string">"M"</span> <span class="hljs-string">"Ž"</span> <span class="hljs-string">"M"</span>
+
+<span class="hljs-comment"># Pretvorba faktora u numerički vektor</span>
+spol_numericki &lt;- as.numeric(spol)
+print(spol_numericki)
+ [<span class="hljs-number">1</span>] <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">1</span>
+</div></code></pre>
+<ul>
+<li>R interno pohranjuje faktore kao brojeve, gdje svaka razina ima svoj numerički kod.</li>
+</ul>
+<p><strong>Primjeri upotrebe faktora:</strong></p>
+<ol>
+<li><strong>Statističke analize:</strong> Faktori su ključni u analizi varijance (ANOVA), regresiji i drugim statističkim metodama</li>
+<li><strong>Grupiranje podataka:</strong> Faktori se koriste za grupiranje podataka u grafikone i tablice</li>
+<li><strong>Kodiranje podataka:</strong> Faktori se koriste za pretvaranje tekstualnih podataka u numeričke kodove</li>
+</ol>
+<hr>
+<div class="page"></div>
+<h3 id="liste-lists">Liste (<em>Lists</em>)</h3>
+<p>Lista je fleksibilna struktura podataka koja može sadržavati različite tipove podataka, uključujući vektore, okvire podataka i čak druge liste. Liste se kreiraju pomoću funkcije <code>list()</code>.</p>
+<p><em>AKA:</em></p>
+<p><img src="images/RandomDataGo.png" alt="alt text"></p>
+<pre class="hljs"><code><div>moja_lista &lt;- list(
+  broj = <span class="hljs-number">42</span>,
+  imena = c(<span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Marko"</span>),
+  matrica = matrix(<span class="hljs-number">1</span>:<span class="hljs-number">4</span>, nrow = <span class="hljs-number">2</span>)
+)
+
+print(moja_lista)
+
+ $broj
+ [<span class="hljs-number">1</span>] <span class="hljs-number">42</span>
+ 
+ $imena
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Ana"</span>   <span class="hljs-string">"Marko"</span>
+ 
+ $matrica
+      [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>,]    <span class="hljs-number">1</span>    <span class="hljs-number">3</span>
+ [<span class="hljs-number">2</span>,]    <span class="hljs-number">2</span>    <span class="hljs-number">4</span>
+
+
+moja_lista$broj
+ [<span class="hljs-number">1</span>] <span class="hljs-number">42</span>
+
+moja_lista$imena[<span class="hljs-number">1</span>]
+ [<span class="hljs-number">1</span>] <span class="hljs-string">"Ana"</span>
+
+moja_lista$matrica[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]
+ [<span class="hljs-number">1</span>] <span class="hljs-number">3</span>
+</div></code></pre>
+<div class="page"></div>
+<h1 id="u%C4%8Ditavanje-podataka">Učitavanje podataka</h1>
+<p>U R-u postoji više načina za učitavanje podataka iz različitih izvora, poput tekstualnih datoteka, Excel datoteka, baza podataka ili internetskih izvora.</p>
+<h2 id="u%C4%8Ditavanje-iz-tekstualnih-datoteka">Učitavanje iz tekstualnih datoteka</h2>
+<p>Tekstualne datoteke (<em>npr. CSV, TXT</em>) najčešći su izvor podataka. R ima ugrađene funkcije za čitanje ovih datoteka.</p>
+<h3 id="u%C4%8Ditavanje-csv-datoteka">Učitavanje CSV datoteka</h3>
+<p>CSV (<em>Comma-Separated Values</em>) datoteke su tablični podaci pohranjeni u tekstualnom obliku, gdje su vrijednosti odvojene zarezom.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Učitavanje CSV datoteke</span>
+podaci &lt;- read.csv(<span class="hljs-string">"data/primjer.csv"</span>)
+
+<span class="hljs-comment"># Prikaz prva 3 retka</span>
+head(podaci, n = <span class="hljs-number">3L</span>)
+     Ime Dob Visina   Grad
+ <span class="hljs-number">1</span>   Ana  <span class="hljs-number">25</span>    <span class="hljs-number">168</span> Zagreb
+ <span class="hljs-number">2</span> Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>  Split
+ <span class="hljs-number">3</span>   Iva  <span class="hljs-number">22</span>    <span class="hljs-number">160</span> Rijeka
+
+<span class="hljs-comment"># Prikaz zadnja 3 retka</span>
+tail(podaci, n = <span class="hljs-number">3L</span>)
+      Ime Dob Visina      Grad
+ <span class="hljs-number">4</span>  Petar  <span class="hljs-number">28</span>    <span class="hljs-number">180</span>    Osijek
+ <span class="hljs-number">5</span> Marija  <span class="hljs-number">35</span>    <span class="hljs-number">165</span>     Zadar
+ <span class="hljs-number">6</span>   Ivan  <span class="hljs-number">40</span>    <span class="hljs-number">178</span> Dubrovnik
+</div></code></pre>
+<ul>
+<li><strong>Argumenti funkcije <code>read.csv()</code>:</strong>
+<ul>
+<li><code>file</code>: Putanja do datoteke.</li>
+<li><code>header</code>: Ako je <code>TRUE</code>, prvi redak se koristi kao nazivi stupaca (<em>default</em> je <code>TRUE</code>)</li>
+<li><code>sep</code>: Znak koji odvaja vrijednosti (<em>default</em> je <code>,</code>)</li>
+</ul>
+</li>
+</ul>
+<div class="page"></div>
+<h3 id="u%C4%8Ditavanje-txt-datoteka">Učitavanje TXT datoteka</h3>
+<p>Za datoteke s drugim separatorima (<em>npr. tabulator, točka-zarez, razmak</em>) koristi se funkcija <code>read.table()</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Učitavanje TXT datoteke s razmakom kao separatorom</span>
+podaci &lt;- read.table(<span class="hljs-string">"data/primjer.txt"</span>, header = <span class="hljs-literal">TRUE</span>, sep = <span class="hljs-string">" "</span>)
+
+<span class="hljs-comment"># Prikaz prva 2 retka</span>
+head(podaci, n = <span class="hljs-number">2L</span>)
+
+      Ime Dob Visina      Grad
+ <span class="hljs-number">1</span>    Ana  <span class="hljs-number">25</span>    <span class="hljs-number">168</span>    Zagreb
+ <span class="hljs-number">2</span>  Marko  <span class="hljs-number">30</span>    <span class="hljs-number">175</span>     Split
+</div></code></pre>
+<ul>
+<li><strong>Argumenti funkcije <code>read.table()</code>:</strong>
+<ul>
+<li><code>header</code>: Ako je <code>TRUE</code>, prvi redak se koristi kao nazivi stupaca</li>
+<li><code>sep</code>: Znak koji odvaja vrijednosti (npr. <code>sep = &quot;\t&quot;</code> za tabulator)</li>
+</ul>
+</li>
+</ul>
+<br>
+<h2 id="u%C4%8Ditavanje-iz-excel-datoteka">Učitavanje iz Excel datoteka</h2>
+<p>Za učitavanje podataka iz Excel datoteka (<em>XLSX</em>) potreban je paket <code>readxl</code>:</p>
+<pre class="hljs"><code><div>install.packages(<span class="hljs-string">"readxl"</span>)  <span class="hljs-comment"># Instalacija paketa</span>
+<span class="hljs-keyword">library</span>(readxl)             <span class="hljs-comment"># Učitavanje paketa</span>
+
+<span class="hljs-comment"># Učitavanje Excel datoteke</span>
+podaci &lt;- read_excel(<span class="hljs-string">"putanja/do/datoteke.xlsx"</span>, sheet = <span class="hljs-number">1</span>)
+
+<span class="hljs-comment"># Prikaz prva 2 retka</span>
+head(podaci, n = <span class="hljs-number">2L</span>)
+
+ <span class="hljs-comment"># A tibble: 2 × 4</span>
+   Ime     Dob Visina Grad  
+   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; 
+ <span class="hljs-number">1</span> Ana      <span class="hljs-number">25</span>    <span class="hljs-number">168</span> Zagreb
+ <span class="hljs-number">2</span> Marko    <span class="hljs-number">30</span>    <span class="hljs-number">175</span> Split 
+</div></code></pre>
+<ul>
+<li><strong>Argumenti funkcije <code>read_excel()</code>:</strong>
+<ul>
+<li><code>path</code>: Putanja do Excel datoteke</li>
+<li><code>sheet</code>: Naziv ili indeks lista koji se želi učitati (default je prvi list)</li>
+<li><code>range</code>: Opseg ćelija koji se želi učitati (npr. <code>range = &quot;A1:D10&quot;</code>)</li>
+</ul>
+</li>
+</ul>
+<br>
+<div class="page"></div>
+<h2 id="u%C4%8Ditavanje-s-interneta">Učitavanje s interneta</h2>
+<p>R može učitati podatke s interneta, bilo izravno s web stranice ili iz API-ja.</p>
+<p>Za učitavanje podataka s API-ja koristi se paket <code>httr</code>.</p>
+<pre class="hljs"><code><div>install.packages(<span class="hljs-string">"httr"</span>)  <span class="hljs-comment"># Instalacija paketa</span>
+<span class="hljs-keyword">library</span>(httr)
+
+<span class="hljs-comment"># Zahtjev za informacije o repozitoriju</span>
+odgovor &lt;- GET(<span class="hljs-string">"https://api.github.com/repos/tidyverse/ggplot2"</span>)
+
+<span class="hljs-comment"># Pretvorba odgovora u JSON</span>
+podaci &lt;- content(odgovor, <span class="hljs-string">"parsed"</span>)
+
+<span class="hljs-comment"># Prikaz podataka</span>
+print(podaci)
+</div></code></pre>
+<br>
+<h2 id="u%C4%8Ditavanje-ugra%C4%91enih-podataka">Učitavanje ugrađenih podataka</h2>
+<p>U R-u postoji veliki broj ugrađenih skupova podataka koji su dostupni odmah nakon pokretanja R-a. Ovi podaci često se koriste za demonstraciju, vježbu i testiranje različitih funkcija i paketa. Ugrađeni podaci mogu se učitati pomoću funkcije <code>data()</code>.</p>
+<p><em>Neki primjeri ugrađenih skupina podataka:</em></p>
+<table>
+<thead>
+<tr>
+<th>Skup podataka</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>mtcars</code></strong></td>
+<td>Podaci o različitim modelima automobila iz 1974. godine. Sadrži informacije o potrošnji goriva, broju cilindara, snazi motora i drugim karakteristikama</td>
+</tr>
+<tr>
+<td><strong><code>iris</code></strong></td>
+<td>Podaci o cvijetu perunike (Iris). Sadrži mjere za duljinu i širinu latica i čašičnih listova za tri različite vrste perunike</td>
+</tr>
+<tr>
+<td><strong><code>airquality</code></strong></td>
+<td>Podaci o kvaliteti zraka u New Yorku tijekom 1973. godine. Sadrži mjerenja ozona, sunčevog zračenja, temperature i drugih varijabli</td>
+</tr>
+<tr>
+<td><strong><code>Titanic</code></strong></td>
+<td>Podaci o preživjelima na Titanicu. Organizirani u obliku tabele s informacijama o putnicima, uključujući klasu, spol, dob i preživljavanje</td>
+</tr>
+<tr>
+<td><strong><code>USArrests</code></strong></td>
+<td>Podaci o broju uhićenja po 100.000 stanovnika u SAD-u za različite zločine (ubojstvo, napad, silovanje) i postotak urbane populacije po državi</td>
+</tr>
+<tr>
+<td><strong><code>ChickWeight</code></strong></td>
+<td>Podaci o težini pilića tijekom vremena, s informacijama o prehrani i dobi</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="page"></div>
+<p><em>Funkcija <code>data()</code> prikazuje popis svih ugrađenih skupova podataka dostupnih u trenutnoj R sesiji. Ako želite učitati određeni skup podataka, jednostavno navedite njegovo ime kao argument:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Prikaz popisa svih ugrađenih skupova podataka</span>
+data()
+
+<span class="hljs-comment"># Učitavanje određenog skupa podataka</span>
+data(<span class="hljs-string">"mtcars"</span>)  <span class="hljs-comment"># Učitava skup podataka 'mtcars'</span>
+
+cars &lt;- data.frame(mtcars)
+
+head(cars)
+
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+ Mazda RX4         <span class="hljs-number">21.0</span>   <span class="hljs-number">6</span>  <span class="hljs-number">160</span> <span class="hljs-number">110</span> <span class="hljs-number">3.90</span> <span class="hljs-number">2.620</span> <span class="hljs-number">16.46</span>  <span class="hljs-number">0</span>  <span class="hljs-number">1</span>    <span class="hljs-number">4</span>    <span class="hljs-number">4</span>
+ Mazda RX4 Wag     <span class="hljs-number">21.0</span>   <span class="hljs-number">6</span>  <span class="hljs-number">160</span> <span class="hljs-number">110</span> <span class="hljs-number">3.90</span> <span class="hljs-number">2.875</span> <span class="hljs-number">17.02</span>  <span class="hljs-number">0</span>  <span class="hljs-number">1</span>    <span class="hljs-number">4</span>    <span class="hljs-number">4</span>
+ Datsun <span class="hljs-number">710</span>        <span class="hljs-number">22.8</span>   <span class="hljs-number">4</span>  <span class="hljs-number">108</span>  <span class="hljs-number">93</span> <span class="hljs-number">3.85</span> <span class="hljs-number">2.320</span> <span class="hljs-number">18.61</span>  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>    <span class="hljs-number">4</span>    <span class="hljs-number">1</span>
+ Hornet <span class="hljs-number">4</span> Drive    <span class="hljs-number">21.4</span>   <span class="hljs-number">6</span>  <span class="hljs-number">258</span> <span class="hljs-number">110</span> <span class="hljs-number">3.08</span> <span class="hljs-number">3.215</span> <span class="hljs-number">19.44</span>  <span class="hljs-number">1</span>  <span class="hljs-number">0</span>    <span class="hljs-number">3</span>    <span class="hljs-number">1</span>
+ Hornet Sportabout <span class="hljs-number">18.7</span>   <span class="hljs-number">8</span>  <span class="hljs-number">360</span> <span class="hljs-number">175</span> <span class="hljs-number">3.15</span> <span class="hljs-number">3.440</span> <span class="hljs-number">17.02</span>  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>    <span class="hljs-number">3</span>    <span class="hljs-number">2</span>
+ Valiant           <span class="hljs-number">18.1</span>   <span class="hljs-number">6</span>  <span class="hljs-number">225</span> <span class="hljs-number">105</span> <span class="hljs-number">2.76</span> <span class="hljs-number">3.460</span> <span class="hljs-number">20.22</span>  <span class="hljs-number">1</span>  <span class="hljs-number">0</span>    <span class="hljs-number">3</span>    <span class="hljs-number">1</span>
+</div></code></pre>
+<p><img src="images/mtcars.png" alt="alt text"></p>
+<br>
+<div class="page"></div>
+<h2 id="provjera-i-%C4%8Di%C5%A1%C4%87enje-podataka">Provjera i čišćenje podataka</h2>
+<p>Nakon učitavanja podataka, važno je provjeriti njihovu strukturu i očistiti ih od eventualnih grešaka.</p>
+<h3 id="provjera-strukture-podataka">Provjera strukture podataka</h3>
+<pre class="hljs"><code><div>podaci &lt;- read.csv(<span class="hljs-string">"data/primjer_with_nulls.csv"</span>)
+
+<span class="hljs-comment"># Prikaz strukture podataka</span>
+str(podaci)
+
+ <span class="hljs-string">'data.frame'</span>:	<span class="hljs-number">6</span> obs. of  <span class="hljs-number">4</span> variables:
+  $ Ime   : chr  <span class="hljs-string">"Ana"</span> <span class="hljs-string">""</span> <span class="hljs-string">"Iva"</span> <span class="hljs-string">"Petar"</span> <span class="hljs-keyword">...</span>
+  $ Dob   : int  <span class="hljs-number">25</span> <span class="hljs-number">30</span> <span class="hljs-number">22</span> <span class="hljs-number">28</span> <span class="hljs-number">35</span> <span class="hljs-number">40</span>
+  $ Visina: int  <span class="hljs-literal">NA</span> <span class="hljs-number">175</span> <span class="hljs-number">160</span> <span class="hljs-number">180</span> <span class="hljs-number">165</span> <span class="hljs-literal">NA</span>
+  $ Grad  : chr  <span class="hljs-string">"Zagreb"</span> <span class="hljs-string">"Split"</span> <span class="hljs-string">"Rijeka"</span> <span class="hljs-string">""</span> <span class="hljs-keyword">...</span>
+
+
+<span class="hljs-comment"># Sažetak podataka</span>
+summary(podaci)
+
+      Ime                 Dob            Visina          Grad          
+  Length:<span class="hljs-number">6</span>           Min.   :<span class="hljs-number">22.00</span>   Min.   :<span class="hljs-number">160.0</span>   Length:<span class="hljs-number">6</span>          
+  Class :character   1st Qu.:<span class="hljs-number">25.75</span>   1st Qu.:<span class="hljs-number">163.8</span>   Class :character  
+  Mode  :character   Median :<span class="hljs-number">29.00</span>   Median :<span class="hljs-number">170.0</span>   Mode  :character  
+                     Mean   :<span class="hljs-number">30.00</span>   Mean   :<span class="hljs-number">170.0</span>                     
+                     3rd Qu.:<span class="hljs-number">33.75</span>   3rd Qu.:<span class="hljs-number">176.2</span>                     
+                     Max.   :<span class="hljs-number">40.00</span>   Max.   :<span class="hljs-number">180.0</span>                     
+                                     <span class="hljs-literal">NA</span><span class="hljs-string">'s   :2                         
+</span></div></code></pre>
+<div class="page"></div>
+<h3 id="provjera-nedostaju%C4%87ih-vrijednosti">Provjera nedostajućih vrijednosti</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Broj nedostajućih vrijednosti po stupcu</span>
+colSums(is.na(podaci))
+    Ime    Dob Visina   Grad 
+      <span class="hljs-number">0</span>      <span class="hljs-number">0</span>      <span class="hljs-number">2</span>      <span class="hljs-number">0</span> 
+
+<span class="hljs-comment"># Uklanjanje redaka s nedostajućim vrijednostima</span>
+podaci_clean &lt;- na.omit(podaci)
+podaci_clean
+
+      Ime Dob Visina   Grad
+ <span class="hljs-number">2</span>         <span class="hljs-number">30</span>    <span class="hljs-number">175</span>  Split
+ <span class="hljs-number">3</span>    Iva  <span class="hljs-number">22</span>    <span class="hljs-number">160</span> Rijeka
+ <span class="hljs-number">4</span>  Petar  <span class="hljs-number">28</span>    <span class="hljs-number">180</span>       
+ <span class="hljs-number">5</span> Marija  <span class="hljs-number">35</span>    <span class="hljs-number">165</span>  Zadar
+
+
+ <span class="hljs-comment"># Uklanjanje redaka gdje bilo "Ime" ili "Grad" ima prazne stringove</span>
+podaci_clean &lt;- podaci_clean[podaci_clean$Ime != <span class="hljs-string">""</span> | podaci_clean$Grad != <span class="hljs-string">""</span>, ]
+podaci_clean
+
+      Ime Dob Visina   Grad
+ <span class="hljs-number">3</span>    Iva  <span class="hljs-number">22</span>    <span class="hljs-number">160</span> Rijeka
+ <span class="hljs-number">5</span> Marija  <span class="hljs-number">35</span>    <span class="hljs-number">165</span>  Zadar
+</div></code></pre>
+<div class="page"></div>
+<h1 id="samostalni-zadatak-za-vje%C5%BEbu-1">Samostalni zadatak za vježbu 1</h1>
+<p>Skup podataka <code>mtcars</code> sadrži informacije o različitim modelima automobila iz 1974. godine. Podaci uključuju potrošnju goriva, broj cilindara, snagu motora i druge karakteristike.</p>
+<p>Učitajte skup podataka <code>mtcars</code> u varijablu naziva <code>cars</code> i odgovorite na sljedeća pitanja:</p>
+<ol>
+<li>
+<p><strong>Koliko ima opservacija (redaka) i varijabli (stupaca)?</strong></p>
+</li>
+<li>
+<p><strong>Navedite kojeg su tipa varijable.</strong></p>
+</li>
+<li>
+<p><strong>Ima li nedostajućih vrijednosti?</strong></p>
+</li>
+<li>
+<p><strong>Izmijenite nazive stupaca tako da budu na hrvatskom jeziku.</strong></p>
+<ul>
+<li>Hint: <code>colnames()</code></li>
+<li>Koristite sljedeće nazive:
+<ul>
+<li><code>mpg</code> → <code>potrosnja</code></li>
+<li><code>cyl</code> → <code>cilindri</code></li>
+<li><code>disp</code> → <code>zapremina</code></li>
+<li><code>hp</code> → <code>snaga</code></li>
+<li><code>drat</code> → <code>omjer</code></li>
+<li><code>wt</code> → <code>tezina</code></li>
+<li><code>qsec</code> → <code>ubrzanje</code></li>
+<li><code>vs</code> → <code>motor</code></li>
+<li><code>am</code> → <code>mjenjac</code></li>
+<li><code>gear</code> → <code>brzine</code></li>
+<li><code>carb</code> → <code>karburatori</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Koja je minimalna, maksimalna i prosječna potrošnja goriva?</strong> - Hint: <code>min()</code>, <code>max()</code>, <code>mean()</code></p>
+</li>
+<li>
+<p><strong>Koliko je različitih brojeva cilindara u skupu podataka?</strong> - Hint: <code>unique()</code></p>
+</li>
+<li>
+<p><strong>Koliko je automobila s ručnim mjenjačem (<code>mjenjac = 1</code>)?</strong> - Hint: <code>sum()</code></p>
+</li>
+<li>
+<p><strong>Kreirajte novi dataframe koji sadrži sve podatke za automobile s 8 cilindara. Spremite podatke u varijablu naziva <code>cars_8cyl</code>.</strong></p>
+</li>
+<li>
+<p><strong>Koliko iznosi prosječna težina automobila s 8 cilindara?</strong></p>
+</li>
+<li>
+<p><strong>Koliko iznosi potrošnja goriva za prva 3 automobila?</strong> - Hint: <code>head()</code></p>
+</li>
+<li>
+<p><strong>Koliko iznosi potrošnja goriva za posljednjih 5 automobila?</strong> - Hint: <code>tail()</code></p>
+</li>
+<li>
+<p><strong>Prikažite sažetak svih numeričkih varijabli u skupu podataka.</strong></p>
+</li>
+</ol>
+</div>
+</body>
+</html>
