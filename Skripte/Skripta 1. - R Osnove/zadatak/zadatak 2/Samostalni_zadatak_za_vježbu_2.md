@@ -33,6 +33,6 @@ Učitajte skup podataka `iris` u varijablu naziva `iris_podaci` i odgovorite na 
 
 10. **Kreirajte novi okvir koji sadrži samo one opservacije gdje je površina latica (Petal.Area) veća od prosječne površine latica za cijeli skup podataka. Spremite podatke u varijablu naziva `irisIznadProsjeka`. Zatim izračunajte koliko je takvih opservacija za svaku vrstu irisa te koja vrsta ima najmanje latice?**
 
-11. **Provjerite da li opservacija s najvećim omjerom iz okvira `irisIznadProsjeka` ima veću površinu čašičnog lista i površinu latice od opservacija s najmanjom površinom čašičnog lista i površinom latice iz okvira**
+11. **Provjerite da li opservacija s najvećim omjerom iz okvira `setosa` ima veću površinu čašičnog lista i površinu latice od opservacija s najmanjom površinom čašičnog lista i površinom latice iz okvira**
 
 </div>
