@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>R osnove</title>
+		<meta
+			http-equiv="Content-type"
+			content="text/html;charset=UTF-8" />
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet" />
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+			/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+			/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+ :not(code *, .hljs *, .MathJax *) {
+				font-family: "Poppins", sans-serif;
+			}
+            html {
+                display: flex;
+                justify-content: center;
+            }
+			body {
+				font-family: var(
+					--vscode-markdown-font-family,
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe WPC",
+					"Segoe UI",
+					"Ubuntu",
+					"Droid Sans",
+					sans-serif
+				);
+				font-size: var(--vscode-markdown-font-size, 14px);
+				line-height: var(--vscode-markdown-line-height, 22px);
+				word-wrap: break-word;
+				color: #3b3b3b;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                width: full;
+			}
+			.body {
+                max-width: 1012px;
+			}
+
+			#code-csp-warning {
+				position: fixed;
+				top: 0;
+				right: 0;
+				color: white;
+				margin: 16px;
+				text-align: center;
+				font-size: 12px;
+				font-family: sans-serif;
+				background-color: #444444;
+				cursor: pointer;
+				padding: 6px;
+				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			}
+
+			#code-csp-warning:hover {
+				text-decoration: none;
+				background-color: #007acc;
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+			}
+
+			body.scrollBeyondLastLine {
+				margin-bottom: calc(100vh - 22px);
+			}
+
+			body.showEditorSelection .code-line {
+				position: relative;
+			}
+
+			body.showEditorSelection .code-active-line:before,
+			body.showEditorSelection .code-line:hover:before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0;
+				left: -12px;
+				height: 100%;
+			}
+
+			body.showEditorSelection li.code-active-line:before,
+			body.showEditorSelection li.code-line:hover:before {
+				left: -30px;
+			}
+
+			.vscode-light.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.15);
+			}
+
+			.vscode-light.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.4);
+			}
+
+			.vscode-light.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-dark.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.4);
+			}
+
+			.vscode-dark.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.6);
+			}
+
+			.vscode-dark.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 160, 0, 0.7);
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 160, 0, 1);
+			}
+
+			.vscode-high-contrast.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+				border-radius: 8px;
+				filter: drop-shadow(-0 2px 2px rgba(0, 0, 0, 0.07));
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+
+			a:focus,
+			input:focus,
+			select:focus,
+			textarea:focus {
+				outline: 1px solid -webkit-focus-ring-color;
+				outline-offset: -1px;
+			}
+
+			hr {
+				border: 0;
+				height: 2px;
+				border-bottom: 2px solid;
+			}
+
+			h1 {
+				padding-bottom: 0.3em;
+				line-height: 1.2;
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+			}
+
+			h1,
+			h2,
+			h3 {
+				font-weight: normal;
+			}
+
+			table {
+				border-collapse: collapse;
+			}
+
+			table > thead > tr > th {
+				text-align: left;
+				border-bottom: 1px solid;
+			}
+
+			table > thead > tr > th,
+			table > thead > tr > td,
+			table > tbody > tr > th,
+			table > tbody > tr > td {
+				padding: 5px 10px;
+			}
+
+			table > tbody > tr + tr > td {
+				border-top: 1px solid;
+			}
+
+			blockquote {
+				margin: 0 7px 0 5px;
+				padding: 0 16px 0 10px;
+				border-left-width: 5px;
+				border-left-style: solid;
+			}
+
+			code {
+				font-family: Menlo, Monaco, Consolas, "Droid Sans Mono",
+					"Courier New", monospace, "Droid Sans Fallback";
+				font-size: 1em;
+				line-height: 1.357em;
+			}
+
+			body.wordWrap pre {
+				white-space: pre-wrap;
+			}
+
+			pre:not(.hljs),
+			pre.hljs code > div {
+				padding: 16px;
+				border-radius: 3px;
+				overflow: auto;
+			}
+
+			pre code {
+				color: var(--vscode-editor-foreground);
+				tab-size: 4;
+			}
+
+			/** Theming */
+
+			.vscode-light pre {
+				background-color: rgba(220, 220, 220, 0.4);
+			}
+
+			.vscode-dark pre {
+				background-color: rgba(10, 10, 10, 0.4);
+			}
+
+			.vscode-high-contrast pre {
+				background-color: rgb(0, 0, 0);
+			}
+
+			.vscode-high-contrast h1 {
+				border-color: rgb(0, 0, 0);
+			}
+
+			.vscode-light table > thead > tr > th {
+				border-color: rgba(0, 0, 0, 0.69);
+			}
+
+			.vscode-dark table > thead > tr > th {
+				border-color: rgba(255, 255, 255, 0.69);
+			}
+
+			.vscode-light h1,
+			.vscode-light hr,
+			.vscode-light table > tbody > tr + tr > td {
+				border-color: rgba(0, 0, 0, 0.18);
+			}
+
+			.vscode-dark h1,
+			.vscode-dark hr,
+			.vscode-dark table > tbody > tr + tr > td {
+				border-color: rgba(255, 255, 255, 0.18);
+			}
+		</style>
+
+		<style>
+			/*
+
+Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+
+*/
+			.hljs {
+				background: white;
+				color: black;
+			}
+
+			.hljs-comment,
+			.hljs-quote,
+			.hljs-variable {
+				color: #008000;
+			}
+
+			.hljs-keyword,
+			.hljs-selector-tag,
+			.hljs-built_in,
+			.hljs-name,
+			.hljs-tag {
+				color: #00f;
+			}
+
+			.hljs-string,
+			.hljs-title,
+			.hljs-section,
+			.hljs-attribute,
+			.hljs-literal,
+			.hljs-template-tag,
+			.hljs-template-variable,
+			.hljs-type,
+			.hljs-addition {
+				color: #a31515;
+			}
+
+			.hljs-deletion,
+			.hljs-selector-attr,
+			.hljs-selector-pseudo,
+			.hljs-meta {
+				color: #2b91af;
+			}
+
+			.hljs-doctag {
+				color: #808080;
+			}
+
+			.hljs-attr {
+				color: #f00;
+			}
+
+			.hljs-symbol,
+			.hljs-bullet,
+			.hljs-link {
+				color: #00b0e8;
+			}
+
+			.hljs-emphasis {
+				font-style: italic;
+			}
+
+			.hljs-strong {
+				font-weight: bold;
+			}
+		</style>
+
+		<style>
+			/*
+ * Markdown PDF CSS
+ */
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC",
+					"Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+			}
+
+			pre {
+				background-color: #f8f8f8;
+				border: 1px solid #cccccc;
+				border-radius: 3px;
+				overflow-x: auto;
+				white-space: pre-wrap;
+				overflow-wrap: break-word;
+			}
+
+			pre:not(.hljs) {
+				padding: 23px;
+				line-height: 19px;
+			}
+
+			blockquote {
+				background: rgba(127, 127, 127, 0.1);
+				border-color: rgba(0, 122, 204, 0.5);
+			}
+
+			.emoji {
+				height: 1.4em;
+			}
+
+			code {
+				font-size: 14px;
+				line-height: 19px;
+			}
+
+			/* for inline code */
+			:not(pre):not(.hljs) > code {
+				color: #3b3b3b; /* Change the old color so it seems less like an error */
+				font-size: inherit;
+				background: #e0e0e0;
+				border-radius: 4px;
+				padding: 1px 2px;
+				margin: -1px -2px;
+			}
+
+			/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+			.page {
+				page-break-after: always;
+			}
+		</style>
+
+		<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+	</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div class="body">
+<h1 id="analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</h1>
+<p><strong>Nositelj</strong>: izv. prof. dr. sc. Siniša Sovilj <br>
+<strong>Asistent</strong>: mag. inf. Alesandro Žužić</p>
+<p><strong>Ustanova</strong>: Sveučilište Jurja Dobrile u Puli, Fakultet informatike u Puli</p>
+<p style="float: clear; display: flex; gap: 8px; align-items: center;" class="font-brioni text-sm whitespace-nowrap">
+    <img src="../Logo/fipu_logo.svg" style="height: 96px; box-shadow: none !important;" class="mr-4"></img>
+    Fakultet informatike u Puli
+</p>
+<h1 id="2-vizualizacija-podataka">[2] Vizualizacija podataka</h1>
+<div style="display: flex; justify-content: space-between; text-align: justify; gap: 32px;">
+    <p>
+        R nudi napredne mogućnosti za <b>grafičku vizualizaciju podataka</b>s bogatim skupom biblioteka i funkcija, omogućava učinkovito stvaranje vizualnih prikaza podataka, olakšavajući analizu i interpretaciju rezultata. Neke od osnovnih grafičkih prikaza koje ćemo proći su: <i>osnovni X-Y prikaz: plot(), histogram: hist(), točkasti prikaz: dotchart(), stupčasti prikaz: barplot(), linijski prikaz: lines(), tortni prikaz: pie(), kutijasti prikaz: boxplot(), raspršeni graf: scatterplot()</i>
+    </p>
+    <img src="../Icons/R_2.svg" style="width: 96px; height: 96px; margin: 0px;"></img>
+</div>
+<p><strong>Posljednje ažurirano:</strong> 19. ožujka 2025.</p>
+<!-- TOC -->
+<ul>
+<li><a href="#analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</a></li>
+<li><a href="#2-vizualizacija-podataka">[2] Vizualizacija podataka</a>
+<ul>
+<li><a href="#x-y-prikaz-plot">X-Y prikaz plot</a>
+<ul>
+<li><a href="#osnovna-sintaksa">Osnovna sintaksa</a></li>
+<li><a href="#slova-i-margine">Slova i margine</a></li>
+<li><a href="#abline">Abline</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<div class="page"></div>
+<h2 id="x-y-prikaz-plot">X-Y prikaz <code>plot()</code></h2>
+<p>X-Y prikaz u R-u koristi se za vizualizaciju odnosa između dviju numeričkih varijabli. Ovaj tip grafa je koristan za ispitivanje korelacije ili uzorka među podacima, a osnovna funkcija za izradu ovih prikaza je <code>plot()</code>. X-Y prikaz daje jasnu sliku o tome kako se jedna varijabla mijenja u odnosu na drugu.</p>
+<h3 id="osnovna-sintaksa">Osnovna sintaksa</h3>
+<p>U R-u, funkcija <code>plot()</code> koristi dva osnovna argumenta: <strong>x</strong> i <strong>y</strong>. Prvi argument predstavlja vrijednosti na <em>X-osi</em>, a drugi na <em>Y-osi</em>.</p>
+<p>Na primjer, ako imamo skup podataka o težini vozila (<code>wt</code>) i potrošnji goriva (<code>mpg</code>) iz skupa podataka <code>mtcars</code>, možemo koristiti X-Y prikaz za vizualizaciju kako težina vozila utječe na njegovu potrošnju goriva.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">attach</span>(mtcars)  <span class="hljs-comment"># Učitavanje podataka</span>
+plot(wt, mpg)   <span class="hljs-comment"># Iscrtavanje podataka</span>
+abline(lm(mpg ~ wt))  <span class="hljs-comment"># Dodavanje regresijskog pravca</span>
+title(<span class="hljs-string">"Regresija: MPG = a + b * WT"</span>)  <span class="hljs-comment"># Naslov grafa</span>
+</div></code></pre>
+<p><img src="images/plot_xy.png" alt="alt text"></p>
+<ol>
+<li>
+<p><strong>attach(mtcars)</strong>: Funkcija <code>attach()</code> omogućava lakši pristup varijablama unutar skupa podataka. Bez nje, morali bismo svaki put navoditi <code>mtcars$wt</code> ili <code>mtcars$mpg</code>. Korištenjem <code>attach(mtcars)</code>, možemo direktno koristiti <code>wt</code> i <code>mpg</code> varijable.</p>
+</li>
+<li>
+<p><strong>plot(wt, mpg)</strong>: Ova funkcija stvara osnovni X-Y graf, gdje je <code>wt</code> (težina vozila) <em>na X-osi</em>, a <code>mpg</code> (potrošnja goriva) na <em>Y-osi</em>.</p>
+</li>
+<li>
+<p><strong>abline(lm(mpg ~ wt))</strong>: Funkcija <code>abline()</code> dodaje pravac na graf. U ovom slučaju, koristi se linearni model (<code>lm()</code>) koji prikazuje regresijsku liniju između težine vozila i potrošnje goriva. Model je izražen kao ( \text{MPG} = a + b \cdot \text{WT} ), gdje su (a) i (b) koeficijenti koji se izračunavaju pomoću funkcije <code>lm()</code>. To omogućuje vizualno prikazivanje trenda ili povezanosti između tih dviju varijabli.</p>
+</li>
+<li>
+<p><strong>title(&quot;Regresija: MPG = a + b * WT&quot;)</strong>: Dodaje naslov grafu koji jasno označava o čemu se radi. U ovom slučaju, to je linearna regresija između potrošnje goriva i težine vozila.</p>
+</li>
+</ol>
+<p><strong>Dodatne opcije i prilagodbe</strong></p>
+<p>Funkcija <code>plot()</code> omogućuje brojne prilagodbe kako bi graf bio jasniji i vizualno pregledniji:</p>
+<ul>
+<li><strong>Podešavanje boja i oznaka</strong>: Možemo koristiti argumente <code>col</code> (boja) i <code>pch</code> (simboli točaka)</li>
+</ul>
+<pre class="hljs"><code><div>plot(wt, mpg, col=<span class="hljs-string">"blue"</span>, pch=<span class="hljs-number">16</span>)
+</div></code></pre>
+<p><img src="images/plot_col_blue.png" alt="alt text"></p>
+<ul>
+<li><strong>Prilagodba osovina</strong>: Argumenti poput <code>xlab</code> i <code>ylab</code> omogućuju postavljanje oznaka za X i Y osi</li>
+</ul>
+<pre class="hljs"><code><div>plot(wt, mpg, xlab=<span class="hljs-string">"Težina vozila (wt)"</span>, ylab=<span class="hljs-string">"Potrošnja goriva (mpg)"</span>)
+</div></code></pre>
+<p><img src="images/plot_xylab.png" alt="alt text"></p>
+<ul>
+<li><strong>Dodavanje grid linija</strong>: Funkcija <code>grid()</code> može se koristiti za dodavanje mreže na grafu, što može pomoći u preciznijem čitanju podataka</li>
+</ul>
+<pre class="hljs"><code><div>plot(wt, mpg)
+grid()
+</div></code></pre>
+<p><img src="images/plot_grid.png" alt="alt text"></p>
+<p>Parametri grafova, linija i teksta:</p>
+<table>
+<thead>
+<tr>
+<th>Parametar</th>
+<th>Opis</th>
+<th>Primjer</th>
+<th>Korištenje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="images/simbols.png" alt="alt text"></td>
+<td>Simbol za iscrtavanje točaka na grafu</td>
+<td><code>pch=17</code> (trokutasti simbol)</td>
+<td><code>plot(wt, mpg, pch=17, col=&quot;blue&quot;)</code></td>
+</tr>
+<tr>
+<td><strong>col</strong></td>
+<td>Boja simbola ili linije na grafu</td>
+<td><code>col=&quot;red&quot;</code> (crvena boja)</td>
+<td><code>plot(wt, mpg, pch=16, col=&quot;red&quot;)</code></td>
+</tr>
+<tr>
+<td><strong>bg, fg</strong></td>
+<td>Boje pozadine (ispune) i prednje strane (granice) objekta, <em>radi samo za simbole 21-25</em></td>
+<td><code>bg=&quot;yellow&quot;</code>, <code>fg=&quot;brown&quot;</code> (pozadina žuta, granica smeđa)</td>
+<td><code>plot(wt, mpg, pch=21, col=&quot;orangered&quot;, bg=&quot;yellow&quot;, fg=&quot;brown&quot;)</code></td>
+</tr>
+<tr>
+<td><strong>cex</strong></td>
+<td>Proširenje veličine simbola ili teksta</td>
+<td><code>cex=2</code> (dvostruko veći simbol)</td>
+<td><code>plot(wt, mpg, pch=5, col=&quot;blue&quot;, cex=2)</code></td>
+</tr>
+<tr>
+<td><strong>lwd</strong></td>
+<td>Širina linije</td>
+<td><code>lwd=2</code> (dvostruko šira linija)</td>
+<td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;); abline(lm(mpg ~ wt), lwd=2)</code></td>
+</tr>
+<tr>
+<td><img src="images/line_types.png" alt="alt text"></td>
+<td>Tip linije</td>
+<td><code>lty=2</code> (crtasta linija)</td>
+<td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;); abline(lm(mpg ~ wt), lty=2)</code></td>
+</tr>
+<tr>
+<td><strong>font</strong> <em>(1=plain, 2=bold, 3=italic, 4=bold italic, 5=symbol)</em></td>
+<td>Tip fonta za tekst</td>
+<td><code>font=3</code> (italic)</td>
+<td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;, main=&quot;Font (font=3, italic)&quot;, font.main=3)</code></td>
+</tr>
+<tr>
+<td><strong>ps</strong></td>
+<td>Veličina fonta u točkama</td>
+<td>Veličina teksta = <code>ps * cex</code></td>
+<td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;, main=&quot;Veličina fonta (ps=2)&quot;, cex.main=2)</code></td>
+</tr>
+<tr>
+<td><strong>family</strong></td>
+<td>Obitelj fonta</td>
+<td><code>family=&quot;mono&quot;</code></td>
+<td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;, main=&quot;Obitelj fonta (family='mono')&quot;, family=&quot;mono&quot;)</code></td>
+</tr>
+</tbody>
+</table>
+<p><img src="images/plot_parametri.png" alt="alt text"></p>
+<p><em>Sve boje u R-u:</em>
+<img src="images/colors.png" alt="alt text"></p>
+<hr>
+<h3 id="slova-i-margine">Slova i margine</h3>
+<p>U R-u, slova i margine na grafu mogu se prilagoditi pomoću nekoliko parametara. Parametri koji kontroliraju veličinu fonta, poziciju teksta, kao i margine između grafova, omogućuju precizno oblikovanje vizualnih prikaza.</p>
+<table>
+<thead>
+<tr>
+<th>Parametar</th>
+<th>Opis</th>
+<th>Primjer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>cex</strong></td>
+<td>Veličina teksta na grafu.</td>
+<td><code>plot(wt, mpg, cex=1.5)</code></td>
+</tr>
+<tr>
+<td><strong>cex.axis</strong></td>
+<td>Veličina teksta na osovinama (X i Y os).</td>
+<td><code>plot(wt, mpg, cex.axis=1.2)</code></td>
+</tr>
+<tr>
+<td><strong>cex.lab</strong></td>
+<td>Veličina teksta na oznakama osovina (X i Y).</td>
+<td><code>plot(wt, mpg, cex.lab=1.3)</code></td>
+</tr>
+<tr>
+<td><strong>cex.main</strong></td>
+<td>Veličina teksta naslova grafa.</td>
+<td><code>plot(wt, mpg, cex.main=2)</code></td>
+</tr>
+<tr>
+<td><strong>mar</strong></td>
+<td>Parametar koji kontrolira margine oko grafa. Definira veličinu prostora između osovina i grafičkog prikaza.</td>
+<td><code>par(mar=c(5, 4, 4, 2) + 0.1); plot(wt, mpg)</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>par(mar=c(<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>) + <span class="hljs-number">0.1</span>)  <span class="hljs-comment"># Margine: (donja, lijeva, gornja, desna)</span>
+plot(wt, mpg, cex.main=<span class="hljs-number">1.5</span>, cex.lab=<span class="hljs-number">1.2</span>, cex.axis=<span class="hljs-number">1.1</span>, main=<span class="hljs-string">"Naslov s većim fontom"</span>)
+</div></code></pre>
+<p><img src="images/font_margine.png" alt="alt text"></p>
+<hr>
+<h3 id="abline">Abline</h3>
+<p>Funkcija <code>abline()</code> koristi se za dodavanje linija na grafove. Možemo dodati horizontalne, vertikalne linije, kao i linije temeljene na regresijskim modelima.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Funkcija</strong></th>
+<th><strong>Opis</strong></th>
+<th><strong>Argumenti</strong></th>
+<th><strong>Primjer</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>h</strong></td>
+<td>Dodavanje horizontalne linije na određenu y-koordinatu</td>
+<td><code>y</code> (y-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>abline(h = 5, col = &quot;red&quot;, lty = 2, lwd = 2)</code></td>
+</tr>
+<tr>
+<td><strong>v</strong></td>
+<td>Dodavanje vertikalne linije na određenu x-koordinatu</td>
+<td><code>x</code> (x-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>abline(v = 3, col = &quot;blue&quot;, lty = 1, lwd = 1)</code></td>
+</tr>
+<tr>
+<td><strong>lm()</strong></td>
+<td>Dodavanje linije temeljene na linearnom modelu (regresija)</td>
+<td>Model (npr. <code>lm()</code>), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>abline(lm(mpg ~ wt), col = &quot;green&quot;)</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>plot(wt, mpg)
+abline(lm(mpg ~ wt), col=<span class="hljs-string">"red"</span>, lwd=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija linearne regresije</span>
+abline(h=mean(mpg), col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija aritmetičke sredine</span>
+abline(v=median(wt), col=<span class="hljs-string">"green"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija medijana wt</span>
+
+text(x=min(wt)*<span class="hljs-number">1.3</span>, y=max(mpg)*<span class="hljs-number">0.9</span>, labels=<span class="hljs-string">"Regresijska linija"</span>, col=<span class="hljs-string">"red"</span>, pos=<span class="hljs-number">1</span>)
+text(x=max(wt)*<span class="hljs-number">0.85</span>, y=mean(mpg)*<span class="hljs-number">0.95</span>, labels=<span class="hljs-string">"Aritmetička sredina"</span>, col=<span class="hljs-string">"blue"</span>, pos=<span class="hljs-number">4</span>)
+text(x=median(wt), y=max(mpg)*<span class="hljs-number">0.8</span>, labels=<span class="hljs-string">"Medijan WT"</span>, col=<span class="hljs-string">"green"</span>, pos=<span class="hljs-number">2</span>)
+</div></code></pre>
+<p><img src="images/abline.png" alt="alt text"></p>
+<p><strong>Linijski prikaz</strong></p>
+<table>
+<thead>
+<tr>
+<th>Grafički parametar</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p</td>
+<td>Točke (points)</td>
+</tr>
+<tr>
+<td>l</td>
+<td>Linije (lines)</td>
+</tr>
+<tr>
+<td>o</td>
+<td>Preklopljene točke i linije (overplotted)</td>
+</tr>
+<tr>
+<td>b</td>
+<td>Točke povezane linijama</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Prazne točke povezane linijama</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Koraci (stair steps)</td>
+</tr>
+<tr>
+<td>S</td>
+<td>Koraci s drugačijim stilom (stair steps)</td>
+</tr>
+<tr>
+<td>h</td>
+<td>Okomite linije (histogram-like)</td>
+</tr>
+<tr>
+<td>n</td>
+<td>Bez točaka i linija</td>
+</tr>
+</tbody>
+</table>
+<p><img src="images/plot_types.png" alt="alt text"></p>
+
+</body>
+</html>
