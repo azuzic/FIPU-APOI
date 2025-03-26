@@ -121,14 +121,14 @@ par(mfrow=c(1, 2))
 plot(x, y, type="l", col="blue", lwd=2, xlab="Vrijeme", ylab="Amplituda")
 
 title(main="Sinusni val", sub="Primjer prilagođenog grafičkog prikaza", col.main="blue", col.sub="gray")
-legend("topright", legend=c("sin(x)"), col="blue", lty=1, cex=0.8, bty="n")
+legend("topright", legend=c("sin(x)"), col="blue", lty=1, cex=0.8, lwd=2)
 
 mtext("Sin i cos grafovi", line=1, col="purple", at=c(0,0))
 
 plot(x, z, type="l", col="red", lwd=2, lty=2,  xlab="Vrijeme", ylab="Amplituda")
 
 title(main="Sinusni val", sub="Primjer prilagođenog grafičkog prikaza", col.main="red", col.sub="gray")
-legend("topright", legend=c("cos(x)"), col="red", lty=2, cex=0.8, bty="n")
+legend("topright", legend=c("cos(x)"), col="red", lty=2, cex=1, lwd=2)
 
 x <- seq(0, 10, by=0.1)
 y <- sin(x)
