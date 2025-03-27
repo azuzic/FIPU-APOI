@@ -29,9 +29,6 @@
                 display: flex;
                 justify-content: center;
             }
-			img {
-				image-rendering: high-quality !important;
-			}
 			body {
 				font-family: var(
 					--vscode-markdown-font-family,
@@ -422,7 +419,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
     </p>
     <img src="../Icons/R_2.svg" style="width: 96px; height: 96px; margin: 0px;"></img>
 </div>
-<p><strong>Posljednje ažurirano:</strong> 19. ožujka 2025.</p>
+<p><strong>Posljednje ažurirano:</strong> 27. ožujka 2025.</p>
 <!-- TOC -->
 <ul>
 <li><a href="#analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</a></li>
@@ -430,7 +427,6 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <ul>
 <li><a href="#x-y-prikaz-plot">X-Y prikaz plot</a>
 <ul>
-<li><a href="#osnovna-sintaksa">Osnovna sintaksa</a></li>
 <li><a href="#slova-i-margine">Slova i margine</a></li>
 <li><a href="#abline">Abline</a></li>
 <li><a href="#lines">Lines</a></li>
@@ -445,7 +441,6 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <div class="page"></div>
 <h2 id="x-y-prikaz-plot">X-Y prikaz <code>plot()</code></h2>
 <p>X-Y prikaz u R-u koristi se za vizualizaciju odnosa između dviju numeričkih varijabli. Ovaj tip grafa je koristan za ispitivanje korelacije ili uzorka među podacima, a osnovna funkcija za izradu ovih prikaza je <code>plot()</code>. X-Y prikaz daje jasnu sliku o tome kako se jedna varijabla mijenja u odnosu na drugu.</p>
-<h3 id="osnovna-sintaksa">Osnovna sintaksa</h3>
 <p>U R-u, funkcija <code>plot()</code> koristi dva osnovna argumenta: <strong>x</strong> i <strong>y</strong>. Prvi argument predstavlja vrijednosti na <em>X-osi</em>, a drugi na <em>Y-osi</em>.</p>
 <p>Na primjer, ako imamo skup podataka o težini vozila (<code>wt</code>) i potrošnji goriva (<code>mpg</code>) iz skupa podataka <code>mtcars</code>, možemo koristiti X-Y prikaz za vizualizaciju kako težina vozila utječe na njegovu potrošnju goriva.</p>
 <p><em>Primjer:</em></p>
@@ -454,7 +449,9 @@ plot(wt, mpg)   <span class="hljs-comment"># Iscrtavanje podataka</span>
 abline(lm(mpg ~ wt))  <span class="hljs-comment"># Dodavanje regresijskog pravca</span>
 title(<span class="hljs-string">"Regresija: MPG = a + b * WT"</span>)  <span class="hljs-comment"># Naslov grafa</span>
 </div></code></pre>
-<p><img src="images/plot_xy.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/plot_xy.png"/>
+</div>
 <ol>
 <li>
 <p><strong>attach(mtcars)</strong>: Funkcija <code>attach()</code> omogućava lakši pristup varijablama unutar skupa podataka. Bez nje, morali bismo svaki put navoditi <code>mtcars$wt</code> ili <code>mtcars$mpg</code>. Korištenjem <code>attach(mtcars)</code>, možemo direktno koristiti <code>wt</code> i <code>mpg</code> varijable.</p>
@@ -476,20 +473,27 @@ title(<span class="hljs-string">"Regresija: MPG = a + b * WT"</span>)  <span cla
 </ul>
 <pre class="hljs"><code><div>plot(wt, mpg, col=<span class="hljs-string">"blue"</span>, pch=<span class="hljs-number">16</span>)
 </div></code></pre>
-<p><img src="images/plot_col_blue.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/plot_col_blue.png"/>
+</div>
+<div class="page"></div>
 <ul>
-<li><strong>Prilagodba osovina</strong>: Argumenti poput <code>xlab</code> i <code>ylab</code> omogućuju postavljanje oznaka za X i Y osi</li>
+<li><strong>Promjena naziva x/y osi</strong>: Argumenti poput <code>xlab</code> i <code>ylab</code> omogućuju postavljanje oznaka za X i Y osi</li>
 </ul>
 <pre class="hljs"><code><div>plot(wt, mpg, xlab=<span class="hljs-string">"Težina vozila (wt)"</span>, ylab=<span class="hljs-string">"Potrošnja goriva (mpg)"</span>)
 </div></code></pre>
-<p><img src="images/plot_xylab.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/plot_xylab.png"/>
+</div>
 <ul>
-<li><strong>Dodavanje grid linija</strong>: Funkcija <code>grid()</code> može se koristiti za dodavanje mreže na grafu, što može pomoći u preciznijem čitanju podataka</li>
+<li><strong>Dodavanje rešetke</strong>: Funkcija <code>grid()</code> može se koristiti za dodavanje mreže na grafu, što može pomoći u preciznijem čitanju podataka</li>
 </ul>
 <pre class="hljs"><code><div>plot(wt, mpg)
 grid()
 </div></code></pre>
-<p><img src="images/plot_grid.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/plot_grid.png"/>
+</div>
 <p>Parametri grafova, linija i teksta:</p>
 <table>
 <thead>
@@ -508,7 +512,7 @@ grid()
 <td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;, xlab=&quot;Težina&quot;, ylab=&quot;Potrošnja goriva&quot;)</code></td>
 </tr>
 <tr>
-<td><img src="images/simbols.png" alt="alt text"></td>
+<td><strong>pch</strong></td>
 <td>Simbol za iscrtavanje točaka na grafu</td>
 <td><code>pch=17</code> (trokutasti simbol)</td>
 <td><code>plot(wt, mpg, pch=17, col=&quot;blue&quot;)</code></td>
@@ -538,7 +542,7 @@ grid()
 <td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;); abline(lm(mpg ~ wt), lwd=2)</code></td>
 </tr>
 <tr>
-<td><img src="images/line_types.png" alt="alt text"></td>
+<td><strong>lth</strong></td>
 <td>Tip linije</td>
 <td><code>lty=2</code> (crtasta linija)</td>
 <td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;); abline(lm(mpg ~ wt), lty=2)</code></td>
@@ -563,10 +567,20 @@ grid()
 </tr>
 </tbody>
 </table>
-<p><img src="images/plot_parametri.png" alt="alt text"></p>
-<p><em>Sve boje u R-u:</em>
-<img src="images/colors.png" alt="alt text"></p>
-<hr>
+<div style="width: 100%; display: flex; justify-content: center; margin-bottom: 16px;">
+    <div style="padding: 16px; width: 50%">
+        <img src="images/simbols.png"/>
+    </div>
+    <div style="padding: 16px; width: 50%">
+        <img src="images/line_types.png"/>
+    </div>
+</div>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/plot_parametri.png"/>
+</div>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/colors.png"/>
+</div>
 <h3 id="slova-i-margine">Slova i margine</h3>
 <p>U R-u, slova i margine na grafu mogu se prilagoditi pomoću nekoliko parametara. Parametri koji kontroliraju veličinu fonta, poziciju teksta, kao i margine između grafova, omogućuju precizno oblikovanje vizualnih prikaza.</p>
 <table>
@@ -610,11 +624,9 @@ grid()
 plot(wt, mpg, cex.main=<span class="hljs-number">1.5</span>, cex.lab=<span class="hljs-number">1.2</span>, cex.axis=<span class="hljs-number">1.1</span>, main=<span class="hljs-string">"Naslov s većim fontom"</span>)
 </div></code></pre>
 <p><img src="images/font_margine.png" alt="alt text"></p>
-<p><strong>Linijski prikaz <code>lines(x, y, type=)</code></strong></p>
-<p>Funkcija <strong><code>lines(x, y, type=)</code></strong> u R-u koristi se za dodavanje linija na postojeći graf izrađen pomoću <code>plot()</code>. Ova funkcija je korisna kada želimo prikazati više serija podataka na istom grafu ili naglasiti određene trendove.</p>
+<p><strong>Linijski prikaz <code>lines(type=)</code></strong></p>
+<p>Funkcija <strong><code>lines(type=)</code></strong> u R-u koristi se za dodavanje linija na postojeći graf izrađen pomoću <code>plot()</code>. Ova funkcija je korisna kada želimo prikazati više serija podataka na istom grafu ili naglasiti određene trendove.</p>
 <ul>
-<li><strong><code>x</code></strong> – vrijednosti na x-osi</li>
-<li><strong><code>y</code></strong> – vrijednosti na y-osi</li>
 <li><strong><code>type=</code></strong> – određuje stil crte, npr. <code>&quot;l&quot;</code> za linije, <code>&quot;b&quot;</code> za točke i linije itd.</li>
 </ul>
 <p><em>Primjer:</em></p>
@@ -623,53 +635,10 @@ y &lt;- c(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>
 
 plot(x, y, type = <span class="hljs-string">"b"</span>, main = <span class="hljs-string">"Točke povezane linijama (b)"</span>)
 </div></code></pre>
-<table>
-<thead>
-<tr>
-<th>Grafički parametar</th>
-<th>Opis</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>p</td>
-<td>Točke (points)</td>
-</tr>
-<tr>
-<td>l</td>
-<td>Linije (lines)</td>
-</tr>
-<tr>
-<td>o</td>
-<td>Preklopljene točke i linije (overplotted)</td>
-</tr>
-<tr>
-<td>b</td>
-<td>Točke povezane linijama</td>
-</tr>
-<tr>
-<td>c</td>
-<td>Prazne točke povezane linijama</td>
-</tr>
-<tr>
-<td>s</td>
-<td>Koraci (stair steps)</td>
-</tr>
-<tr>
-<td>S</td>
-<td>Koraci s drugačijim stilom (stair steps)</td>
-</tr>
-<tr>
-<td>h</td>
-<td>Okomite linije (histogram-like)</td>
-</tr>
-<tr>
-<td>n</td>
-<td>Bez točaka i linija</td>
-</tr>
-</tbody>
-</table>
-<p><img src="images/plot_types.png" alt="alt text"></p>
+<p>Vrste linija: <strong>&quot;p&quot;</strong> za točke, <strong>&quot;l&quot;</strong> za linije, <strong>&quot;o&quot;</strong> za preklopljene točke i linije, <strong>&quot;b&quot;</strong> za točke povezane linijama, <strong>&quot;c&quot;</strong> za prazne točke povezane linijama, <strong>&quot;s&quot;</strong> i <strong>&quot;S&quot;</strong> za korake, <strong>&quot;h&quot;</strong> za okomite linije te <strong>&quot;n&quot;</strong> za isključivanje točaka i linija.</p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/plot_types.png"/>
+</div>
 <h3 id="abline">Abline</h3>
 <p>Funkcija <code>abline()</code> koristi se za dodavanje linija na grafove. Možemo dodati horizontalne, vertikalne linije, kao i linije temeljene na regresijskim modelima.</p>
 <table>
@@ -685,13 +654,13 @@ plot(x, y, type = <span class="hljs-string">"b"</span>, main = <span class="hljs
 <tr>
 <td><strong>h</strong></td>
 <td>Dodavanje horizontalne linije na određenu y-koordinatu</td>
-<td><code>y</code> (y-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>col</code>, <code>lty</code>, <code>lwd</code></td>
 <td><code>abline(h = 5, col = &quot;red&quot;, lty = 2, lwd = 2)</code></td>
 </tr>
 <tr>
 <td><strong>v</strong></td>
 <td>Dodavanje vertikalne linije na određenu x-koordinatu</td>
-<td><code>x</code> (x-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>col</code>, <code>lty</code>, <code>lwd</code></td>
 <td><code>abline(v = 3, col = &quot;blue&quot;, lty = 1, lwd = 1)</code></td>
 </tr>
 <tr>
@@ -705,14 +674,16 @@ plot(x, y, type = <span class="hljs-string">"b"</span>, main = <span class="hljs
 <p><em>Primjer:</em></p>
 <pre class="hljs"><code><div>plot(wt, mpg)
 abline(lm(mpg ~ wt), col=<span class="hljs-string">"red"</span>, lwd=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija linearne regresije</span>
-abline(h=mean(mpg), col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija aritmetičke sredine</span>
+abline(h=mean(mpg), col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija aritmetičke sredine mpg</span>
 abline(v=median(wt), col=<span class="hljs-string">"green"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija medijana wt</span>
 
 text(x=min(wt)*<span class="hljs-number">1.3</span>, y=max(mpg)*<span class="hljs-number">0.9</span>, labels=<span class="hljs-string">"Regresijska linija"</span>, col=<span class="hljs-string">"red"</span>, pos=<span class="hljs-number">1</span>)
 text(x=max(wt)*<span class="hljs-number">0.85</span>, y=mean(mpg)*<span class="hljs-number">0.95</span>, labels=<span class="hljs-string">"Aritmetička sredina"</span>, col=<span class="hljs-string">"blue"</span>, pos=<span class="hljs-number">4</span>)
 text(x=median(wt), y=max(mpg)*<span class="hljs-number">0.8</span>, labels=<span class="hljs-string">"Medijan WT"</span>, col=<span class="hljs-string">"green"</span>, pos=<span class="hljs-number">2</span>)
 </div></code></pre>
-<p><img src="images/abline.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/abline.png" width="90%"/>
+</div>
 <h3 id="lines">Lines</h3>
 <p>Funkcija <code>lines()</code> koristi se za dodavanje linija na postojeći graf u R-u. Za razliku od <code>plot()</code>, koji kreira novi graf, <code>lines()</code> samo nadodaje linije na postojeći prikaz. Može se koristiti za povezivanje točaka u skupu podataka, crtanje funkcija ili dodavanje trendova.</p>
 <p><em>Primjer:</em></p>
@@ -729,7 +700,10 @@ lines(x2, y3, col=<span class="hljs-string">"green"</span>, lwd=<span class="hlj
 
 legend(<span class="hljs-string">"topright"</span>, legend=c(<span class="hljs-string">"sin(x)"</span>, <span class="hljs-string">"cos(x)"</span>, <span class="hljs-string">"rigid"</span>), col=c(<span class="hljs-string">"red"</span>, <span class="hljs-string">"blue"</span>, <span class="hljs-string">"green"</span>), lty=c(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>), lwd=<span class="hljs-number">2</span>)
 </div></code></pre>
-<p><img src="images/lines.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/lines.png"/>
+</div>
+<div class="page"></div>
 <h3 id="ostali-elementi">Ostali elementi</h3>
 <p>U R-u, razni elementi mogu se dodavati na grafove kako bi poboljšali čitljivost i interpretaciju podataka. To uključuje naslove, oznake osi, legende i grafičke oblike.</p>
 <table>
@@ -810,6 +784,7 @@ legend(<span class="hljs-string">"topright"</span>, legend=c(<span class="hljs-s
 </tr>
 </tbody>
 </table>
+<div class="page"></div>
 <p><em>Primjer 1:</em></p>
 <pre class="hljs"><code><div>x &lt;- seq(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, by=<span class="hljs-number">0.1</span>)
 y &lt;- sin(x)
@@ -829,7 +804,10 @@ plot(x, z, type=<span class="hljs-string">"l"</span>, col=<span class="hljs-stri
 title(main=<span class="hljs-string">"Sinusni val"</span>, sub=<span class="hljs-string">"Primjer prilagođenog grafičkog prikaza"</span>, col.main=<span class="hljs-string">"red"</span>, col.sub=<span class="hljs-string">"gray"</span>)
 legend(<span class="hljs-string">"topright"</span>, legend=c(<span class="hljs-string">"cos(x)"</span>), col=<span class="hljs-string">"red"</span>, lty=<span class="hljs-number">2</span>, cex=<span class="hljs-number">0.8</span>, bty=<span class="hljs-string">"n"</span>)
 </div></code></pre>
-<p><img src="images/elements1.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/elements1.png"/>
+</div>
+<div class="page"></div>
 <p><em>Primjer 2:</em></p>
 <pre class="hljs"><code><div>x &lt;- seq(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, by=<span class="hljs-number">0.1</span>)
 y &lt;- sin(x)
@@ -859,7 +837,10 @@ arrows(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <
 <span class="hljs-comment"># Dodavanje točke s posebnim simbolom</span>
 points(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, pch=<span class="hljs-number">19</span>, col=<span class="hljs-string">"red"</span>, cex=<span class="hljs-number">2</span>)
 </div></code></pre>
-<p><img src="images/elements2.png" alt="alt text"></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/elements2.png"/>
+</div>
+<div class="page"></div>
 <h2 id="vje%C5%BEba">Vježba</h2>
 <p>Istražujemo podatke o automobilima i želimo vizualizirati odnos između težine vozila (<code>wt</code>) i potrošnje goriva (<code>mpg</code>) koristeći skup podataka <code>mtcars</code>. Cilj je dodati korisne vizualne elemente kako biste istaknuli važne vrijednosti i trendove.</p>
 <ol>
@@ -870,10 +851,11 @@ points(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, p
 <li>Dodajte legendu koja označava regresijsku liniju, prosječnu vrijednost i medijan</li>
 <li>Koristite <code>text()</code> za dodavanje oznaka uz sve tri linije grafa</li>
 <li>Dodajte mrežu (<code>grid()</code>) radi boljeg pregleda podataka</li>
-<li>Ručno označite područje između prvog i trećeg kvartila pomoću <code>rect()</code>.</li>
+<li>Ručno označite područje između prvog i trećeg kvartila pomoću <code>rect()</code></li>
 <li>Dodajte strelicu (<code>arrows()</code>) koja upućuje na vozilo s najvećom potrošnjom (<code>mpg</code>)</li>
 </ol>
-<p><img src="images/cars.png" alt="alt text"></p>
-
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/cars.png"/>
+</div>
 </body>
 </html>
