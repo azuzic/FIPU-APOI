@@ -29,6 +29,9 @@
                 display: flex;
                 justify-content: center;
             }
+			img {
+				image-rendering: high-quality !important;
+			}
 			body {
 				font-family: var(
 					--vscode-markdown-font-family,
@@ -415,7 +418,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <h1 id="2-vizualizacija-podataka">[2] Vizualizacija podataka</h1>
 <div style="display: flex; justify-content: space-between; text-align: justify; gap: 32px;">
     <p>
-        R nudi napredne mogućnosti za <b>grafičku vizualizaciju podataka</b>s bogatim skupom biblioteka i funkcija, omogućava učinkovito stvaranje vizualnih prikaza podataka, olakšavajući analizu i interpretaciju rezultata. Neke od osnovnih grafičkih prikaza koje ćemo proći su: <i>osnovni X-Y prikaz: plot(), histogram: hist(), točkasti prikaz: dotchart(), stupčasti prikaz: barplot(), linijski prikaz: lines(), tortni prikaz: pie(), kutijasti prikaz: boxplot(), raspršeni graf: scatterplot()</i>
+        R nudi napredne mogućnosti za <b>grafičku vizualizaciju podataka</b>s bogatim skupom biblioteka i funkcija, omogućava učinkovito stvaranje vizualnih prikaza podataka, olakšavajući analizu i interpretaciju rezultata. Neke od osnovnih grafičkih prikaza koje ćemo proći su: <i>osnovni X-Y prikaz: plot(), linijski prikaz: lines(), histogram: hist(), točkasti prikaz: dotchart(), stupčasti prikaz: barplot(), tortni prikaz: pie(), kutijasti prikaz: boxplot(), raspršeni graf: scatterplot()</i>
     </p>
     <img src="../Icons/R_2.svg" style="width: 96px; height: 96px; margin: 0px;"></img>
 </div>
@@ -430,8 +433,11 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <li><a href="#osnovna-sintaksa">Osnovna sintaksa</a></li>
 <li><a href="#slova-i-margine">Slova i margine</a></li>
 <li><a href="#abline">Abline</a></li>
+<li><a href="#lines">Lines</a></li>
+<li><a href="#ostali-elementi">Ostali elementi</a></li>
 </ul>
 </li>
+<li><a href="#vje%C5%BEba">Vježba</a></li>
 </ul>
 </li>
 </ul>
@@ -495,6 +501,12 @@ grid()
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><strong>xlab, ylab</strong></td>
+<td>Naziv osi x i y</td>
+<td><code>xlab=&quot;Težina&quot;</code>, <code>ylab=&quot;Potrošnja goriva&quot;</code></td>
+<td><code>plot(wt, mpg, pch=16, col=&quot;blue&quot;, xlab=&quot;Težina&quot;, ylab=&quot;Potrošnja goriva&quot;)</code></td>
+</tr>
 <tr>
 <td><img src="images/simbols.png" alt="alt text"></td>
 <td>Simbol za iscrtavanje točaka na grafu</td>
@@ -598,51 +610,19 @@ grid()
 plot(wt, mpg, cex.main=<span class="hljs-number">1.5</span>, cex.lab=<span class="hljs-number">1.2</span>, cex.axis=<span class="hljs-number">1.1</span>, main=<span class="hljs-string">"Naslov s većim fontom"</span>)
 </div></code></pre>
 <p><img src="images/font_margine.png" alt="alt text"></p>
-<hr>
-<h3 id="abline">Abline</h3>
-<p>Funkcija <code>abline()</code> koristi se za dodavanje linija na grafove. Možemo dodati horizontalne, vertikalne linije, kao i linije temeljene na regresijskim modelima.</p>
-<table>
-<thead>
-<tr>
-<th><strong>Funkcija</strong></th>
-<th><strong>Opis</strong></th>
-<th><strong>Argumenti</strong></th>
-<th><strong>Primjer</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>h</strong></td>
-<td>Dodavanje horizontalne linije na određenu y-koordinatu</td>
-<td><code>y</code> (y-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
-<td><code>abline(h = 5, col = &quot;red&quot;, lty = 2, lwd = 2)</code></td>
-</tr>
-<tr>
-<td><strong>v</strong></td>
-<td>Dodavanje vertikalne linije na određenu x-koordinatu</td>
-<td><code>x</code> (x-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
-<td><code>abline(v = 3, col = &quot;blue&quot;, lty = 1, lwd = 1)</code></td>
-</tr>
-<tr>
-<td><strong>lm()</strong></td>
-<td>Dodavanje linije temeljene na linearnom modelu (regresija)</td>
-<td>Model (npr. <code>lm()</code>), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
-<td><code>abline(lm(mpg ~ wt), col = &quot;green&quot;)</code></td>
-</tr>
-</tbody>
-</table>
+<p><strong>Linijski prikaz <code>lines(x, y, type=)</code></strong></p>
+<p>Funkcija <strong><code>lines(x, y, type=)</code></strong> u R-u koristi se za dodavanje linija na postojeći graf izrađen pomoću <code>plot()</code>. Ova funkcija je korisna kada želimo prikazati više serija podataka na istom grafu ili naglasiti određene trendove.</p>
+<ul>
+<li><strong><code>x</code></strong> – vrijednosti na x-osi</li>
+<li><strong><code>y</code></strong> – vrijednosti na y-osi</li>
+<li><strong><code>type=</code></strong> – određuje stil crte, npr. <code>&quot;l&quot;</code> za linije, <code>&quot;b&quot;</code> za točke i linije itd.</li>
+</ul>
 <p><em>Primjer:</em></p>
-<pre class="hljs"><code><div>plot(wt, mpg)
-abline(lm(mpg ~ wt), col=<span class="hljs-string">"red"</span>, lwd=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija linearne regresije</span>
-abline(h=mean(mpg), col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija aritmetičke sredine</span>
-abline(v=median(wt), col=<span class="hljs-string">"green"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija medijana wt</span>
+<pre class="hljs"><code><div>x &lt;- <span class="hljs-number">1</span>:<span class="hljs-number">10</span>
+y &lt;- c(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>)
 
-text(x=min(wt)*<span class="hljs-number">1.3</span>, y=max(mpg)*<span class="hljs-number">0.9</span>, labels=<span class="hljs-string">"Regresijska linija"</span>, col=<span class="hljs-string">"red"</span>, pos=<span class="hljs-number">1</span>)
-text(x=max(wt)*<span class="hljs-number">0.85</span>, y=mean(mpg)*<span class="hljs-number">0.95</span>, labels=<span class="hljs-string">"Aritmetička sredina"</span>, col=<span class="hljs-string">"blue"</span>, pos=<span class="hljs-number">4</span>)
-text(x=median(wt), y=max(mpg)*<span class="hljs-number">0.8</span>, labels=<span class="hljs-string">"Medijan WT"</span>, col=<span class="hljs-string">"green"</span>, pos=<span class="hljs-number">2</span>)
+plot(x, y, type = <span class="hljs-string">"b"</span>, main = <span class="hljs-string">"Točke povezane linijama (b)"</span>)
 </div></code></pre>
-<p><img src="images/abline.png" alt="alt text"></p>
-<p><strong>Linijski prikaz</strong></p>
 <table>
 <thead>
 <tr>
@@ -690,6 +670,210 @@ text(x=median(wt), y=max(mpg)*<span class="hljs-number">0.8</span>, labels=<span
 </tbody>
 </table>
 <p><img src="images/plot_types.png" alt="alt text"></p>
+<h3 id="abline">Abline</h3>
+<p>Funkcija <code>abline()</code> koristi se za dodavanje linija na grafove. Možemo dodati horizontalne, vertikalne linije, kao i linije temeljene na regresijskim modelima.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Funkcija</strong></th>
+<th><strong>Opis</strong></th>
+<th><strong>Argumenti</strong></th>
+<th><strong>Primjer</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>h</strong></td>
+<td>Dodavanje horizontalne linije na određenu y-koordinatu</td>
+<td><code>y</code> (y-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>abline(h = 5, col = &quot;red&quot;, lty = 2, lwd = 2)</code></td>
+</tr>
+<tr>
+<td><strong>v</strong></td>
+<td>Dodavanje vertikalne linije na određenu x-koordinatu</td>
+<td><code>x</code> (x-koordinata), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>abline(v = 3, col = &quot;blue&quot;, lty = 1, lwd = 1)</code></td>
+</tr>
+<tr>
+<td><strong>lm()</strong></td>
+<td>Dodavanje linije temeljene na linearnom modelu (regresija)</td>
+<td>Model (npr. <code>lm()</code>), <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>abline(lm(mpg ~ wt), col = &quot;green&quot;)</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>plot(wt, mpg)
+abline(lm(mpg ~ wt), col=<span class="hljs-string">"red"</span>, lwd=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija linearne regresije</span>
+abline(h=mean(mpg), col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija aritmetičke sredine</span>
+abline(v=median(wt), col=<span class="hljs-string">"green"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  <span class="hljs-comment"># linija medijana wt</span>
+
+text(x=min(wt)*<span class="hljs-number">1.3</span>, y=max(mpg)*<span class="hljs-number">0.9</span>, labels=<span class="hljs-string">"Regresijska linija"</span>, col=<span class="hljs-string">"red"</span>, pos=<span class="hljs-number">1</span>)
+text(x=max(wt)*<span class="hljs-number">0.85</span>, y=mean(mpg)*<span class="hljs-number">0.95</span>, labels=<span class="hljs-string">"Aritmetička sredina"</span>, col=<span class="hljs-string">"blue"</span>, pos=<span class="hljs-number">4</span>)
+text(x=median(wt), y=max(mpg)*<span class="hljs-number">0.8</span>, labels=<span class="hljs-string">"Medijan WT"</span>, col=<span class="hljs-string">"green"</span>, pos=<span class="hljs-number">2</span>)
+</div></code></pre>
+<p><img src="images/abline.png" alt="alt text"></p>
+<h3 id="lines">Lines</h3>
+<p>Funkcija <code>lines()</code> koristi se za dodavanje linija na postojeći graf u R-u. Za razliku od <code>plot()</code>, koji kreira novi graf, <code>lines()</code> samo nadodaje linije na postojeći prikaz. Može se koristiti za povezivanje točaka u skupu podataka, crtanje funkcija ili dodavanje trendova.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>x &lt;- seq(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, by=<span class="hljs-number">0.1</span>)
+x2 &lt;- seq(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, by=<span class="hljs-number">1</span>)
+
+y1 &lt;- sin(x)
+y2 &lt;- cos(x)
+y3 &lt;- c(-<span class="hljs-number">0.2</span>, -<span class="hljs-number">0.3</span>, <span class="hljs-number">0.75</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.13</span>, -<span class="hljs-number">0.8</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.21</span>, -<span class="hljs-number">0.45</span>, -<span class="hljs-number">0.32</span>, <span class="hljs-number">0.625</span>)
+
+plot(x, y1, type=<span class="hljs-string">"l"</span>, col=<span class="hljs-string">"red"</span>, lwd=<span class="hljs-number">2</span>, ylim=c(-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>), xlab=<span class="hljs-string">"X Vrijednosti"</span>, ylab=<span class="hljs-string">"Y Vrijednosti"</span>)
+lines(x, y2, col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)  
+lines(x2, y3, col=<span class="hljs-string">"green"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">4</span>)  
+
+legend(<span class="hljs-string">"topright"</span>, legend=c(<span class="hljs-string">"sin(x)"</span>, <span class="hljs-string">"cos(x)"</span>, <span class="hljs-string">"rigid"</span>), col=c(<span class="hljs-string">"red"</span>, <span class="hljs-string">"blue"</span>, <span class="hljs-string">"green"</span>), lty=c(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>), lwd=<span class="hljs-number">2</span>)
+</div></code></pre>
+<p><img src="images/lines.png" alt="alt text"></p>
+<h3 id="ostali-elementi">Ostali elementi</h3>
+<p>U R-u, razni elementi mogu se dodavati na grafove kako bi poboljšali čitljivost i interpretaciju podataka. To uključuje naslove, oznake osi, legende i grafičke oblike.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Funkcija</strong></th>
+<th><strong>Opis</strong></th>
+<th><strong>Argumenti</strong></th>
+<th><strong>Primjer</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>title()</strong></td>
+<td>Dodaje naslov, podnaslov ili oznake osi</td>
+<td><code>main</code>, <code>sub</code>, <code>xlab</code>, <code>ylab</code>, <code>col.main</code>, <code>col.sub</code> itd.</td>
+<td><code>title(main=&quot;Naslov&quot;, sub=&quot;Podnaslov&quot;, col.main=&quot;red&quot;)</code></td>
+</tr>
+<tr>
+<td><strong>mtext()</strong></td>
+<td>Dodaje tekst izvan granica grafičkog prikaza</td>
+<td><code>text</code>, <code>side</code> (1=bottom, 2=left, 3=top, 4=right), <code>line</code>, <code>col</code>, <code>at</code></td>
+<td><code>mtext(&quot;Dodatni tekst&quot;, side=3, line=2, col=&quot;blue&quot;)</code></td>
+</tr>
+<tr>
+<td><strong>legend()</strong></td>
+<td>Dodaje legendu unutar ili izvan grafičkog prikaza</td>
+<td><code>x</code>, <code>y</code>, <code>legend</code>, <code>col</code>, <code>lty</code>, <code>pch</code>, <code>bty</code></td>
+<td><code>legend(&quot;topright&quot;, legend=c(&quot;Linija A&quot;, &quot;Linija B&quot;), col=c(&quot;red&quot;, &quot;blue&quot;), lty=1:2, cex=0.8, bty=&quot;n&quot;)</code></td>
+</tr>
+<tr>
+<td><strong>text()</strong></td>
+<td>Dodaje prilagođeni tekst unutar grafičkog prostora</td>
+<td><code>x</code>, <code>y</code>, <code>labels</code>, <code>col</code>, <code>pos</code>, <code>cex</code></td>
+<td><code>text(5, 0.5, &quot;Ovdje je oznaka&quot;, col=&quot;green&quot;, pos=4)</code></td>
+</tr>
+<tr>
+<td><strong>grid()</strong></td>
+<td>Dodaje mrežu za lakše očitavanje vrijednosti</td>
+<td><code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>grid(col=&quot;gray&quot;, lty=2, lwd=0.5)</code></td>
+</tr>
+<tr>
+<td><strong>rect()</strong></td>
+<td>Ističe određeni dio grafa bojom u pozadini</td>
+<td><code>xleft</code>, <code>ybottom</code>, <code>xright</code>, <code>ytop</code>, <code>col</code>, <code>border</code></td>
+<td><code>rect(2, -1, 4, 1, col=rgb(1,0,0,0.2), border=NA)</code></td>
+</tr>
+<tr>
+<td><strong>segments()</strong></td>
+<td>Dodaje referentne crte</td>
+<td><code>x0</code>, <code>y0</code>, <code>x1</code>, <code>y1</code>, <code>col</code>, <code>lty</code>, <code>lwd</code></td>
+<td><code>segments(2, -1, 2, 1, col=&quot;black&quot;, lty=2, lwd=2)</code></td>
+</tr>
+<tr>
+<td><strong>polygon()</strong></td>
+<td>Iscrtava područje između određenih točaka</td>
+<td><code>x</code>, <code>y</code>, <code>col</code>, <code>border</code></td>
+<td><code>polygon(c(2,3,3,2), c(-1,-1,1,1), col=rgb(0,0,1,0.3), border=NA)</code></td>
+</tr>
+<tr>
+<td><strong>points()</strong></td>
+<td>Dodaje specifične oblike na pojedine točke</td>
+<td><code>x</code>, <code>y</code>, <code>pch</code>, <code>col</code>, <code>cex</code></td>
+<td><code>points(5, 0, pch=19, col=&quot;red&quot;, cex=2)</code></td>
+</tr>
+<tr>
+<td><strong>arrows()</strong></td>
+<td>Dodaje strelice za označavanje smjera</td>
+<td><code>x0</code>, <code>y0</code>, <code>x1</code>, <code>y1</code>, <code>col</code>, <code>lty</code>, <code>length</code></td>
+<td><code>arrows(2,0,3,0.5, col=&quot;red&quot;, lwd=2, length=0.1)</code></td>
+</tr>
+<tr>
+<td><strong>par(mfrow)</strong></td>
+<td>Omogućuje prikaz više grafova u istom prozoru</td>
+<td><code>mfrow=c(n,m)</code></td>
+<td><code>par(mfrow=c(2,2)); plot(x,y); hist(x); boxplot(y); barplot(y)</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Primjer 1:</em></p>
+<pre class="hljs"><code><div>x &lt;- seq(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, by=<span class="hljs-number">0.1</span>)
+y &lt;- sin(x)
+z &lt;- cos(x)
+
+par(mfrow=c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>))
+
+plot(x, y, type=<span class="hljs-string">"l"</span>, col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, xlab=<span class="hljs-string">"Vrijeme"</span>, ylab=<span class="hljs-string">"Amplituda"</span>)
+
+title(main=<span class="hljs-string">"Sinusni val"</span>, sub=<span class="hljs-string">"Primjer prilagođenog grafičkog prikaza"</span>, col.main=<span class="hljs-string">"blue"</span>, col.sub=<span class="hljs-string">"gray"</span>)
+legend(<span class="hljs-string">"topright"</span>, legend=c(<span class="hljs-string">"sin(x)"</span>), col=<span class="hljs-string">"blue"</span>, lty=<span class="hljs-number">1</span>, cex=<span class="hljs-number">0.8</span>, bty=<span class="hljs-string">"n"</span>)
+
+mtext(<span class="hljs-string">"Sin i col grafovi"</span>, line=<span class="hljs-number">1</span>, col=<span class="hljs-string">"purple"</span>, at=c(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>))
+
+plot(x, z, type=<span class="hljs-string">"l"</span>, col=<span class="hljs-string">"red"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>,  xlab=<span class="hljs-string">"Vrijeme"</span>, ylab=<span class="hljs-string">"Amplituda"</span>)
+
+title(main=<span class="hljs-string">"Sinusni val"</span>, sub=<span class="hljs-string">"Primjer prilagođenog grafičkog prikaza"</span>, col.main=<span class="hljs-string">"red"</span>, col.sub=<span class="hljs-string">"gray"</span>)
+legend(<span class="hljs-string">"topright"</span>, legend=c(<span class="hljs-string">"cos(x)"</span>), col=<span class="hljs-string">"red"</span>, lty=<span class="hljs-number">2</span>, cex=<span class="hljs-number">0.8</span>, bty=<span class="hljs-string">"n"</span>)
+</div></code></pre>
+<p><img src="images/elements1.png" alt="alt text"></p>
+<p><em>Primjer 2:</em></p>
+<pre class="hljs"><code><div>x &lt;- seq(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, by=<span class="hljs-number">0.1</span>)
+y &lt;- sin(x)
+
+plot(x, y, type=<span class="hljs-string">"l"</span>, col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">2</span>, xlab=<span class="hljs-string">"Vrijeme"</span>, ylab=<span class="hljs-string">"Amplituda"</span>)
+title(main=<span class="hljs-string">"Sinusni val s dodatnim elementima"</span>)
+
+<span class="hljs-comment"># Dodavanje mreže</span>
+grid(col=<span class="hljs-string">"gray"</span>, lty=<span class="hljs-number">2</span>, lwd=<span class="hljs-number">0.5</span>)
+
+<span class="hljs-comment"># Dodavanje pravokutnika</span>
+rect(<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>, col=rgb(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.2</span>), border=<span class="hljs-literal">NA</span>)
+
+<span class="hljs-comment"># Dodavanje referentne linije</span>
+segments(<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, col=<span class="hljs-string">"black"</span>, lty=<span class="hljs-number">2</span>, lwd=<span class="hljs-number">2</span>)
+
+<span class="hljs-comment"># Dodavanje poligona</span>
+polygon(c(<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>), c(-<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>), col=rgb(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0.3</span>), border=<span class="hljs-literal">NA</span>)
+
+<span class="hljs-comment"># Dodavanje oznaka</span>
+text(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, <span class="hljs-string">"Nulta točka"</span>, col=<span class="hljs-string">"black"</span>, pos=<span class="hljs-number">3</span>)
+text(<span class="hljs-number">3</span>, <span class="hljs-number">0.5</span>, <span class="hljs-string">"Označeno područje"</span>, col=<span class="hljs-string">"red"</span>, pos=<span class="hljs-number">4</span>)
+
+<span class="hljs-comment"># Dodavanje strelice</span>
+arrows(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0.5</span>, col=<span class="hljs-string">"red"</span>, lwd=<span class="hljs-number">2</span>, length=<span class="hljs-number">0.1</span>)
+
+<span class="hljs-comment"># Dodavanje točke s posebnim simbolom</span>
+points(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, pch=<span class="hljs-number">19</span>, col=<span class="hljs-string">"red"</span>, cex=<span class="hljs-number">2</span>)
+</div></code></pre>
+<p><img src="images/elements2.png" alt="alt text"></p>
+<h2 id="vje%C5%BEba">Vježba</h2>
+<p>Istražujemo podatke o automobilima i želimo vizualizirati odnos između težine vozila (<code>wt</code>) i potrošnje goriva (<code>mpg</code>) koristeći skup podataka <code>mtcars</code>. Cilj je dodati korisne vizualne elemente kako biste istaknuli važne vrijednosti i trendove.</p>
+<ol>
+<li>Nacrtajte raspršeni dijagram (<code>plot()</code>) za <code>wt</code> (x-os) i <code>mpg</code> (y-os)</li>
+<li>Dodajte regresijsku liniju koristeći <code>abline(lm())</code></li>
+<li>Dodajte horizontalnu liniju na prosječnu vrijednost <code>mpg</code> i vertikalnu liniju na medijan <code>wt</code></li>
+<li>Dodajte naslov i oznake osi koristeći <code>title()</code></li>
+<li>Dodajte legendu koja označava regresijsku liniju, prosječnu vrijednost i medijan</li>
+<li>Koristite <code>text()</code> za dodavanje oznaka uz sve tri linije grafa</li>
+<li>Dodajte mrežu (<code>grid()</code>) radi boljeg pregleda podataka</li>
+<li>Ručno označite područje između prvog i trećeg kvartila pomoću <code>rect()</code>.</li>
+<li>Dodajte strelicu (<code>arrows()</code>) koja upućuje na vozilo s najvećom potrošnjom (<code>mpg</code>)</li>
+</ol>
+<p><img src="images/cars.png" alt="alt text"></p>
 
 </body>
 </html>
