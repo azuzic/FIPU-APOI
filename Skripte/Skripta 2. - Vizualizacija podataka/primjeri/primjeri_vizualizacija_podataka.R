@@ -161,7 +161,3 @@ points(5, 0, pch=19, col="red", cex=2)
 
 
 
-
-
-
-
