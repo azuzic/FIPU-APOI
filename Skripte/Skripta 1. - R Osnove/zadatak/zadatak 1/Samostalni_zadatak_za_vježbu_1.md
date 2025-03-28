@@ -31,7 +31,7 @@ Učitajte skup podataka `mtcars` u varijablu naziva `cars` i odgovorite na sljed
 
 6. **Koliko je različitih brojeva cilindara u skupu podataka?** - Hint: `unique()`
 
-7. **Koliko je automobila s ručnim mjenjačem (`mjenjac = 1`)?** - Hint: `sum()`
+7. **Koliko je automobila s ručnim mjenjačem (`mjenjac = 1`)?** - Hint: `nrow()`
 
 8. **Kreirajte novi dataframe koji sadrži sve podatke za automobile s 8 cilindara. Spremite podatke u varijablu naziva `cars_8cyl`.**
 
