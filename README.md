@@ -26,4 +26,4 @@ Kolegij slušaju:
 
 ## YouTube 📺
 
-To be recorded...
+1. [R Osnove](https://www.youtube.com/watch?v=QgbR_waIKfc&list=PL3KdD7QwiDWqT9MvSK521s_fgz0nxbDQ9) ([APOI1](https://github.com/azuzic/FIPU-APOI/tree/main/Skripte/Skripta%201.%20-%20R%20Osnove))
