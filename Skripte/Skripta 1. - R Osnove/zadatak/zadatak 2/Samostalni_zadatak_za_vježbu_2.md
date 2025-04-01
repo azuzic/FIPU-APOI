@@ -28,11 +28,11 @@ Učitajte skup podataka `iris` u varijablu naziva `iris_podaci` i odgovorite na 
 
 8. **Kreirajte novi okvir koji sadrži sve podatke za vrstu *Iris setosa*. Spremite podatke u varijablu naziva `setosa`. Zatim pronađite opservaciju koja ima najveći omjer između površine čašičnog lista i površine latice.**
 
-9. **Koja vrsta **iris-a** ima u prosjeku najdulji čašični list (*Sepal.Length*), a koja vrsta ima u prosjeku najmanju površinu latica (*Petal*)**?
+9. **Koja vrsta **iris-a** ima u prosjeku najdulji čašični list (*Sepal.Length*), a koja vrsta ima u prosjeku najmanju površinu latica (*Petal*)?**
    - Hint: `aggregate()`
 
 10. **Kreirajte novi okvir koji sadrži samo one opservacije gdje je površina latica (Petal.Area) veća od prosječne površine latica za cijeli skup podataka. Spremite podatke u varijablu naziva `irisIznadProsjeka`. Zatim izračunajte koliko je takvih opservacija za svaku vrstu irisa te koja vrsta ima najmanje latice?**
 
-11. **Provjerite da li opservacija s najvećim omjerom iz okvira `setosa` ima veću površinu čašičnog lista i površinu latice od opservacija s najmanjom površinom čašičnog lista i površinom latice iz okvira**
+11. **Provjerite da li opservacija s najvećim omjerom iz okvira `setosa` ima veću površinu čašičnog lista i površinu latice od opservacija s najmanjom površinom čašičnog lista i površinom latice iz okvira `irisIznadProsjeka`.**
 
 </div>
