@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>APOI - Službeni šalabahter</title>
+		<meta
+			http-equiv="Content-type"
+			content="text/html;charset=UTF-8" />
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet" />
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+		<style>
+			/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+			/*---------------------------------------------------------------------------------------------
+		*  Copyright (c) Microsoft Corporation. All rights reserved.
+		*  Licensed under the MIT License. See License.txt in the project root for license information.
+		*--------------------------------------------------------------------------------------------*/
+		:not(code *, .hljs *, .MathJax *) {
+				font-family: "Poppins", sans-serif;
+			}
+			html {
+				display: flex;
+				justify-content: center;
+			}
+			body {
+				font-family: var(
+					--vscode-markdown-font-family,
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe WPC",
+					"Segoe UI",
+					"Ubuntu",
+					"Droid Sans",
+					sans-serif
+				);
+				font-size: var(--vscode-markdown-font-size, 14px);
+				line-height: var(--vscode-markdown-line-height, 22px);
+				word-wrap: break-word;
+				color: #3b3b3b;
+				position: absolute;
+				display: flex;
+				justify-content: center;
+				width: full;
+			}
+			.body {
+				max-width: 1012px;
+			}
+		
+			#code-csp-warning {
+				position: fixed;
+				top: 0;
+				right: 0;
+				color: white;
+				margin: 16px;
+				text-align: center;
+				font-size: 12px;
+				font-family: sans-serif;
+				background-color: #444444;
+				cursor: pointer;
+				padding: 6px;
+				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			}
+		
+			#code-csp-warning:hover {
+				text-decoration: none;
+				background-color: #007acc;
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+			}
+		
+			body.scrollBeyondLastLine {
+				margin-bottom: calc(100vh - 22px);
+			}
+		
+			body.showEditorSelection .code-line {
+				position: relative;
+			}
+		
+			body.showEditorSelection .code-active-line:before,
+			body.showEditorSelection .code-line:hover:before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0;
+				left: -12px;
+				height: 100%;
+			}
+		
+			body.showEditorSelection li.code-active-line:before,
+			body.showEditorSelection li.code-line:hover:before {
+				left: -30px;
+			}
+		
+			.vscode-light.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.15);
+			}
+		
+			.vscode-light.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.4);
+			}
+		
+			.vscode-light.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+		
+			.vscode-dark.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.4);
+			}
+		
+			.vscode-dark.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.6);
+			}
+		
+			.vscode-dark.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+		
+			.vscode-high-contrast.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 160, 0, 0.7);
+			}
+		
+			.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 160, 0, 1);
+			}
+		
+			.vscode-high-contrast.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+		
+			img {
+				max-width: 100%;
+				max-height: 100%;
+				border-radius: 8px;
+				filter: drop-shadow(-0 2px 2px rgba(0, 0, 0, 0.07));
+			}
+		
+			a {
+				text-decoration: none;
+			}
+		
+			a:hover {
+				text-decoration: underline;
+			}
+		
+			a:focus,
+			input:focus,
+			select:focus,
+			textarea:focus {
+				outline: 1px solid -webkit-focus-ring-color;
+				outline-offset: -1px;
+			}
+		
+			hr {
+				border: 0;
+				height: 2px;
+				border-bottom: 2px solid;
+			}
+		
+			h1 {
+				padding-bottom: 0.3em;
+				line-height: 1.2;
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+			}
+		
+			h1,
+			h2,
+			h3 {
+				font-weight: normal;
+			}
+		
+			table {
+				border-collapse: collapse;
+			}
+		
+			table > thead > tr > th {
+				text-align: left;
+				border-bottom: 1px solid;
+			}
+		
+			table > thead > tr > th,
+			table > thead > tr > td,
+			table > tbody > tr > th,
+			table > tbody > tr > td {
+				padding: 5px 10px;
+			}
+		
+			table > tbody > tr + tr > td {
+				border-top: 1px solid;
+			}
+		
+			blockquote {
+				margin: 0 7px 0 5px;
+				padding: 0 16px 0 10px;
+				border-left-width: 5px;
+				border-left-style: solid;
+			}
+		
+			code {
+				font-family: Menlo, Monaco, Consolas, "Droid Sans Mono",
+					"Courier New", monospace, "Droid Sans Fallback";
+				font-size: 1em;
+				line-height: 1.357em;
+			}
+		
+			body.wordWrap pre {
+				white-space: pre-wrap;
+			}
+		
+			pre:not(.hljs),
+			pre.hljs code > div {
+				padding: 16px;
+				border-radius: 3px;
+				overflow: auto;
+			}
+		
+			pre code {
+				color: var(--vscode-editor-foreground);
+				tab-size: 4;
+			}
+		
+			/** Theming */
+		
+			.vscode-light pre {
+				background-color: rgba(220, 220, 220, 0.4);
+			}
+		
+			.vscode-dark pre {
+				background-color: rgba(10, 10, 10, 0.4);
+			}
+		
+			.vscode-high-contrast pre {
+				background-color: rgb(0, 0, 0);
+			}
+		
+			.vscode-high-contrast h1 {
+				border-color: rgb(0, 0, 0);
+			}
+		
+			.vscode-light table > thead > tr > th {
+				border-color: rgba(0, 0, 0, 0.69);
+			}
+		
+			.vscode-dark table > thead > tr > th {
+				border-color: rgba(255, 255, 255, 0.69);
+			}
+		
+			.vscode-light h1,
+			.vscode-light hr,
+			.vscode-light table > tbody > tr + tr > td {
+				border-color: rgba(0, 0, 0, 0.18);
+			}
+		
+			.vscode-dark h1,
+			.vscode-dark hr,
+			.vscode-dark table > tbody > tr + tr > td {
+				border-color: rgba(255, 255, 255, 0.18);
+			}
+		</style>
+		
+		<style>
+			/*
+		
+		Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+		
+		*/
+			.hljs {
+				background: white;
+				color: black;
+			}
+		
+			.hljs-comment,
+			.hljs-quote,
+			.hljs-variable {
+				color: #008000;
+			}
+		
+			.hljs-keyword,
+			.hljs-selector-tag,
+			.hljs-built_in,
+			.hljs-name,
+			.hljs-tag {
+				color: #00f;
+			}
+		
+			.hljs-string,
+			.hljs-title,
+			.hljs-section,
+			.hljs-attribute,
+			.hljs-literal,
+			.hljs-template-tag,
+			.hljs-template-variable,
+			.hljs-type,
+			.hljs-addition {
+				color: #a31515;
+			}
+		
+			.hljs-deletion,
+			.hljs-selector-attr,
+			.hljs-selector-pseudo,
+			.hljs-meta {
+				color: #2b91af;
+			}
+		
+			.hljs-doctag {
+				color: #808080;
+			}
+		
+			.hljs-attr {
+				color: #f00;
+			}
+		
+			.hljs-symbol,
+			.hljs-bullet,
+			.hljs-link {
+				color: #00b0e8;
+			}
+		
+			.hljs-emphasis {
+				font-style: italic;
+			}
+		
+			.hljs-strong {
+				font-weight: bold;
+			}
+		</style>
+		
+		<style>
+			/*
+		* Markdown PDF CSS
+		*/
+		
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC",
+					"Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+			}
+		
+			pre {
+				background-color: #f8f8f8;
+				border: 1px solid #cccccc;
+				border-radius: 3px;
+				overflow-x: auto;
+				white-space: pre-wrap;
+				overflow-wrap: break-word;
+			}
+		
+			pre:not(.hljs) {
+				padding: 23px;
+				line-height: 19px;
+			}
+		
+			blockquote {
+				background: rgba(127, 127, 127, 0.1);
+				border-color: rgba(0, 122, 204, 0.5);
+			}
+		
+			.emoji {
+				height: 1.4em;
+			}
+		
+			code {
+				font-size: 14px;
+				line-height: 19px;
+			}
+		
+			/* for inline code */
+			:not(pre):not(.hljs) > code {
+				color: #3b3b3b; /* Change the old color so it seems less like an error */
+				font-size: inherit;
+				background: #e0e0e0;
+				border-radius: 4px;
+				padding: 1px 2px;
+				margin: -1px -2px;
+			}
+		
+			/* Page Break : use <div class="page"/> to insert page break
+		-------------------------------------------------------- */
+			.page {
+				page-break-after: always;
+			}
+		</style>
+		
+		<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+		</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div>
+<h2 id="analiza-podataka-i-obrada-informacija---slu%C5%BEbeni-%C5%A1alabahter">Analiza podataka i obrada informacija - službeni šalabahter</h2>
+<p><strong>Osnove</strong></p>
+<pre class="hljs"><code><div>print(<span class="hljs-string">"Hello, World!"</span>)  <span class="hljs-comment"># ispis niza znakova</span>
+paste(<span class="hljs-string">"Hello"</span>, <span class="hljs-string">"World"</span>) <span class="hljs-comment"># spajanje više objekata u jedan tekstualni niz</span>
+
+a &lt;- <span class="hljs-number">42</span>  
+class(a) <span class="hljs-comment"># provjera vrste podataka</span>
+rm(a)    <span class="hljs-comment"># brisanje varijable</span>
+
+
+<span class="hljs-keyword">if</span> (<span class="hljs-number">1</span> == <span class="hljs-number">0</span>) { <span class="hljs-comment"># if / else</span>
+  print(<span class="hljs-number">1</span>)
+} <span class="hljs-keyword">else</span> {
+  print(<span class="hljs-number">0</span>)
+}
+
+<span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">10</span>) { <span class="hljs-comment"># for petlja</span>
+  print(paste(<span class="hljs-string">"i = "</span>, i))
+}
+
+naziv_funkcije &lt;- <span class="hljs-keyword">function</span>(argument_1, argument_2, <span class="hljs-keyword">...</span>) { <span class="hljs-comment"># funkcija</span>
+  <span class="hljs-comment"># tijelo funkcije/operacije </span>
+  <span class="hljs-keyword">return</span>(varijabla/vrijednost)
+}
+</div></code></pre>
+<p><strong>Učitavanje podataka</strong></p>
+<pre class="hljs"><code><div>data(<span class="hljs-string">"mtcars"</span>) <span class="hljs-comment"># učitavanje ugrađenih R podataka</span>
+cars &lt;- mtcars
+
+getwd() <span class="hljs-comment"># vraća aktivni radni direktorij</span>
+podaci &lt;- read.csv(<span class="hljs-string">"data/primjer.csv"</span>) <span class="hljs-comment"># učitavanje CSV datoteke</span>
+
+podaci &lt;- read.table(<span class="hljs-string">"data/primjer.txt"</span>, header = <span class="hljs-literal">TRUE</span>, sep = <span class="hljs-string">" "</span>) <span class="hljs-comment"># učitavanje TXT datoteke</span>
+
+install.packages(<span class="hljs-string">"readxl"</span>)
+<span class="hljs-keyword">library</span>(readxl)
+podaci &lt;- read_excel(<span class="hljs-string">"data/primjer.xlsx"</span>, sheet = <span class="hljs-number">1</span>) <span class="hljs-comment"># učitavanje XLSX datoteke</span>
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Provjera i čiščenje podataka</strong></p>
+<pre class="hljs"><code><div>is.na(podaci) <span class="hljs-comment"># provjera nedostajućih vrijednosti</span>
+colSums(is.na(podaci)) <span class="hljs-comment"># broj nedostajućih vrijednosti po stupcima</span>
+
+podaci_clean &lt;- na.omit(podaci) <span class="hljs-comment"># uklanjanje redaka s nedostajućim vrijednostima</span>
+podaci_clean2 &lt;- podaci[complete.cases(podaci),] <span class="hljs-comment"># uklanjanje redaka s nedostajućim vrijednostima</span>
+</div></code></pre>
+<p><strong>Kreiranje i korištenje slučajnog uzorka</strong></p>
+<pre class="hljs"><code><div>SEED &lt;- <span class="hljs-number">1234567890</span>
+set.seed(SEED)
+
+podaci &lt;- c(<span class="hljs-string">"Marko"</span>, <span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Ivan"</span>) 
+imena &lt;- sample(podaci, <span class="hljs-number">2</span>) <span class="hljs-comment"># biranje 2 nasumična podatka</span>
+
+redci &lt;- sample(nrow(podaci), <span class="hljs-number">20</span>) <span class="hljs-comment"># biranje 20 nasumičnih redaka</span>
+stupci &lt;- sample(ncol(podaci), <span class="hljs-number">5</span>)  <span class="hljs-comment"># biranje 5 nasumičnih stupaca</span>
+</div></code></pre>
+<p><strong>Rad s vektorima</strong></p>
+<pre class="hljs"><code><div>podaci &lt;- c(<span class="hljs-number">8</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>) <span class="hljs-comment"># izrada vektora</span>
+
+podaci[<span class="hljs-number">2</span>] <span class="hljs-comment"># dohvaća drugi element - 5</span>
+podaci[podaci &gt; <span class="hljs-number">5</span>] <span class="hljs-comment"># dohvaća elemente - c(8, 7)</span>
+
+podaci_1 &lt;- c(<span class="hljs-number">8</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>)
+podaci_2 &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>)
+
+podaci_3 &lt;- c(<span class="hljs-number">8</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, podaci_2) <span class="hljs-comment"># spajanje vektora - c(8, 5, 7, 1, 5)</span>
+podaci_3 &lt;- c(podaci_1, podaci_2) <span class="hljs-comment"># spajanje vektora - c(8, 5, 7, 1, 5)</span>
+podaci_3 &lt;- setdiff(podaci_1, podaci_2) <span class="hljs-comment"># razlika vektora - c(8, 7)</span>
+
+ifelse(podaci &lt; <span class="hljs-number">4</span> | podaci &gt; <span class="hljs-number">7</span>, podaci, <span class="hljs-number">0</span>) <span class="hljs-comment"># inline uvjet - c(8, 0, 0, 1, 2)</span>
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Funkcije za rad s vektorima</strong></p>
+<pre class="hljs"><code><div>podaci &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>)
+
+length(podaci)         <span class="hljs-comment"># vraća broj elemenata u vektoru                   - 6</span>
+sum(podaci)            <span class="hljs-comment"># zbraja sve elemente u vektoru                    - 18</span>
+
+min(podaci)            <span class="hljs-comment"># vraća minimalnu vrijednost u vektoru             - 1</span>
+max(podaci)            <span class="hljs-comment"># vraća maksimalnu vrijednost u vektoru            - 7</span>
+range(podaci)          <span class="hljs-comment"># vraća minimalnu i maksimalnu vrijednost          - c(1, 7)</span>
+
+mean(podaci)           <span class="hljs-comment"># vraća prosječnu vrijednost vektora               - 3</span>
+median(podaci)         <span class="hljs-comment"># vraća srednju vrijednost sortiranog vektora      - 2</span>
+
+quantile(podaci, <span class="hljs-number">0.75</span>) <span class="hljs-comment"># vraća 75. percentil (gornji kvartil)             - 3.5</span>
+quantile(podaci, <span class="hljs-number">0.25</span>) <span class="hljs-comment"># vraća 25. percentil (donji kvartil)              - 2</span>
+IQR(podaci)            <span class="hljs-comment"># vraća interkvartilni raspon                      - 1.5</span>
+
+sd(podaci)             <span class="hljs-comment"># vraća standardnu devijaciju vektora              - 2.136976</span>
+var(podaci)            <span class="hljs-comment"># vraća varijancu vektora                          - 4.566667</span>
+
+sort(podaci)           <span class="hljs-comment"># sortira elemente u vektoru                       - c(1, 2, 2, 2, 4, 7)</span>
+rev(podaci)            <span class="hljs-comment"># obrće redoslijed elemenata u vektoru             - c(2, 7, 2, 4, 2, 1)</span>
+
+which(podaci &gt; <span class="hljs-number">3</span>)      <span class="hljs-comment"># vraća indekse elemenata koji zadovoljavaju uvjet - c(3, 5)</span>
+any(podaci &gt; <span class="hljs-number">5</span>)        <span class="hljs-comment"># vraća TRUE ako jedan element zadovoljava uvjet   - TRUE</span>
+all(podaci &gt; <span class="hljs-number">6</span>)        <span class="hljs-comment"># vraća TRUE ako svi elementi zadovoljavaju uvjet  - FALSE</span>
+
+diff(podaci)           <span class="hljs-comment"># vraća razlike između susjednih elemenata         - c(1, 2, -2, 5, -5)</span>
+unique(podaci)         <span class="hljs-comment"># vraća jedinstvene vrijednosti                    - c(1, 2, 4, 7)</span>
+table(podaci)          <span class="hljs-comment"># vraća frekvenciju svake jedinstvene vrijednosti  - 1   2   4   7     </span>
+                       <span class="hljs-comment">#                                                  - 1   3   1   1</span>
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Rad s okvirima</strong></p>
+<pre class="hljs"><code><div>podaci &lt;- data.frame(
+  Ime = c(<span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Marko"</span>, <span class="hljs-string">"Iva"</span>, <span class="hljs-string">"Pero"</span>),
+  Dob = c(<span class="hljs-number">25</span>, <span class="hljs-number">30</span>, <span class="hljs-number">22</span>, <span class="hljs-number">25</span>),
+  Visina = c(<span class="hljs-number">168</span>, <span class="hljs-number">175</span>, <span class="hljs-number">160</span>, <span class="hljs-number">190</span>)
+) <span class="hljs-comment"># izrada okvira</span>
+
+podaci$Ime <span class="hljs-comment"># vraća vektor stupca: c('Marko', 'Ana', 'Ivan', 'Pero')</span>
+podaci[<span class="hljs-string">'Ime'</span>] <span class="hljs-comment"># vraća podokvir stupca</span>
+podaci[[<span class="hljs-string">'Ime'</span>]] <span class="hljs-comment"># vraća vektor stupca</span>
+podaci[c(<span class="hljs-string">'Ime'</span>, <span class="hljs-string">'Dob'</span>)] <span class="hljs-comment"># vraća podokvir s danim stupcima</span>
+
+podaci[<span class="hljs-number">2</span>, ]   <span class="hljs-comment"># vraća drugi redak kao podokvir</span>
+podaci[, <span class="hljs-number">3</span>]   <span class="hljs-comment"># vraća treći stupac kao podokvir</span>
+podaci[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]  <span class="hljs-comment"># Vraća vrijednost u drugom retku i trećem stupcu kao podokvir</span>
+
+podaci$Težina &lt;- c(<span class="hljs-number">55</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>, <span class="hljs-number">87</span>) <span class="hljs-comment"># dodavanje novog stupca ili ažuriranje vrijednosti stupca</span>
+podaci$Visina &lt;- <span class="hljs-literal">NULL</span> <span class="hljs-comment"># brisanje stupca</span>
+
+podaci[podaci$Dob &gt; <span class="hljs-number">23</span>, ] <span class="hljs-comment"># filtriranje redaka</span>
+podaci[podaci$Dob &gt; <span class="hljs-number">23</span> &amp; podaci$Visina &lt; <span class="hljs-number">180</span>, ] <span class="hljs-comment"># filtriranje redaka</span>
+podaci[podaci$Dob &gt; <span class="hljs-number">23</span>, c(<span class="hljs-string">'Ime'</span>, <span class="hljs-string">'Dob'</span>)] <span class="hljs-comment"># filtriranje redaka i stupaca</span>
+
+podaci[which.min(podaci$Dob),] <span class="hljs-comment"># filtriranje retka s min vrijednosti</span>
+podaci[which.max(podaci$Visina),] <span class="hljs-comment"># filtriranje retka s max vrijednosti</span>
+podaci[which(podaci$Dob == max(podaci$Dob)),] <span class="hljs-comment"># isto radi što i linija gore</span>
+podaci[podaci$Dob == max(podaci$Dob),] <span class="hljs-comment"># isto radi što i linija gore</span>
+
+podaci[order(podaci$Dob, decreasing = <span class="hljs-literal">TRUE</span>), ] <span class="hljs-comment"># sortiranje redaka</span>
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Funkcije za rad s okvirima</strong></p>
+<pre class="hljs"><code><div>     Ime  Dob  Visina
+<span class="hljs-number">1</span>    Ana   <span class="hljs-number">25</span>     <span class="hljs-number">168</span>
+<span class="hljs-number">2</span>  Marko   <span class="hljs-number">30</span>     <span class="hljs-number">175</span>
+<span class="hljs-number">3</span>    Iva   <span class="hljs-number">22</span>     <span class="hljs-number">160</span>
+<span class="hljs-number">4</span>   Pero   <span class="hljs-number">25</span>     <span class="hljs-number">191</span>
+
+colnames(podaci) <span class="hljs-comment"># vraća nazive stupaca</span>
+colnames(podaci) &lt;- c(<span class="hljs-string">"Name"</span>, <span class="hljs-string">"Age"</span>, <span class="hljs-string">"Height"</span>) <span class="hljs-comment"># promjena naziva svih stupaca</span>
+colnames(podaci)[<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Year"</span> <span class="hljs-comment"># promjena naziva određenog stupca</span>
+
+nrow(podaci)     <span class="hljs-comment"># vraća broj redaka okvira            - 4</span>
+ncol(podaci)     <span class="hljs-comment"># vraća broj redaka okvira            - 3</span>
+dim(podaci)      <span class="hljs-comment"># vraća broj redaka i stupaca okvira  - c(4, 3)</span>
+
+head(podaci, n = <span class="hljs-number">2L</span>) <span class="hljs-comment"># vraća prva 2 retka</span>
+tail(podaci, n = <span class="hljs-number">4L</span>) <span class="hljs-comment"># vraća zadnja 4 retka</span>
+
+str(podaci)     <span class="hljs-comment"># prikazuje strukturu objekta   </span>
+summary(podaci) <span class="hljs-comment"># vraća sažetak podataka </span>
+<span class="hljs-comment"># (min, max, medijan, prosjek za numeričke podatke, frekvencije za kategorijske)</span>
+
+<span class="hljs-comment"># tablica kontingencije</span>
+table(podaci2$Ime, podaci2$Dob) <span class="hljs-comment"># prikazuje raspodjelu dviju kategorijskih varijabli</span>
+proportions(tablica)            <span class="hljs-comment"># izračunavanje proporcionalnih vrijednosti</span>
+addmargins(tablica)             <span class="hljs-comment"># dodaje sumarne stupce i retke</span>
+
+aggregate(Visina ~ Dob, data = podaci, FUN = mean) 
+<span class="hljs-comment"># grupira podatke i primjenjuje funkciju sažimanja (mean, sum, max, ...)</span>
+
+scale(podaci[-<span class="hljs-number">1</span>])    <span class="hljs-comment"># normalizacija podataka (Z-score)</span>
+colSums(podaci[-<span class="hljs-number">1</span>])  <span class="hljs-comment"># računa zbroj svih vrijednosti u svakom stupcu</span>
+colMeans(podaci[-<span class="hljs-number">1</span>]) <span class="hljs-comment"># računa prosječnu vrijednost svih vrijednosti u svakom stupcu</span>
+
+sapply(podaci[-<span class="hljs-number">1</span>], <span class="hljs-keyword">function</span>(x) { <span class="hljs-keyword">return</span>(mean(x)) })
+<span class="hljs-comment"># primjenjuje zadanu funkciju na svaki element vektora</span>
+
+colMean &lt;- <span class="hljs-keyword">function</span> (x) { 
+  <span class="hljs-keyword">return</span>(mean(x))
+}
+sapply(podaci[-<span class="hljs-number">1</span>], colMean ) <span class="hljs-comment"># koristeći vlastitu funkciju</span>
+sapply(podaci[-<span class="hljs-number">1</span>], mean )    <span class="hljs-comment"># koristeći postojeću funkciju</span>
+</div></code></pre>
+<div class="page"></div>
+<p><strong>X/Y plot graf</strong></p>
+<pre class="hljs"><code><div>x &lt;- <span class="hljs-number">1</span>:<span class="hljs-number">10</span>
+y &lt;- c(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">8</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>)
+
+plot(
+    x,                 <span class="hljs-comment"># vrijednosti na osi x </span>
+    y,                 <span class="hljs-comment"># vrijednosti na osi y </span>
+
+    xlim = c(<span class="hljs-number">1</span>, <span class="hljs-number">9</span>),    <span class="hljs-comment"># raspon x vrijednost</span>
+    ylim = c(<span class="hljs-number">1</span>, <span class="hljs-number">8</span>),    <span class="hljs-comment"># raspon y vrijednost</span>
+
+    main = <span class="hljs-string">"Naslov"</span>,   <span class="hljs-comment"># naslov grafa</span>
+    xlab = <span class="hljs-string">"X os"</span>,     <span class="hljs-comment"># naziv osi x</span>
+    ylab = <span class="hljs-string">"y os"</span>,     <span class="hljs-comment"># naziv osi y</span>
+
+    cex.main = <span class="hljs-number">2</span>,      <span class="hljs-comment"># veličina naslova</span>
+    cex.lab = <span class="hljs-number">1.5</span>,     <span class="hljs-comment"># veličina naziva osi</span>
+    cex.axis = <span class="hljs-number">1.25</span>,   <span class="hljs-comment"># veličina labela osi</span>
+
+    type = <span class="hljs-string">"b"</span>,        <span class="hljs-comment"># vrsta linija/točaka</span>
+    lth  = <span class="hljs-number">2</span>,          <span class="hljs-comment"># vrsta linije</span>
+
+    pch  = <span class="hljs-number">21</span>,         <span class="hljs-comment"># vrsta točke</span>
+    lwd  = <span class="hljs-number">3</span>,          <span class="hljs-comment"># debljina linije i obruba točki</span>
+    cex  = <span class="hljs-number">2</span>,          <span class="hljs-comment"># veličina točki</span>
+
+    col  = <span class="hljs-string">"brown"</span>,    <span class="hljs-comment"># boja linije i točki</span>
+    bg   = <span class="hljs-string">"orange"</span>,   <span class="hljs-comment"># boja ispune točke</span>
+    fg   = <span class="hljs-string">"tomato"</span>,   <span class="hljs-comment"># boja obruba grafa</span>
+)
+
+<span class="hljs-comment"># dodavanje linija na graf</span>
+abline(lm(mpg ~ wt), col=<span class="hljs-string">"red"</span>,   lwd=<span class="hljs-number">2</span>)           <span class="hljs-comment"># linija linearne regresije</span>
+abline(h=mean(mpg),  col=<span class="hljs-string">"blue"</span>,  lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)    <span class="hljs-comment"># linija aritmetičke sredine mpg</span>
+abline(v=median(wt), col=<span class="hljs-string">"green"</span>, lwd=<span class="hljs-number">2</span>, lty=<span class="hljs-number">2</span>)    <span class="hljs-comment"># linija medijana wt</span>
+
+<span class="hljs-comment"># dodavanje legende na graf</span>
+legend(
+  <span class="hljs-string">"topright"</span>,                                    <span class="hljs-comment"># pozicija</span>
+  legend=c(<span class="hljs-string">"lm(y ~ x)"</span>, <span class="hljs-string">"mean(y)"</span>, <span class="hljs-string">"median(x)"</span>), <span class="hljs-comment"># nazivi</span>
+  col=c(<span class="hljs-string">"red"</span>, <span class="hljs-string">"blue"</span>, <span class="hljs-string">"green"</span>),                 <span class="hljs-comment"># boje</span>
+  lty=c(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>),                                  <span class="hljs-comment"># linije</span>
+)
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Histogram</strong></p>
+<pre class="hljs"><code><div>vrijednosti &lt;- c(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>)
+hist(
+    vrijednosti,        <span class="hljs-comment"># vrijednosti</span>
+
+    breaks = <span class="hljs-number">4</span>,         <span class="hljs-comment"># razredi</span>
+
+    xlim = c(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>),     <span class="hljs-comment"># raspon x vrijednost</span>
+    ylim = c(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>),     <span class="hljs-comment"># raspon y vrijednost</span>
+
+    main = <span class="hljs-string">"Naslov"</span>,    <span class="hljs-comment"># naslov</span>
+    xlab = <span class="hljs-string">"X os"</span>,      <span class="hljs-comment"># naziv osi x</span>
+    ylab = <span class="hljs-string">"Y os"</span>,      <span class="hljs-comment"># naziv osi y</span>
+
+    cex.main = <span class="hljs-number">2</span>,       <span class="hljs-comment"># veličina naslova</span>
+    cex.lab = <span class="hljs-number">1.5</span>,      <span class="hljs-comment"># veličina naziva osi</span>
+    cex.axis = <span class="hljs-number">1.25</span>,    <span class="hljs-comment"># veličina labela osi</span>
+
+    col = <span class="hljs-string">"lightblue"</span>,  <span class="hljs-comment"># boja stupaca</span>
+)
+</div></code></pre>
+<p><strong>Boxplot</strong></p>
+<pre class="hljs"><code><div>vrijednosti &lt;- c(<span class="hljs-number">106</span>, <span class="hljs-number">102</span>, <span class="hljs-number">141</span>, <span class="hljs-number">121</span>, <span class="hljs-number">116</span>, <span class="hljs-number">168</span>, <span class="hljs-number">119</span>, <span class="hljs-number">71</span>, <span class="hljs-number">164</span>, <span class="hljs-number">67</span>, <span class="hljs-number">54</span>, <span class="hljs-number">98</span>, <span class="hljs-number">82</span>, <span class="hljs-number">240</span>)
+boxplot(
+    vrijednosti,        <span class="hljs-comment"># vrijednosti</span>
+
+    ylim = c(<span class="hljs-number">50</span>, <span class="hljs-number">250</span>),  <span class="hljs-comment"># raspon y vrijednost</span>
+
+    main = <span class="hljs-string">"Naslov"</span>,    <span class="hljs-comment"># naslov</span>
+    xlab = <span class="hljs-string">"X os"</span>,      <span class="hljs-comment"># naziv osi x</span>
+    ylab = <span class="hljs-string">"Y os"</span>,      <span class="hljs-comment"># naziv osi y</span>
+
+    cex.main = <span class="hljs-number">2</span>,       <span class="hljs-comment"># veličina naslova</span>
+    cex.lab = <span class="hljs-number">1.5</span>,      <span class="hljs-comment"># veličina naziva osi</span>
+    cex.axis = <span class="hljs-number">1.25</span>,    <span class="hljs-comment"># veličina labela osi</span>
+
+    col = <span class="hljs-string">"lightblue"</span>,  <span class="hljs-comment"># boja boxplot-a</span>
+)
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Rad s grafovima</strong></p>
+<pre class="hljs"><code><div>par(mfrow = c(retci, stupci)) <span class="hljs-comment"># omogućuje prikaz više grafova u istom</span>
+
+<span class="hljs-comment"># dodavanje legende na graf</span>
+legend(
+  <span class="hljs-string">"topright"</span>,                                    <span class="hljs-comment"># pozicija</span>
+  legend=c(<span class="hljs-string">"lm(y ~ x)"</span>, <span class="hljs-string">"mean(y)"</span>, <span class="hljs-string">"median(x)"</span>), <span class="hljs-comment"># nazivi</span>
+  col=c(<span class="hljs-string">"red"</span>, <span class="hljs-string">"blue"</span>, <span class="hljs-string">"green"</span>),                 <span class="hljs-comment"># boje</span>
+  lty=c(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>),                                  <span class="hljs-comment"># linije</span>
+)
+</div></code></pre>
+<p><strong>Vrste linija</strong>: <code>p</code> za točke, <code>l</code> za linije, <code>o</code> za preklopljene točke i linije, <code>b</code> za točke povezane linijama, <code>c</code> za prazne točke povezane linijama, <code>s</code> i <code>S</code> za korake, <code>h</code> za okomite linije te <code>n</code> za isključivanje točaka i linija.</p>
+<p><img src="image-2.png" alt="alt text"></p>
+</div>
+</body>
+</html>
