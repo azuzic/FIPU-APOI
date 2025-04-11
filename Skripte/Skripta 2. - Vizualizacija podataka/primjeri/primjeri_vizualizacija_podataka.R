@@ -459,18 +459,25 @@ plot(quakes$long, quakes$lat,
      cex = (quakes$mag^3)/50)
 
 
+# Različite boje po intenzitetu
+intensity_col <- rev(heat.colors(10))[cut(quakes$mag, breaks=10)]
+plot(quakes$depth, quakes$stations, col=intensity_col, pch=19, main="Boje po magnitudi")
+
+
 
 # Prikaz svih varijabli u scatterplot matrici
-pairs(quakes[,c("lat", "long", "depth", "mag", "stations")],
+pairs(quakes,
       main = "Matrica raspršenih dijagrama",
       pch = 21,
-      bg = adjustcolor("blue", alpha.f = 0.3),
-      col = adjustcolor("darkblue", alpha.f = 0.5))
+      col = rgb(0,0.1,0.5,0.5),
+      bg = rgb(0,0.3,0.9,0.2))
+
+
 
 
 
 # Izračun korelacijske matrice
-cor_matrix <- cor(quakes[,c("lat", "long", "depth", "mag", "stations")])
+cor_matrix <- cor(quakes)
 round(cor_matrix, 2)
 
 
@@ -487,8 +494,8 @@ plot(quakes$mag, quakes$stations,
      xlab = "Magnituda",
      ylab = "Broj stanica",
      pch = 19,
-     col = adjustcolor("red", alpha.f = 0.3))
-abline(lm(stations ~ mag, data=quakes), col="blue", lwd=2)
+     col = rgb(0.8,0,0,0.3))
+abline(lm(stations ~ mag, data=quakes), col="blue", lwd=3)
 
 # Dubina vs magnituda
 plot(quakes$depth, quakes$mag,
@@ -496,8 +503,8 @@ plot(quakes$depth, quakes$mag,
      xlab = "Dubina (km)",
      ylab = "Magnituda",
      pch = 19,
-     col = adjustcolor("darkgreen", alpha.f = 0.3))
-abline(lm(mag ~ depth, data=quakes), col="orange", lwd=2)
+     col = rgb(0,0.5,0,0.3))
+abline(lm(mag ~ depth, data=quakes), col="orange", lwd=3)
 
 
 

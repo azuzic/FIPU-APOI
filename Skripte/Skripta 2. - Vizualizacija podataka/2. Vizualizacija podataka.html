@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>R osnove</title>
+		<title>Vizualizacija podataka</title>
 		<meta
 			http-equiv="Content-type"
 			content="text/html;charset=UTF-8" />
@@ -415,11 +415,11 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <h1 id="2-vizualizacija-podataka">[2] Vizualizacija podataka</h1>
 <div style="display: flex; justify-content: space-between; text-align: justify; gap: 32px;">
     <p>
-        R nudi napredne mogućnosti za <b>grafičku vizualizaciju podataka</b>s bogatim skupom biblioteka i funkcija, omogućava učinkovito stvaranje vizualnih prikaza podataka, olakšavajući analizu i interpretaciju rezultata. Neke od osnovnih grafičkih prikaza koje ćemo proći su: <i>osnovni X-Y prikaz: plot(), histogram: hist(), točkasti prikaz: dotchart(), stupčasti prikaz: barplot(), tortni prikaz: pie(), kutijasti prikaz: boxplot(), raspršeni graf: scatterplot()</i>
+        R nudi napredne mogućnosti za <b>grafičku vizualizaciju podataka</b>s bogatim skupom biblioteka i funkcija, omogućava učinkovito stvaranje vizualnih prikaza podataka, olakšavajući analizu i interpretaciju rezultata. Neke od osnovnih grafičkih prikaza koje ćemo proći su: <i>osnovni X-Y prikaz: plot(), histogram: hist(), točkasti prikaz: dotchart(), stupčasti prikaz: barplot(), tortni prikaz: pie(), kutijasti prikaz: boxplot(), raspršeni graf - korelacijska matrica</i>
     </p>
     <img src="../Icons/R_2.svg" style="width: 96px; height: 96px; margin: 0px;"></img>
 </div>
-<p><strong>Posljednje ažurirano:</strong> 27. ožujka 2025.</p>
+<p><strong>Posljednje ažurirano:</strong> 11. travnja 2025.</p>
 <!-- TOC -->
 <ul>
 <li><a href="#analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</a></li>
@@ -427,13 +427,41 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <ul>
 <li><a href="#x-y-prikaz-plot">X-Y prikaz plot</a>
 <ul>
-<li><a href="#slova-i-margine">Slova i margine</a></li>
 <li><a href="#abline">Abline</a></li>
 <li><a href="#lines">Lines</a></li>
-<li><a href="#ostali-elementi">Ostali elementi</a></li>
 </ul>
 </li>
-<li><a href="#vje%C5%BEba">Vježba</a></li>
+<li><a href="#ostali-elementi">Ostali elementi</a>
+<ul>
+<li><a href="#vje%C5%BEba-1">Vježba 1</a></li>
+</ul>
+</li>
+<li><a href="#histogram-hist">Histogram hist</a>
+<ul>
+<li><a href="#vje%C5%BEba-2">Vježba 2</a></li>
+</ul>
+</li>
+<li><a href="#to%C4%8Dkasti-dijagram-dotchart">Točkasti dijagram dotchart</a>
+<ul>
+<li><a href="#vje%C5%BEba-3">Vježba 3</a></li>
+</ul>
+</li>
+<li><a href="#stup%C4%8Dasti-prikaz-barplot">Stupčasti prikaz barplot</a>
+<ul>
+<li><a href="#vje%C5%BEba-4">Vježba 4</a></li>
+</ul>
+</li>
+<li><a href="#tortni-prikaz-pie">Tortni prikaz pie</a></li>
+<li><a href="#kutijasti-prikaz-boxplot">Kutijasti prikaz boxplot</a>
+<ul>
+<li><a href="#vje%C5%BEba-5">Vježba 5</a></li>
+</ul>
+</li>
+<li><a href="#raspr%C5%A1eni-graf---korelacijska-matrica">Raspršeni graf - korelacijska matrica</a>
+<ul>
+<li><a href="#vje%C5%BEba-6">Vježba 6</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -581,54 +609,8 @@ grid()
 <div style="width: 100%; display: flex; justify-content: center;">
     <img src="images/colors.png"/>
 </div>
-<h3 id="slova-i-margine">Slova i margine</h3>
-<p>U R-u, slova i margine na grafu mogu se prilagoditi pomoću nekoliko parametara. Parametri koji kontroliraju veličinu fonta, poziciju teksta, kao i margine između grafova, omogućuju precizno oblikovanje vizualnih prikaza.</p>
-<table>
-<thead>
-<tr>
-<th>Parametar</th>
-<th>Opis</th>
-<th>Primjer</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>cex</strong></td>
-<td>Veličina teksta na grafu.</td>
-<td><code>plot(wt, mpg, cex=1.5)</code></td>
-</tr>
-<tr>
-<td><strong>cex.axis</strong></td>
-<td>Veličina teksta na osovinama (X i Y os).</td>
-<td><code>plot(wt, mpg, cex.axis=1.2)</code></td>
-</tr>
-<tr>
-<td><strong>cex.lab</strong></td>
-<td>Veličina teksta na oznakama osovina (X i Y).</td>
-<td><code>plot(wt, mpg, cex.lab=1.3)</code></td>
-</tr>
-<tr>
-<td><strong>cex.main</strong></td>
-<td>Veličina teksta naslova grafa.</td>
-<td><code>plot(wt, mpg, cex.main=2)</code></td>
-</tr>
-<tr>
-<td><strong>mar</strong></td>
-<td>Parametar koji kontrolira margine oko grafa. Definira veličinu prostora između osovina i grafičkog prikaza.</td>
-<td><code>par(mar=c(5, 4, 4, 2) + 0.1); plot(wt, mpg)</code></td>
-</tr>
-</tbody>
-</table>
-<p><em>Primjer:</em></p>
-<pre class="hljs"><code><div>par(mar=c(<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>) + <span class="hljs-number">0.1</span>)  <span class="hljs-comment"># Margine: (donja, lijeva, gornja, desna)</span>
-plot(wt, mpg, cex.main=<span class="hljs-number">1.5</span>, cex.lab=<span class="hljs-number">1.2</span>, cex.axis=<span class="hljs-number">1.1</span>, main=<span class="hljs-string">"Naslov s većim fontom"</span>)
-</div></code></pre>
-<p><img src="images/font_margine.png" alt="alt text"></p>
-<p><strong>Linijski prikaz <code>lines(type=)</code></strong></p>
-<p>Funkcija <strong><code>lines(type=)</code></strong> u R-u koristi se za dodavanje linija na postojeći graf izrađen pomoću <code>plot()</code>. Ova funkcija je korisna kada želimo prikazati više serija podataka na istom grafu ili naglasiti određene trendove.</p>
-<ul>
-<li><strong><code>type=</code></strong> – određuje stil crte, npr. <code>&quot;l&quot;</code> za linije, <code>&quot;b&quot;</code> za točke i linije itd.</li>
-</ul>
+<hr>
+<p><strong><code>type=</code></strong> parametar određuje stil crte, npr. <code>&quot;l&quot;</code> za linije, <code>&quot;b&quot;</code> za točke i linije itd.</p>
 <p><em>Primjer:</em></p>
 <pre class="hljs"><code><div>x &lt;- <span class="hljs-number">1</span>:<span class="hljs-number">10</span>
 y &lt;- c(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>)
@@ -639,6 +621,35 @@ plot(x, y, type = <span class="hljs-string">"b"</span>, main = <span class="hljs
 <div style="width: 100%; display: flex; justify-content: center;">
     <img src="images/plot_types.png"/>
 </div>
+<div class="page"></div>
+<p><em>Sažetak:</em></p>
+<pre class="hljs"><code><div>x &lt;- <span class="hljs-number">1</span>:<span class="hljs-number">10</span>
+y &lt;- c(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">8</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>)
+plot(
+  x,                 <span class="hljs-comment"># vrijednosti na osi x </span>
+  y,                 <span class="hljs-comment"># vrijednosti na osi y </span>
+  xlim = c(<span class="hljs-number">1</span>, <span class="hljs-number">9</span>),    <span class="hljs-comment"># raspon x vrijednost</span>
+  ylim = c(<span class="hljs-number">1</span>, <span class="hljs-number">8</span>),    <span class="hljs-comment"># raspon y vrijednost</span>
+  main = <span class="hljs-string">"Naslov"</span>,   <span class="hljs-comment"># naslov grafa</span>
+  xlab = <span class="hljs-string">"X os"</span>,     <span class="hljs-comment"># naziv osi x</span>
+  ylab = <span class="hljs-string">"y os"</span>,     <span class="hljs-comment"># naziv osi y</span>
+  cex.main = <span class="hljs-number">2</span>,      <span class="hljs-comment"># veličina naslova</span>
+  cex.lab = <span class="hljs-number">1.5</span>,     <span class="hljs-comment"># veličina naziva osi</span>
+  cex.axis = <span class="hljs-number">1.25</span>,   <span class="hljs-comment"># veličina labela osi</span>
+  type = <span class="hljs-string">"b"</span>,        <span class="hljs-comment"># vrsta linija/točaka</span>
+  lth  = <span class="hljs-number">2</span>,          <span class="hljs-comment"># vrsta linije</span>
+  pch  = <span class="hljs-number">21</span>,         <span class="hljs-comment"># vrsta točke</span>
+  lwd  = <span class="hljs-number">3</span>,          <span class="hljs-comment"># debljina linije i obruba točki</span>
+  cex  = <span class="hljs-number">2</span>,          <span class="hljs-comment"># veličina točki</span>
+  col  = <span class="hljs-string">"brown"</span>,    <span class="hljs-comment"># boja linije i točki</span>
+  bg   = <span class="hljs-string">"orange"</span>,   <span class="hljs-comment"># boja ispune točke</span>
+  fg   = <span class="hljs-string">"tomato"</span>,   <span class="hljs-comment"># boja obruba grafa</span>
+)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/xy_sazetak.png"/>
+</div>
+<div class="page"></div>
 <h3 id="abline">Abline</h3>
 <p>Funkcija <code>abline()</code> koristi se za dodavanje linija na grafove. Možemo dodati horizontalne, vertikalne linije, kao i linije temeljene na regresijskim modelima.</p>
 <table>
@@ -682,7 +693,7 @@ text(x=max(wt)*<span class="hljs-number">0.85</span>, y=mean(mpg)*<span class="h
 text(x=median(wt), y=max(mpg)*<span class="hljs-number">0.8</span>, labels=<span class="hljs-string">"Medijan WT"</span>, col=<span class="hljs-string">"green"</span>, pos=<span class="hljs-number">2</span>)
 </div></code></pre>
 <div style="width: 100%; display: flex; justify-content: center;">
-    <img src="images/abline.png" width="90%"/>
+    <img src="images/abline.png" width="85%"/>
 </div>
 <h3 id="lines">Lines</h3>
 <p>Funkcija <code>lines()</code> koristi se za dodavanje linija na postojeći graf u R-u. Za razliku od <code>plot()</code>, koji kreira novi graf, <code>lines()</code> samo nadodaje linije na postojeći prikaz. Može se koristiti za povezivanje točaka u skupu podataka, crtanje funkcija ili dodavanje trendova.</p>
@@ -704,7 +715,7 @@ legend(<span class="hljs-string">"topright"</span>, legend=c(<span class="hljs-s
     <img src="images/lines.png"/>
 </div>
 <div class="page"></div>
-<h3 id="ostali-elementi">Ostali elementi</h3>
+<h2 id="ostali-elementi">Ostali elementi</h2>
 <p>U R-u, razni elementi mogu se dodavati na grafove kako bi poboljšali čitljivost i interpretaciju podataka. To uključuje naslove, oznake osi, legende i grafičke oblike.</p>
 <table>
 <thead>
@@ -841,7 +852,7 @@ points(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, p
     <img src="images/elements2.png"/>
 </div>
 <div class="page"></div>
-<h2 id="vje%C5%BEba">Vježba</h2>
+<h3 id="vje%C5%BEba-1">Vježba 1</h3>
 <p>Istražujemo podatke o automobilima i želimo vizualizirati odnos između težine vozila (<code>wt</code>) i potrošnje goriva (<code>mpg</code>) koristeći skup podataka <code>mtcars</code>. Cilj je dodati korisne vizualne elemente kako biste istaknuli važne vrijednosti i trendove.</p>
 <ol>
 <li>Nacrtajte raspršeni dijagram (<code>plot()</code>) za <code>wt</code> (x-os) i <code>mpg</code> (y-os)</li>
@@ -856,6 +867,462 @@ points(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, p
 </ol>
 <div style="width: 100%; display: flex; justify-content: center;">
     <img src="images/cars.png"/>
+</div>
+<div class="page"></div>
+<h2 id="histogram-hist">Histogram <code>hist()</code></h2>
+<p>Histogram je grafički prikaz distribucije numeričkih podataka. Koristi se za vizualizaciju frekvencije pojavljivanja vrijednosti unutar određenog raspona (intervala). U R-u, histogram se generira pomoću funkcije <code>hist()</code>.</p>
+<p>Osnovna sintaksa funkcije <code>hist()</code>:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Generiranje normalno distribuirane varijable</span>
+set.seed(<span class="hljs-number">123</span>)
+x &lt;- rnorm(<span class="hljs-number">500</span>, mean = <span class="hljs-number">100</span>, sd = <span class="hljs-number">15</span>)
+
+hist(
+  x,                      <span class="hljs-comment"># vrijednosti</span>
+  breaks = <span class="hljs-number">20</span>,            <span class="hljs-comment"># razredi</span>
+  xlim = c(<span class="hljs-number">50</span>, <span class="hljs-number">160</span>),      <span class="hljs-comment"># raspon x vrijednost</span>
+  ylim = c(<span class="hljs-number">0</span>, <span class="hljs-number">80</span>),        <span class="hljs-comment"># raspon y vrijednost</span>
+  main = <span class="hljs-string">"Naslov"</span>,        <span class="hljs-comment"># naslov</span>
+  xlab = <span class="hljs-string">"X os"</span>,          <span class="hljs-comment"># naziv osi x</span>
+  ylab = <span class="hljs-string">"Y os"</span>,          <span class="hljs-comment"># naziv osi y</span>
+  cex.main = <span class="hljs-number">2</span>,           <span class="hljs-comment"># veličina naslova</span>
+  cex.lab = <span class="hljs-number">1.5</span>,          <span class="hljs-comment"># veličina naziva osi</span>
+  cex.axis = <span class="hljs-number">1.25</span>,        <span class="hljs-comment"># veličina labela osi</span>
+  col = <span class="hljs-string">"lightblue"</span>,      <span class="hljs-comment"># boja stupaca</span>
+  border = <span class="hljs-string">"darkblue"</span>,    <span class="hljs-comment"># boja rubova</span>
+)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/histogram_basic.png"/>
+</div>
+<div class="page"></div>
+<p><strong>Podešavanje intervala (breaks)</strong>:</p>
+<ul>
+<li>Može biti broj (broj intervala)</li>
+<li>Vektor graničnih vrijednosti</li>
+<li>Naziv algoritma (&quot;Sturges&quot;, &quot;Scott&quot;, &quot;FD&quot;)</li>
+</ul>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>par(mfrow=c(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>))
+hist(podaci, main=<span class="hljs-string">"Fiksni broj"</span>, breaks = <span class="hljs-number">50</span>)  
+hist(podaci, main=<span class="hljs-string">"Prilagođeni intervali"</span>, breaks = seq(<span class="hljs-number">10</span>, <span class="hljs-number">200</span>, by = <span class="hljs-number">10</span>))
+hist(podaci, main=<span class="hljs-string">"Friedman-Diaconis algoritam"</span>, breaks = <span class="hljs-string">"FD"</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/breaks.png"/>
+</div>
+<p><em>Više histograma na istoj slici koristeći parametar <code>add</code>:</em></p>
+<pre class="hljs"><code><div>set.seed(<span class="hljs-number">123</span>)
+podaci1 &lt;- rnorm(<span class="hljs-number">500</span>, mean = <span class="hljs-number">100</span>, sd = <span class="hljs-number">15</span>)
+podaci2 &lt;- rnorm(<span class="hljs-number">500</span>, mean = <span class="hljs-number">120</span>, sd = <span class="hljs-number">10</span>)
+
+hist(podaci1, 
+     col = rgb(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.5</span>),   <span class="hljs-comment"># Crvena s prozirnošću</span>
+     main = <span class="hljs-string">"Usporedba distribucija"</span>,
+     xlab = <span class="hljs-string">"Vrijednosti"</span>,
+     xlim = c(<span class="hljs-number">50</span>, <span class="hljs-number">160</span>))
+hist(podaci2, 
+     col = rgb(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0.5</span>),    <span class="hljs-comment"># Plava s prozirnošću</span>
+     add = <span class="hljs-literal">TRUE</span>)              <span class="hljs-comment"># Dodaj na postojeći graf</span>
+legend(<span class="hljs-string">"topright"</span>, 
+       legend = c(<span class="hljs-string">"Skup 1"</span>, <span class="hljs-string">"Skup 2"</span>),
+       fill = c(rgb(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.5</span>), rgb(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0.5</span>)))
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/multiple_hist.png"/>
+</div>
+<p><em>Dodavanje krivulje gustoće <code>freq=FALSE</code> i <code>lines(density(x))</code>:</em></p>
+<pre class="hljs"><code><div>hist(podaci, 
+     freq = <span class="hljs-literal">FALSE</span>,            <span class="hljs-comment"># Prikaz gustoće umjesto frekvencije</span>
+     col = <span class="hljs-string">"lightgreen"</span>,
+     main = <span class="hljs-string">"Histogram s krivuljom gustoće"</span>)
+lines(density(podaci),        <span class="hljs-comment"># Dodavanje krivulje gustoće</span>
+      col = <span class="hljs-string">"red"</span>, 
+      lwd = <span class="hljs-number">2</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/hist_density.png"/>
+</div>
+<div class="page"></div>
+<h3 id="vje%C5%BEba-2">Vježba 2</h3>
+<p>Istražujemo podatke o erupcijama gejzira i želimo vizualizirati distribuciju vremena između erupcija <code>waiting</code> koristeći skup podataka <strong>faithful</strong>. Cilj je dodati korisne vizualne elemente kako bismo istaknuli važne vrijednosti i karakteristike distribucije.</p>
+<ol>
+<li>Koristite podatke <code>waiting</code> (vrijeme između erupcija gejzira)</li>
+<li>Kreirajte histogram s <code>15</code> <em>razreda</em></li>
+<li>Postavite <strong>naslov</strong> &quot;<em>Distribucija vremena između erupcija</em>&quot;</li>
+<li>Oznake osi neka budu &quot;<em>Vrijeme čekanja (minute)</em>&quot; i &quot;<em>Broj erupcija</em>&quot;</li>
+<li>Postavite boju stupaca na <code>lightsteelblue</code></li>
+<li>Dodajte <strong>krivulju gustoće distribucije</strong> (<em>crvena boja, debljina linije 2</em>)</li>
+<li>Dodajte <strong>vertikalnu liniju</strong> za <strong>srednju vrijednost</strong> (<em>plava, puna linija</em>)</li>
+<li>Dodajte <strong>vertikalnu liniju</strong> za <strong>medijan</strong> (<em>zelena, isprekidana linija</em>)</li>
+<li>Dodajte <strong>legendu</strong> koja objašnjava sve elemente grafa</li>
+</ol>
+<p><em>Primjer:</em></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/faithful.png"/>
+</div>
+<div class="page"></div>
+<h2 id="to%C4%8Dkasti-dijagram-dotchart">Točkasti dijagram <code>dotchart()</code></h2>
+<p>Točkasti dijagram je vrsta grafičkog prikaza koji prikazuje vrijednosti podataka kao točke duž brojčane linije. Ova vrsta vizualizacije posebno je korisna za:</p>
+<ul>
+<li>Prikazivanje distribucije podataka</li>
+<li>Usporedbu vrijednosti između različitih kategorija</li>
+<li>Vizualizaciju rang-liste vrijednosti</li>
+</ul>
+<pre class="hljs"><code><div>data(iris)
+dotchart(iris$Sepal.Length,
+         main = <span class="hljs-string">"Dužina čašičnih listova"</span>,
+         xlab = <span class="hljs-string">"Dužina (cm)"</span>,
+         ylab = <span class="hljs-string">"Uzorak"</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/dotchart_iris_basic.png"/>
+</div>
+<pre class="hljs"><code><div>dotchart(x = iris$Sepal.Length,
+         groups = iris$Species,
+         gcolor = c(<span class="hljs-string">"#FF6B6B"</span>, <span class="hljs-string">"#4CAF50"</span>, <span class="hljs-string">"#2196F3"</span>),
+         lcolor = <span class="hljs-string">"gray80"</span>,
+         color = c(<span class="hljs-string">"#FF6B6B"</span>, <span class="hljs-string">"#4CAF50"</span>, <span class="hljs-string">"#2196F3"</span>)[as.numeric(iris$Species)],
+         bg = rev(c(<span class="hljs-string">"#FFCDD2"</span>, <span class="hljs-string">"#C8E6C9"</span>, <span class="hljs-string">"#BBDEFB"</span>))[as.numeric(iris$Species)],
+         main = <span class="hljs-string">"Dužina čašičnih listova po vrstama"</span>,
+         xlab = <span class="hljs-string">"Dužina (cm)"</span>,
+         ylab = <span class="hljs-string">"Uzorak"</span>,
+         pch = <span class="hljs-number">21</span>,
+         pt.cex = <span class="hljs-number">1.5</span>,
+         cex = <span class="hljs-number">1</span>)
+</div></code></pre>
+<ul>
+<li><code>x</code> - Vektor podataka (dužine čašičnih listova)</li>
+<li><code>groups</code> - Grupiranje po vrstama cvijeća</li>
+<li><code>gcolor</code> - Boje oznaka grupa (crvena, zelena, plava)</li>
+<li><code>lcolor</code> - Boja linija poveznica (svijetlo siva)</li>
+<li><code>color</code> - Boje rubova točaka po vrstama</li>
+<li><code>bg</code> - Boje ispune točaka (svjetlije nijanse)</li>
+<li><code>pt.cex</code> - Veličina točaka (1.5× standardne)</li>
+</ul>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/dotchart_iris_species.png"/>
+</div>
+<h3 id="vje%C5%BEba-3">Vježba 3</h3>
+<p>Istražujemo podatke o karakteristikama cvijeća iz <strong>Iris</strong> dataseta i želimo vizualizirati omjer dužine i širine latica (<code>Petal.Length/Petal.Width</code>) koristeći točkasti dijagram. Cilj je istaknuti razlike između vrsta cvijeća i njihove prosječne vrijednosti.</p>
+<ol>
+<li>Koristite podatke <code>Petal.Length</code> i <code>Petal.Width</code> za izračun omjera (<code>Ratio</code>)</li>
+<li>Kreirajte <strong>točkasti dijagram</strong> s grupiranjem po vrstama cvijeća (<code>Species</code>)</li>
+<li>Postavite <strong>naslov</strong> &quot;<em>Omjer dužine i širine latica po vrstama</em>&quot;</li>
+<li>Oznake osi neka budu &quot;<em>Omjer (dužina/širina)</em>&quot; i &quot;<em>Uzorak</em>&quot;</li>
+<li>Postavite <strong>boje grupa</strong>:
+<ul>
+<li>Setosa (<code>red</code>)</li>
+<li>Versicolor (<code>green</code>)</li>
+<li>Virginica (<code>blue</code>)</li>
+</ul>
+</li>
+<li>Dodajte <strong>vertikalne linije</strong> za prosječne vrijednosti po vrstama</li>
+<li>Dodajte <strong>legendu</strong>:
+<ul>
+<li>Boje točaka = vrste cvijeća</li>
+<li>Linija = prosjek</li>
+</ul>
+</li>
+</ol>
+<div class="page"></div>
+<p><em>Primjer:</em></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/iris_omjer_dotchart.png"/>
+</div>
+<h2 id="stup%C4%8Dasti-prikaz-barplot"><strong>Stupčasti prikaz <code>barplot()</code></strong></h2>
+<p>Stupčasti dijagram (<code>barplot</code>) koristi se za vizualizaciju kategoričkih podataka, prikazujući vrijednosti u obliku vertikalnih ili horizontalnih stupaca. Posebno je koristan za usporedbu vrijednosti između različitih skupina.</p>
+<p>Funkcija <code>barplot()</code> stvara stupčasti dijagram na temelju numeričkog vektora ili matrice.</p>
+<pre class="hljs"><code><div>barplot(height, names.arg = <span class="hljs-literal">NULL</span>, horiz = <span class="hljs-literal">FALSE</span>, col = <span class="hljs-literal">NULL</span>, <span class="hljs-keyword">...</span>)
+</div></code></pre>
+<ul>
+<li><strong><code>height</code></strong> – vektor ili matrica vrijednosti za prikaz</li>
+<li><strong><code>names.arg</code></strong> – oznake za svaki stupac</li>
+<li><strong><code>horiz</code></strong> – <code>TRUE</code> za horizontalne stupce, <code>FALSE</code> (default) za vertikalne</li>
+<li><strong><code>col</code></strong> – boje stupaca</li>
+</ul>
+<pre class="hljs"><code><div>data(ChickWeight)
+<span class="hljs-comment"># Prosječna težina po dijeti</span>
+mean_weight &lt;- aggregate(weight ~ Diet, ChickWeight, mean)
+
+bp &lt;- barplot(mean_weight$weight,
+        main = <span class="hljs-string">"Prosječna težina pilića po dijeti"</span>,
+        xlab = <span class="hljs-string">"Dijeta"</span>,
+        ylab = <span class="hljs-string">"Težina (g)"</span>,
+        col = c(<span class="hljs-string">"#FF9999"</span>, <span class="hljs-string">"#99FF99"</span>, <span class="hljs-string">"#9999FF"</span>, <span class="hljs-string">"#FFCC99"</span>),
+        ylim = c(<span class="hljs-number">0</span>, <span class="hljs-number">150</span>))
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/barplot_chickweight_basic.png"/>
+</div>
+<p><em>Dodavanje oznaka iznad svakog stupca:</em></p>
+<pre class="hljs"><code><div>text(x = bp, y = mean_weight$weight, labels = round(mean_weight$weight), pos = <span class="hljs-number">3</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/barplot_chickweight_basic_labels.png"/>
+</div>
+<div class="page"></div>
+<p><em>Horizontalni stupčasti dijagram <code>horiz = TRUE</code>:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Najveća težina po dijeti</span>
+max_weight &lt;- aggregate(weight ~ Diet, ChickWeight, max)
+
+barplot(max_weight$weight,
+        horiz = <span class="hljs-literal">TRUE</span>,
+        main = <span class="hljs-string">"Maksimalna težina po dijeti"</span>,
+        xlab = <span class="hljs-string">"Težina (g)"</span>,
+        ylab = <span class="hljs-string">"Dijeta"</span>,
+        col = terrain.colors(<span class="hljs-number">4</span>),
+        xlim = c(<span class="hljs-number">0</span>, <span class="hljs-number">400</span>))
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/barplot_chickweight_horizontal.png"/>
+</div>
+<h3 id="vje%C5%BEba-4">Vježba 4</h3>
+<p>Istražujemo podatke o razvoju pilića iz <strong>ChickWeight</strong> dataseta i želimo vizualizirati prosječnu težinu pilića u <em>21. danu</em> prema različitim dijetama koristeći stupčasti dijagram. Cilj je istaknuti razlike u razvoju između skupina s različitim načinima ishrane.</p>
+<ol>
+<li>Koristite podatke <code>weight</code> i <code>Diet</code> za piliće u 21. danu</li>
+<li>Kreirajte <strong>stupčasti dijagram</strong> prosječnih težina po dijetama</li>
+<li>Postavite <strong>naslov</strong> &quot;<em>Težina pilića u 21. danu po dijetama</em>&quot;</li>
+<li>Oznake osi neka budu &quot;<em>Dijeta</em>&quot; i &quot;<em>Težina (g)</em>&quot;</li>
+<li>Postavite <strong>boje stupaca</strong></li>
+<li>Dodajte <strong>numeričke vrijednosti</strong> iznad svakog stupca</li>
+<li>Dodajte <strong>legendu</strong> koja objašnjava:
+<ul>
+<li>Boje stupaca = vrste dijeta</li>
+<li>Numeričke vrijednosti = prosječna težina u gramima</li>
+</ul>
+</li>
+</ol>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/barplot_chickweight_exercise.png"/>
+</div>
+<h2 id="tortni-prikaz-pie">Tortni prikaz <code>pie()</code></h2>
+<p>Tortni dijagram (<code>pie</code>) koristi se za prikazivanje proporcija ili postotaka u skupu podataka. Posebno je koristan za vizualizaciju strukture cjeline.</p>
+<pre class="hljs"><code><div>data(PlantGrowth)
+<span class="hljs-comment"># Broj biljaka po skupinama</span>
+counts &lt;- table(PlantGrowth$group)
+
+pie(counts,
+    main = <span class="hljs-string">"Raspodjela biljaka po eksperimentalnim skupinama"</span>,
+    col = c(<span class="hljs-string">"#FF6B6B"</span>, <span class="hljs-string">"#4CAF50"</span>, <span class="hljs-string">"#2196F3"</span>))
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/pie_plantgrowth_basic.png"/>
+</div>
+<div class="page"></div>
+<p><em>Postoci i legenda:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Izračun postotaka</span>
+percentages &lt;- round(<span class="hljs-number">100</span> * counts/sum(counts), <span class="hljs-number">1</span>)
+
+pie(counts,
+    labels = paste0(percentages, <span class="hljs-string">"%"</span>),
+    main = <span class="hljs-string">"Postotna raspodjela biljaka po skupinama"</span>,
+    col = c(<span class="hljs-string">"#FF9999"</span>, <span class="hljs-string">"#99FF99"</span>, <span class="hljs-string">"#9999FF"</span>))
+
+legend(<span class="hljs-string">"topright"</span>,
+       legend = c(<span class="hljs-string">"Kontrola"</span>, <span class="hljs-string">"Tretman 1"</span>, <span class="hljs-string">"Tretman 2"</span>),
+       fill = c(<span class="hljs-string">"#FF9999"</span>, <span class="hljs-string">"#99FF99"</span>, <span class="hljs-string">"#9999FF"</span>))
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/pie_plantgrowth_percent.png"/>
+</div>
+<div class="page"></div>
+<h2 id="kutijasti-prikaz-boxplot">Kutijasti prikaz <code>boxplot()</code></h2>
+<p>Kutijasti dijagram (boxplot) prikazuje distribuciju numeričkih podataka kroz njihove kvartile, pružajući vizualni pregled središnje tendencije, varijabilnosti i outliera.</p>
+<pre class="hljs"><code><div>data(airquality)
+boxplot(airquality$Ozone,
+        main = <span class="hljs-string">"Distribucija ozonskih vrijednosti"</span>,
+        ylab = <span class="hljs-string">"Ozon (ppb)"</span>,
+        col = <span class="hljs-string">"lightblue"</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/boxplot_ozone_basic.png"/>
+</div>
+<ul>
+<li><strong>Kutija</strong> prikazuje interkvartilni raspon (IQR, 25-75 percentil)</li>
+<li><strong>Crta</strong> u kutiji označava medijan</li>
+<li><strong>Brkovi/Linije</strong> pokazuju raspon podataka (obično 1.5 × IQR)</li>
+<li><strong>Točke</strong> izvan brkova su outlieri</li>
+<li><strong>Širina kutije</strong> ukazuje na broj opažanja (šira kutija = više podataka)</li>
+</ul>
+<p><em>Vertikalni boxplot (Ozon po mjesecima) <code>~</code>:</em></p>
+<pre class="hljs"><code><div>boxplot(Ozone ~ Month, data = airquality,
+        main = <span class="hljs-string">"Ozon po mjesecima"</span>,
+        xlab = <span class="hljs-string">"Mjesec"</span>,
+        ylab = <span class="hljs-string">"Ozon (ppb)"</span>,
+        col = terrain.colors(<span class="hljs-number">5</span>),
+        names = month.name[<span class="hljs-number">5</span>:<span class="hljs-number">9</span>])
+</div></code></pre>
+<ul>
+<li><code>names</code>: postavljanje imena za svaku kutiju</li>
+</ul>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/boxplot_ozone_month.png"/>
+</div>
+<p><em>Horizontalni boxplot (Temperature po mjesecima) <code>horizontal = TRUE</code>, <code>notch = TRUE</code>:</em></p>
+<pre class="hljs"><code><div>boxplot(airquality$Temp ~ airquality$Month,
+        horizontal = <span class="hljs-literal">TRUE</span>,
+        main = <span class="hljs-string">"Temperature po mjesecima"</span>,
+        ylab = <span class="hljs-string">"Mjesec"</span>,
+        xlab = <span class="hljs-string">"Temperatura (°F)"</span>,
+        col = heat.colors(<span class="hljs-number">5</span>),
+        notch = <span class="hljs-literal">TRUE</span>,
+        boxwex = <span class="hljs-number">0.75</span>)
+</div></code></pre>
+<ul>
+<li><code>horizontal</code>: smjer kutija</li>
+<li><code>notch</code> (<em>urez</em>): Prikazuje 95% interval pouzdanosti za medijan</li>
+<li><code>boxwex</code>: širina/debljina kutija</li>
+</ul>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/boxplot_temp_horizontal.png"/>
+</div>
+<h3 id="vje%C5%BEba-5">Vježba 5</h3>
+<p>Istražujemo podatke o kvaliteti zraka iz <strong>airquality</strong> dataseta i želimo vizualizirati distribuciju brzine vjetra (<code>Wind</code>) po mjesecima koristeći kutijasti dijagram. Cilj je istaknuti sezonske varijacije u brzinama vjetra i njihove prosječne vrijednosti.</p>
+<ol>
+<li>Koristite podatke <code>Wind</code> i <code>Month</code> iz skupa podataka <code>airquality</code></li>
+<li>Kreirajte <strong>kutijasti dijagram</strong> brzina vjetra grupiranih po mjesecima</li>
+<li>Postavite <strong>naslov</strong> &quot;<em>Distribucija brzine vjetra po mjesecima</em>&quot;</li>
+<li>Oznake osi neka budu &quot;<em>Mjesec</em>&quot; i &quot;<em>Brzina vjetra (mph)</em>&quot;</li>
+<li>Postavite <strong>boje kutija</strong></li>
+<li>Dodajte <strong>crvene točke</strong> za prikaz srednjih vrijednosti po mjesecima</li>
+<li>Dodajte <strong>legendu</strong>:
+<ul>
+<li>Crvena točka = srednja vrijednost</li>
+</ul>
+</li>
+</ol>
+<div class="page"></div>
+<p><em>Primjer:</em></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/boxplot_wind_exercise.png"/>
+</div>
+<h2 id="raspr%C5%A1eni-graf---korelacijska-matrica">Raspršeni graf - korelacijska matrica</h2>
+<p>Raspršeni graf prikazuje odnos između dvije numeričke varijable, što ga čini idealnim za analizu korelacija i trendova u podacima. U R-u možemo koristiti osnovnu funkciju <code>plot()</code> za kreiranje raspršenih grafova.</p>
+<pre class="hljs"><code><div>plot(
+  x,                      <span class="hljs-comment"># vrijednosti na x-osi</span>
+  y,                      <span class="hljs-comment"># vrijednosti na y-osi </span>
+  xlim = c(min, max),     <span class="hljs-comment"># raspon x vrijednosti</span>
+  ylim = c(min, max),     <span class="hljs-comment"># raspon y vrijednosti</span>
+  main = <span class="hljs-string">"Naslov"</span>,        <span class="hljs-comment"># naslov grafa</span>
+  xlab = <span class="hljs-string">"X os"</span>,          <span class="hljs-comment"># oznaka x-osi</span>
+  ylab = <span class="hljs-string">"Y os"</span>,          <span class="hljs-comment"># oznaka y-osi</span>
+  pch = <span class="hljs-number">19</span>,               <span class="hljs-comment"># tip točke (19=puni krug)</span>
+  cex = <span class="hljs-number">1</span>,                <span class="hljs-comment"># veličina točaka</span>
+  col = <span class="hljs-string">"blue"</span>,           <span class="hljs-comment"># boja točaka</span>
+  bg = <span class="hljs-string">"lightblue"</span>,       <span class="hljs-comment"># boja ispune (za pch 21-25)</span>
+  lwd = <span class="hljs-number">1</span>                 <span class="hljs-comment"># debljina linija/obruba</span>
+)
+</div></code></pre>
+<div class="page"></div>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>data(quakes)
+plot(quakes$long, quakes$lat,
+     main = <span class="hljs-string">"Lokacije potresa"</span>,
+     xlab = <span class="hljs-string">"Geografska dužina"</span>,
+     ylab = <span class="hljs-string">"Geografska širina"</span>,
+     pch = <span class="hljs-number">21</span>,
+     col = rgb(<span class="hljs-number">0</span>,<span class="hljs-number">0.2</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.75</span>),
+     bg = rgb(<span class="hljs-number">0</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.8</span>,<span class="hljs-number">0.2</span>),
+     cex = (quakes$mag^<span class="hljs-number">3</span>)/<span class="hljs-number">50</span>)
+</div></code></pre>
+<ul>
+<li>U <code>cex</code> proslijeđujemo <code>magnitudu</code> za vizualni prikaz jačine potresa</li>
+</ul>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/quakes_basic.png"/>
+</div>
+<pre class="hljs"><code><div><span class="hljs-comment"># Različite boje po intenzitetu</span>
+intensity_col &lt;- rev(heat.colors(<span class="hljs-number">10</span>))[cut(quakes$mag, breaks=<span class="hljs-number">10</span>)]
+plot(quakes$depth, quakes$stations, col=intensity_col, pch=<span class="hljs-number">19</span>, main=<span class="hljs-string">"Boje po magnitudi"</span>)
+</div></code></pre>
+<ul>
+<li><code>cut()</code> grupira brojeve u vektoru</li>
+<li>što je crvenije to je jača magnituda</li>
+</ul>
+<div style="width: 85%; display: flex; justify-content: center;">
+    <img src="images/quakes_points.png"/>
+</div>
+<p><strong>Korelacijska matrica:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Prikaz svih varijabli u korelacijskoj matrici</span>
+pairs(quakes,
+      main = <span class="hljs-string">"Matrica raspršenih dijagrama"</span>,
+      pch = <span class="hljs-number">21</span>,
+      bg = adjustcolor(<span class="hljs-string">"blue"</span>, alpha.f = <span class="hljs-number">0.3</span>),
+      col = adjustcolor(<span class="hljs-string">"darkblue"</span>, alpha.f = <span class="hljs-number">0.5</span>))
+</div></code></pre>
+<div style="width: 85%; display: flex; justify-content: center;">
+    <img src="images/cor_matrica.png"/>
+</div>
+<p><strong>Izračun korelacijske matrice:</strong></p>
+<pre class="hljs"><code><div>cor_matrix &lt;- cor(quakes)
+round(cor_matrix, <span class="hljs-number">2</span>)
+</div></code></pre>
+<p><em>Rezultat:</em></p>
+<pre class="hljs"><code><div>           lat  long depth   mag stations
+lat       <span class="hljs-number">1.00</span> -<span class="hljs-number">0.36</span>  <span class="hljs-number">0.03</span> -<span class="hljs-number">0.05</span>     <span class="hljs-number">0.00</span>
+long     -<span class="hljs-number">0.36</span>  <span class="hljs-number">1.00</span>  <span class="hljs-number">0.14</span> -<span class="hljs-number">0.17</span>    -<span class="hljs-number">0.05</span>
+depth     <span class="hljs-number">0.03</span>  <span class="hljs-number">0.14</span>  <span class="hljs-number">1.00</span> -<span class="hljs-number">0.23</span>    -<span class="hljs-number">0.07</span>
+mag      -<span class="hljs-number">0.05</span> -<span class="hljs-number">0.17</span> -<span class="hljs-number">0.23</span>  <span class="hljs-number">1.00</span>     <span class="hljs-number">0.85</span>
+stations  <span class="hljs-number">0.00</span> -<span class="hljs-number">0.05</span> -<span class="hljs-number">0.07</span>  <span class="hljs-number">0.85</span>     <span class="hljs-number">1.00</span>
+</div></code></pre>
+<p><strong>Testiranje korelacija:</strong></p>
+<pre class="hljs"><code><div>cor.test(quakes$mag, quakes$stations)
+</div></code></pre>
+<p><em>Rezultat:</em></p>
+<pre class="hljs"><code><div>	Pearson<span class="hljs-string">'s product-moment correlation
+
+data:  quakes$mag and quakes$stations
+t = 51.231, df = 998, p-value &lt; 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.8331527 0.8674048
+sample estimates:
+      cor 
+0.8511824 
+</span></div></code></pre>
+<div class="page"></div>
+<p><em>Prikaz najmanje i najveće korelacijske matrice:</em></p>
+<pre class="hljs"><code><div>par(mfrow=c(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))
+
+<span class="hljs-comment"># Magnituda vs stanice</span>
+plot(quakes$mag, quakes$stations,
+     main = <span class="hljs-string">"Magnituda vs broj stanica\n(r = 0.85)"</span>,
+     xlab = <span class="hljs-string">"Magnituda"</span>,
+     ylab = <span class="hljs-string">"Broj stanica"</span>,
+     pch = <span class="hljs-number">19</span>,
+     col = rgb(<span class="hljs-number">0.8</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.3</span>))
+abline(lm(stations ~ mag, data=quakes), col=<span class="hljs-string">"blue"</span>, lwd=<span class="hljs-number">3</span>)
+
+<span class="hljs-comment"># Dubina vs magnituda</span>
+plot(quakes$depth, quakes$mag,
+     main = <span class="hljs-string">"Dubina vs magnituda\n(r = -0.23)"</span>,
+     xlab = <span class="hljs-string">"Dubina (km)"</span>,
+     ylab = <span class="hljs-string">"Magnituda"</span>,
+     pch = <span class="hljs-number">19</span>,
+     col = rgb(<span class="hljs-number">0</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.3</span>))
+abline(lm(mag ~ depth, data=quakes), col=<span class="hljs-string">"orange"</span>, lwd=<span class="hljs-number">3</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/min_max_cor.png"/>
+</div>
+<div class="page"></div>
+<h3 id="vje%C5%BEba-6">Vježba 6</h3>
+<p>Istražujemo podatke o potresima iz skupa podataka <strong>quakes</strong> i želimo vizualizirati odnos između broja seizmoloških stanica koje su detektirale potres (<code>stations</code>) i magnitude potresa (<code>mag</code>). Cilj je istražiti kako se broj detekcija povezuje s jačinom potresa i uočiti eventualne obrasce.</p>
+<ol>
+<li>Koristite podatke <code>stations</code> i <code>mag</code> iz skupa podataka <code>quakes</code></li>
+<li>Kreirajte <strong>raspršeni graf</strong> koji prikazuje odnos ove dvije varijable</li>
+<li>Postavite <strong>naslov</strong> &quot;<em>Broj stanica vs magnituda potresa</em>&quot;</li>
+<li>Oznake osi neka budu &quot;<em>Broj stanica</em>&quot; i &quot;<em>Magnituda</em>&quot;</li>
+<li>Podijelite dubine potresa na <strong>5 intervala</strong> pomoću funkcije <code>cut()</code></li>
+<li>Koristite <strong>paletu boja</strong> <code>terrain.colors()</code> za vizualno razlikovanje dubina</li>
+<li>Dodajte <strong>glatku trend liniju</strong> pomoću funkcije <code>lowess()</code></li>
+<li>Postavite <strong>veličinu točaka</strong> proporcionalnu dubini potresa</li>
+<li>Dodajte <strong>legendu</strong> koja objašnjava kategorije dubina</li>
+</ol>
+<p><em>Primjer:</em></p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/quakes_exercise.png"/>
+</div>
 </div>
 </body>
 </html>
