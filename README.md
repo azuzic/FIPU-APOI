@@ -26,4 +26,5 @@ Kolegij slušaju:
 
 ## YouTube 📺
 
-1. [R Osnove](https://www.youtube.com/watch?v=QgbR_waIKfc&list=PL3KdD7QwiDWqT9MvSK521s_fgz0nxbDQ9) ([APOI1](https://github.com/azuzic/FIPU-APOI/tree/main/Skripte/Skripta%201.%20-%20R%20Osnove))
+1. [R Osnove](https://youtu.be/QgbR_waIKfc?list=PL3KdD7QwiDWqT9MvSK521s_fgz0nxbDQ9) ([APOI1](https://github.com/azuzic/FIPU-APOI/tree/main/Skripte/Skripta%201.%20-%20R%20Osnove))
+1. [Vizualizacija podataka](https://youtu.be/k1nE3AaZeH0?list=PL3KdD7QwiDWqT9MvSK521s_fgz0nxbDQ9) ([APOI2](https://github.com/azuzic/FIPU-APOI/tree/main/Skripte/Skripta%202.%20-%20Vizualizacija%20podataka))
