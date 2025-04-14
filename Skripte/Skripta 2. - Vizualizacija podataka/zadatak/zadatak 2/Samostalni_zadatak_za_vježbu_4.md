@@ -8,7 +8,7 @@ Radit ćemo s podacima o putnicima s Titanika, učitanima iz Excel datoteke. Cil
 
 ---
 
-1. **Učitajte podatke iz Excel datoteke "zadatak1.xls"**  
+1. **Učitajte podatke iz Excel datoteke "podaci_titanic.xls"**  
     - Učitajte radni list **"Titanic"** u `data.frame` naziva `titanic`
     - Ako je potrebno, instalirajte i aktivirajte odgovarajući paket za rad s Excel datotekama
 
