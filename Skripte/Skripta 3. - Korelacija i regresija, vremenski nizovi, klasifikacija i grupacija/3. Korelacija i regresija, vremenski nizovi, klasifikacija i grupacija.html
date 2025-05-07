@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>R osnove</title>
+		<meta
+			http-equiv="Content-type"
+			content="text/html;charset=UTF-8" />
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet" />
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+			/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+			/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+ :not(code *, .hljs *, .MathJax *) {
+				font-family: "Poppins", sans-serif;
+			}
+            html {
+                display: flex;
+                justify-content: center;
+            }
+			body {
+				font-family: var(
+					--vscode-markdown-font-family,
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe WPC",
+					"Segoe UI",
+					"Ubuntu",
+					"Droid Sans",
+					sans-serif
+				);
+				font-size: var(--vscode-markdown-font-size, 14px);
+				line-height: var(--vscode-markdown-line-height, 22px);
+				word-wrap: break-word;
+				color: #3b3b3b;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                width: full;
+			}
+			.body {
+                max-width: 1012px;
+			}
+
+			#code-csp-warning {
+				position: fixed;
+				top: 0;
+				right: 0;
+				color: white;
+				margin: 16px;
+				text-align: center;
+				font-size: 12px;
+				font-family: sans-serif;
+				background-color: #444444;
+				cursor: pointer;
+				padding: 6px;
+				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			}
+
+			#code-csp-warning:hover {
+				text-decoration: none;
+				background-color: #007acc;
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+			}
+
+			body.scrollBeyondLastLine {
+				margin-bottom: calc(100vh - 22px);
+			}
+
+			body.showEditorSelection .code-line {
+				position: relative;
+			}
+
+			body.showEditorSelection .code-active-line:before,
+			body.showEditorSelection .code-line:hover:before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0;
+				left: -12px;
+				height: 100%;
+			}
+
+			body.showEditorSelection li.code-active-line:before,
+			body.showEditorSelection li.code-line:hover:before {
+				left: -30px;
+			}
+
+			.vscode-light.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.15);
+			}
+
+			.vscode-light.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.4);
+			}
+
+			.vscode-light.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-dark.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.4);
+			}
+
+			.vscode-dark.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.6);
+			}
+
+			.vscode-dark.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 160, 0, 0.7);
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 160, 0, 1);
+			}
+
+			.vscode-high-contrast.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+				border-radius: 8px;
+				filter: drop-shadow(-0 2px 2px rgba(0, 0, 0, 0.07));
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+
+			a:focus,
+			input:focus,
+			select:focus,
+			textarea:focus {
+				outline: 1px solid -webkit-focus-ring-color;
+				outline-offset: -1px;
+			}
+
+			hr {
+				border: 0;
+				height: 2px;
+				border-bottom: 2px solid;
+			}
+
+			h1 {
+				padding-bottom: 0.3em;
+				line-height: 1.2;
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+			}
+
+			h1,
+			h2,
+			h3 {
+				font-weight: normal;
+			}
+
+			table {
+				border-collapse: collapse;
+			}
+
+			table > thead > tr > th {
+				text-align: left;
+				border-bottom: 1px solid;
+			}
+
+			table > thead > tr > th,
+			table > thead > tr > td,
+			table > tbody > tr > th,
+			table > tbody > tr > td {
+				padding: 5px 10px;
+			}
+
+			table > tbody > tr + tr > td {
+				border-top: 1px solid;
+			}
+
+			blockquote {
+				margin: 0 7px 0 5px;
+				padding: 0 16px 0 10px;
+				border-left-width: 5px;
+				border-left-style: solid;
+			}
+
+			code {
+				font-family: Menlo, Monaco, Consolas, "Droid Sans Mono",
+					"Courier New", monospace, "Droid Sans Fallback";
+				font-size: 1em;
+				line-height: 1.357em;
+			}
+
+			body.wordWrap pre {
+				white-space: pre-wrap;
+			}
+
+			pre:not(.hljs),
+			pre.hljs code > div {
+				padding: 16px;
+				border-radius: 3px;
+				overflow: auto;
+			}
+
+			pre code {
+				color: var(--vscode-editor-foreground);
+				tab-size: 4;
+			}
+
+			/** Theming */
+
+			.vscode-light pre {
+				background-color: rgba(220, 220, 220, 0.4);
+			}
+
+			.vscode-dark pre {
+				background-color: rgba(10, 10, 10, 0.4);
+			}
+
+			.vscode-high-contrast pre {
+				background-color: rgb(0, 0, 0);
+			}
+
+			.vscode-high-contrast h1 {
+				border-color: rgb(0, 0, 0);
+			}
+
+			.vscode-light table > thead > tr > th {
+				border-color: rgba(0, 0, 0, 0.69);
+			}
+
+			.vscode-dark table > thead > tr > th {
+				border-color: rgba(255, 255, 255, 0.69);
+			}
+
+			.vscode-light h1,
+			.vscode-light hr,
+			.vscode-light table > tbody > tr + tr > td {
+				border-color: rgba(0, 0, 0, 0.18);
+			}
+
+			.vscode-dark h1,
+			.vscode-dark hr,
+			.vscode-dark table > tbody > tr + tr > td {
+				border-color: rgba(255, 255, 255, 0.18);
+			}
+		</style>
+
+		<style>
+			/*
+
+Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+
+*/
+			.hljs {
+				background: white;
+				color: black;
+			}
+
+			.hljs-comment,
+			.hljs-quote,
+			.hljs-variable {
+				color: #008000;
+			}
+
+			.hljs-keyword,
+			.hljs-selector-tag,
+			.hljs-built_in,
+			.hljs-name,
+			.hljs-tag {
+				color: #00f;
+			}
+
+			.hljs-string,
+			.hljs-title,
+			.hljs-section,
+			.hljs-attribute,
+			.hljs-literal,
+			.hljs-template-tag,
+			.hljs-template-variable,
+			.hljs-type,
+			.hljs-addition {
+				color: #a31515;
+			}
+
+			.hljs-deletion,
+			.hljs-selector-attr,
+			.hljs-selector-pseudo,
+			.hljs-meta {
+				color: #2b91af;
+			}
+
+			.hljs-doctag {
+				color: #808080;
+			}
+
+			.hljs-attr {
+				color: #f00;
+			}
+
+			.hljs-symbol,
+			.hljs-bullet,
+			.hljs-link {
+				color: #00b0e8;
+			}
+
+			.hljs-emphasis {
+				font-style: italic;
+			}
+
+			.hljs-strong {
+				font-weight: bold;
+			}
+		</style>
+
+		<style>
+			/*
+ * Markdown PDF CSS
+ */
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC",
+					"Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+			}
+
+			pre {
+				background-color: #f8f8f8;
+				border: 1px solid #cccccc;
+				border-radius: 3px;
+				overflow-x: auto;
+				white-space: pre-wrap;
+				overflow-wrap: break-word;
+			}
+
+			pre:not(.hljs) {
+				padding: 23px;
+				line-height: 19px;
+			}
+
+			blockquote {
+				background: rgba(127, 127, 127, 0.1);
+				border-color: rgba(0, 122, 204, 0.5);
+			}
+
+			.emoji {
+				height: 1.4em;
+			}
+
+			code {
+				font-size: 14px;
+				line-height: 19px;
+			}
+
+			/* for inline code */
+			:not(pre):not(.hljs) > code {
+				color: #3b3b3b; /* Change the old color so it seems less like an error */
+				font-size: inherit;
+				background: #e0e0e0;
+				border-radius: 4px;
+				padding: 1px 2px;
+				margin: -1px -2px;
+			}
+
+			/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+			.page {
+				page-break-after: always;
+			}
+		</style>
+
+		<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+	</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div class="body">
+<h1 id="analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</h1>
+<p><strong>Nositelj</strong>: izv. prof. dr. sc. Siniša Sovilj <br>
+<strong>Asistent</strong>: mag. inf. Alesandro Žužić</p>
+<p><strong>Ustanova</strong>: Sveučilište Jurja Dobrile u Puli, Fakultet informatike u Puli</p>
+<p style="float: clear; display: flex; gap: 8px; align-items: center;" class="font-brioni text-sm whitespace-nowrap">
+    <img src="../Logo/fipu_logo.svg" style="height: 96px; box-shadow: none !important;" class="mr-4"></img>
+    Fakultet informatike u Puli
+</p>
+<h1 id="3-korelacija-i-regresija-vremenski-nizovi-klasifikacija-i-grupacija">[3] Korelacija i regresija, vremenski nizovi, klasifikacija i grupacija</h1>
+<div style="display: flex; justify-content: space-between; text-align: justify; gap: 32px;">
+    <p>
+        <b>Korelacija</b> mjeri linearnu povezanost između varijabli. <b>Regresija</b> modelira odnose za predviđanje vrijednosti. <b>Vremenski nizovi</b> analiziraju podatke ovisne o vremenu. <b>Klasifikacija</b> dodjeljuje podatke unaprijed definiranim kategorijama, dok <b>grupiranje</b> (klasteriranje) automatski identificira prirodne grupe u podacima. U R-u se koriste funkcije poput <code>cor()</code>, <code>lm()</code>, <code>forecast()</code>, <code>caret</code> i <code>kmeans()</code>, a vizualizacija pomaže u interpretaciji rezultata.
+    </p>
+    <img src="../Icons/R_2.svg" style="width: 96px; height: 96px; margin: 0px;"></img>
+</div>
+<p><strong>Posljednje ažurirano:</strong> 11. travnja 2025.</p>
+<!-- TOC -->
+<ul>
+<li><a href="#analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</a></li>
+<li><a href="#3-korelacija-i-regresija-vremenski-nizovi-klasifikacija-i-grupacija">[3] Korelacija i regresija, vremenski nizovi, klasifikacija i grupacija</a>
+<ul>
+<li><a href="#korelacija">Korelacija</a>
+<ul>
+<li><a href="#%C4%8Detiri-osnovna-tipa-korelacijskih-odnosa">Četiri osnovna tipa korelacijskih odnosa:</a></li>
+<li><a href="#koeficijenti-korelacije">Koeficijenti korelacije</a>
+<ul>
+<li><a href="#pearsonov-koeficijent-korelacije">Pearsonov koeficijent korelacije</a></li>
+<li><a href="#spearmanov-koeficijent-korelacije">Spearmanov koeficijent korelacije</a></li>
+</ul>
+</li>
+<li><a href="#matrica-korelacije">Matrica korelacije</a></li>
+<li><a href="#outlieri-u-korelacijskoj-analizi">Outlieri u korelacijskoj analizi</a></li>
+<li><a href="#kovarijanca">Kovarijanca</a></li>
+</ul>
+</li>
+<li><a href="#regresijska-analiza">Regresijska analiza</a>
+<ul>
+<li><a href="#linearna-regresija">Linearna regresija</a></li>
+<li><a href="#logisti%C4%8Dka-regresija">Logistička regresija</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<div class="page"></div>
+<h2 id="korelacija">Korelacija</h2>
+<p><strong>Korelacija</strong> kvantificira statističku povezanost između <strong>dvije numeričke</strong> varijable, pokazujući koliko se one zajedno mijenjaju. Povezanost znači da je vrijednost jedne varijable s nekom vjerojatnošću moguće predvidjeti na osnovi saznanja o vrijednosti druge varijable.</p>
+<p>Promjena vrijednosti jedne varijable utječe na promjenu vrijednosti druge varijable. Varijabla koja svojom vrijednošću utječe na drugu varijablu naziva se <strong>neovisna varijabla</strong>. Varijabla na koju se utječe naziva se <strong>ovisna varijabla</strong>.</p>
+<blockquote>
+<p>Mogući su slučajevi da dvije varijable istovremeno utječu jedna na drugu, pa su u tom slučaju obje varijable istovremeno i ovisne i neovisne.</p>
+</blockquote>
+<p><em>U R-u korelacija se računa pomoću sljedeće funkcije:</em></p>
+<pre class="hljs"><code><div>cor(x, y)
+</div></code></pre>
+<p>Međusoban odnos između dvije varijable, grafički možemo prikazati pomoću dvodimenzionalnog grafa, tzv. <strong>scatter dijagram</strong> (dijagrama raspršenja).</p>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/korelacija_base.png"  width="75%"/>
+</div>
+<p>Ovisno o međusobnom odnosu dvaju varijabli među kojima postoji korelacija, ona može biti <strong>linearna</strong> ili <strong>nelinearna</strong>.</p>
+<ul>
+<li>Kod <strong>linearne korelacije</strong>, točke su grupirane oko pravca.</li>
+<li>Kod <strong>nelinearne korelacije</strong>, točke su grupirane oko neke druge krivulje.</li>
+</ul>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/linearna_vs_nelinearna_korelacija.png"/>
+</div>
+<h3 id="%C4%8Detiri-osnovna-tipa-korelacijskih-odnosa">Četiri osnovna tipa korelacijskih odnosa:</h3>
+<ol>
+<li>
+<p><strong>Pozitivna korelacija</strong> (<code>+</code>)</p>
+<ul>
+<li><strong>Karakteristike</strong>:
+<ul>
+<li>Mala vrijednost varijable X ↔ mala vrijednost varijable Y</li>
+<li>Velika vrijednost varijable X ↔ velika vrijednost varijable Y</li>
+</ul>
+</li>
+<li><strong>Grafički prikaz</strong>: Točke se koncentriraju oko uzlazne linije</li>
+</ul>
+</li>
+<li>
+<p><strong>Negativna korelacija</strong> (<code>-</code>)</p>
+<ul>
+<li><strong>Karakteristike</strong>:
+<ul>
+<li>Mala vrijednost varijable X ↔ velika vrijednost varijable Y</li>
+<li>Velika vrijednost varijable X ↔ mala vrijednost varijable Y</li>
+</ul>
+</li>
+<li><strong>Grafički prikaz</strong>: Točke se koncentriraju oko silazne linije</li>
+</ul>
+</li>
+<li>
+<p><strong>Nemonotona korelacija</strong> (<code>ciklička</code>)</p>
+<ul>
+<li><strong>Karakteristike</strong>:
+<ul>
+<li>Odnos se mijenja po intervalima</li>
+<li>U nekim dijelovima može biti pozitivan, u drugima negativan</li>
+<li>Ako se smjer mijenja više puta → ciklička korelacija</li>
+</ul>
+</li>
+<li><strong>Grafički prikaz</strong>: Točke slijede valoviti obrazac (npr. sinusoida)</li>
+</ul>
+</li>
+<li>
+<p><strong>Nul-korelacija</strong> (<code>0</code>)</p>
+<ul>
+<li><strong>Karakteristike</strong>:
+<ul>
+<li>Nema vidljive veze između varijabli</li>
+<li>Vrijednosti jedne varijable ne pružaju informaciju o vrijednostima druge</li>
+</ul>
+</li>
+<li><strong>Grafički prikaz</strong>: Točke potpuno nasumično raspršene</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Tip korelacije</th>
+<th>Smjer</th>
+<th>Snaga</th>
+<th>Primjer vizualizacije</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pozitivna</td>
+<td>↗</td>
+<td>Jaka do umjerena</td>
+<td>Točke blisko uz uzlaznu liniju</td>
+</tr>
+<tr>
+<td>Negativna</td>
+<td>↘</td>
+<td>Jaka do umjerena</td>
+<td>Točke blisko uz silaznu liniju</td>
+</tr>
+<tr>
+<td>Nemonotona</td>
+<td>Promjenjiv</td>
+<td>Varira</td>
+<td>Valoviti/periodični obrazac</td>
+</tr>
+<tr>
+<td>Nul-korelacija</td>
+<td>-</td>
+<td>0</td>
+<td>Kaotično raspršene točke</td>
+</tr>
+</tbody>
+</table>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/korelacijski_odnosi.png"/>
+</div>
+<h3 id="koeficijenti-korelacije">Koeficijenti korelacije</h3>
+<p><strong>Koeficijenti korelacije</strong> mjere povezanost između varijabli na standardiziranoj skali neovisnoj o mjernim jedinicama. Dva najčešća koeficijenta su:</p>
+<ol>
+<li><strong>Pearsonov (r)</strong> - mjeri <strong>linearnu</strong> povezanost (-1 do +1), optimalan za normalno distribuirane podatke</li>
+<li><strong>Spearmanov (ρ)</strong> - mjeri <strong>monotonu</strong> povezanost kroz rangove, robusniji na nelinearnosti i outlier-e</li>
+</ol>
+<p>Pearson je osjetljiv na linearne odnose, dok Spearman hvata širi spektar monotonih veza (uključujući nelinearne). Oba koeficijenta eliminiraju utjecaj mjernih jedinica, omogućavajući usporedbu različitih varijabli.</p>
+<h4 id="pearsonov-koeficijent-korelacije">Pearsonov koeficijent korelacije</h4>
+<p>Pearsonov koeficijent (r) mjeri <strong>linearnu povezanost</strong> između dvije numeričke varijable s normalnom distribucijom. Vrijednost Pearsonovog koeficijenta korelacije kreće se od <code>+1</code> (<em>savršena pozitivna korelacija</em>) do <code>–1</code> (<em>savršena negativna korelacija</em>). <strong>Predznak</strong> koeficijenta nas upućuje na <strong>smjer korelacije</strong> – je li pozitivna ili negativna, ali nas ne upućuje na snagu korelacije. Pearsonov koeficijent korelacije bazira se na usporedbi stvarnog utjecaja promatranih varijabli jedne na drugu u odnosu na maksimalni mogući utjecaj dviju varijabli.
+Vrijednosti:</p>
+<ul>
+<li><strong>+1</strong>: savršena pozitivna korelacija</li>
+<li><strong>-1</strong>: savršena negativna korelacija</li>
+<li><strong>0</strong>: nema linearne veze</li>
+</ul>
+<blockquote>
+<p>Osjetljiv je na outlier-e te zahtijeva linearnost i normalnu distribuciju</p>
+</blockquote>
+<p><code>cor()</code> funkcija uvijek koristi <strong>Pearsonov koeficijent</strong> tako da se ne navodi kao argument:</p>
+<pre class="hljs"><code><div>cor(x, y)
+</div></code></pre>
+<p><em>Vrijednosti Pearsonovog koeficijenta korelacije:</em></p>
+<table>
+<thead>
+<tr>
+<th>Vrijednost (r)</th>
+<th>Jakost veze</th>
+<th>Smjer veze</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1.0</td>
+<td>Funkcionalna veza</td>
+<td>Negativan</td>
+</tr>
+<tr>
+<td>-1.0 &lt; r &lt; -0.8</td>
+<td>Jaka veza</td>
+<td>Negativan</td>
+</tr>
+<tr>
+<td>-0.8 ≤ r &lt; -0.5</td>
+<td>Umjerena veza</td>
+<td>Negativan</td>
+</tr>
+<tr>
+<td>-0.5 ≤ r &lt; 0</td>
+<td>Slaba veza</td>
+<td>Negativan</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Nema linearne veze</td>
+<td>-</td>
+</tr>
+<tr>
+<td>0 &lt; r ≤ 0.5</td>
+<td>Slaba veza</td>
+<td>Pozitivan</td>
+</tr>
+<tr>
+<td>0.5 &lt; r ≤ 0.8</td>
+<td>Umjerena veza</td>
+<td>Pozitivan</td>
+</tr>
+<tr>
+<td>0.8 &lt; r &lt; 1.0</td>
+<td>Jaka veza</td>
+<td>Pozitivan</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>Funkcionalna veza</td>
+<td>Pozitivan</td>
+</tr>
+</tbody>
+</table>
+<h4 id="spearmanov-koeficijent-korelacije">Spearmanov koeficijent korelacije</h4>
+<p>Spearmanov koeficijent (ρ) mjeri <strong>monotonu povezanost</strong> (linearne i nelinearne) kroz rangove vrijednosti. Koristi se za mjerenje povezanosti između varijabli u slučajevima kada nije moguće primijeniti Pearsonov koeficijent korelacije. Bazira se na tome da se izmjeri dosljednost povezanosti između poredanih varijabli, a oblik povezanosti (npr. linearni oblik koji je preduvjet za korištenje Pearsonovog koeficijenta) nije bitan.</p>
+<blockquote>
+<p>Robusniji na odstupanja od normalnosti te detektira širi spektar veza</p>
+</blockquote>
+<p>Da bi koristili <strong>Spearmanov koeficijent</strong> u <code>cor()</code> funkciji trebamo ga navesti kao metodu:</p>
+<pre class="hljs"><code><div>cor(x, y, method = <span class="hljs-string">"spearman"</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/koeficijenti_korelacije.png"/>
+</div>
+<h3 id="matrica-korelacije">Matrica korelacije</h3>
+<p>Matrica korelacije je tabularni prikaz koeficijenata korelacije između svih parova varijabli u skupu podataka. Omogućuje:</p>
+<ul>
+<li>Simultani pregled međusobnih odnosa više varijabli</li>
+<li>Identifikaciju najjačih povezanosti</li>
+<li>Preliminarnu analizu prije složenijih statističkih modela</li>
+</ul>
+<p><strong>Dijagonala</strong>: Uvijek sadrži vrijednosti 1 (savršena korelacija varijable same sa sobom)
+<strong>Simetričnost</strong>: <code>cor(X,Y) = cor(Y,X)</code></p>
+<p><em>Izrada korelacijske matrice u R-u s pomoću <code>corrplot()</code> ili <code>corrgram()</code> funkcija:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment">#install.packages("corrplot")</span>
+<span class="hljs-comment">#install.packages("corrgram)</span>
+<span class="hljs-keyword">library</span>(corrplot)
+<span class="hljs-keyword">library</span>(corrgram)
+
+par(mfrow = c(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+cor_matrix &lt;- cor(quakes)
+
+corrplot(cor_matrix) <span class="hljs-comment"># method = "circle" - ako nije postavljeno</span>
+corrplot(cor_matrix, method = <span class="hljs-string">"color"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"number"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"square"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"ellipse"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"pie"</span>)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/korelacijska_matrica.png"/>
+</div>
+<br/>
+<p><em>Izrada korelacijske matrice u R-u s pomoću <code>pairs()</code> funkcije:</em></p>
+<pre class="hljs"><code><div>pairs(quakes)
+</div></code></pre>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/korelacijska_matrica_pairs.png"/>
+</div>
+<h3 id="outlieri-u-korelacijskoj-analizi">Outlieri u korelacijskoj analizi</h3>
+<p><strong>Outlieri</strong> su <strong>ekstremne vrijednosti</strong> koje značajno odstupaju od većine podataka i mogu dramatično utjecati na rezultate korelacijske analize. Budući da <em>Pearsonov koeficijent</em> koristi metode najmanjih kvadrata, samo nekoliko ekstremnih vrijednosti može potpuno iskriviti pravi odnos između varijabli. Vizualna detekcija s pomoću <strong>boxplot</strong>-a jedan je način za vizualnu identifikaciju outliera.</p>
+<p>U praksi se koriste <strong>kvantitativne metode</strong> za identifikaciju outliera, poput:</p>
+<ul>
+<li>Uklanjanja vrijednosti izvan <code>±2</code> standardne devijacije</li>
+<li>IQR metode (vrijednosti izvan <code>1.5×IQR</code> od kvartila)</li>
+</ul>
+<blockquote>
+<p>Ključni izazov je razlikovati prave outliere od rijetkih ali autentičnih vrijednosti. U velikim uzorcima s malim brojem outliera, njihovo uklanjanje je opravdano. Međutim, u malim uzorcima ili kada outlieri predstavljaju važne biološke/prirodne pojave, njihovo uklanjanje može dovesti do gubitka ključnih informacija.</p>
+</blockquote>
+<div style="width: 100%; display: flex; justify-content: center;">
+    <img src="images/korelacija_outlieri.png"/>
+</div>
+<h3 id="kovarijanca">Kovarijanca</h3>
+<p><strong>Kovarijanca</strong> mjeri zajedničku varijabilnost dviju numeričkih varijabli, pokazujući kako se jedna mijenja u odnosu na drugu. Za razliku od korelacije koja je standardizirana, kovarijanca ovisi o mjernim jedinicama varijabli što otežava izravnu usporedbu između različitih studija. Računa se kao prosječni umnožak odstupanja svake varijable od svoje srednje vrijednosti.</p>
+<p><strong>Pozitivna vrijednost</strong> ukazuje da se veće vrijednosti jedne varijable obično javljaju uz veće vrijednosti druge, dok <strong>negativna pokazuje</strong> suprotan odnos. <strong>Nulta vrijednost</strong> sugerira odsutnost linearne povezanosti.</p>
+<ul>
+<li><strong>Pozitivna kovarijanca</strong>: Veće vrijednosti <em>X</em> tendiraju uz veće vrijednosti <em>Y</em></li>
+<li><strong>Negativna kovarijanca</strong>: Veće vrijednosti <em>X</em> tendiraju uz manje vrijednosti <em>Y</em></li>
+<li><strong>Nula</strong>: Nema linearne povezanosti</li>
+</ul>
+<p><em>U R-u kovarijanca se računa pomoću sljedeće funkcije:</em></p>
+<pre class="hljs"><code><div>cov(x, y)
+</div></code></pre>
+<p>Korelacija je standardizirana verzija kovarijance:<br>
+[
+\rho = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+]<br>
+Dok kovarijanca može biti bilo koji realan broj, korelacija je uvijek između -1 i 1.</p>
+<h3 id="multikolearnost">Multikolearnost</h3>
+<p><strong>Multikolinearnost</strong> nastaje kada su dva ili više prediktora u regresijskom modelu visoko međusobno korelirana, što otežava pouzdano procjenjivanje njihovih pojedinačnih utjecaja.</p>
+<p><strong>Zašto je problematična:</strong></p>
+<ul>
+<li>Koeficijenti postaju nestabilni i osjetljivi na male promjene u podacima</li>
+<li>Standardne pogreške rastu → p-vrijednosti mogu postati nenamjerno visoke</li>
+<li>Teže je interpretirati doprinos pojedinih varijabli</li>
+</ul>
+<p><strong>Kako otkriti:</strong></p>
+<ul>
+<li><strong>Korelacijska matrica</strong>: Pogledati visoke korelacije između prediktora (npr. &gt; 0.8)</li>
+<li><strong>VIF (Variance Inflation Factor)</strong>: Ako je VIF &gt; 5 (ili 10), postoji jaka multikolinearnost</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">library</span>(car)
+vif(model)
+</div></code></pre>
+<p><strong>Rješenja:</strong></p>
+<ul>
+<li>Ukloniti jedan od koreliranih prediktora</li>
+<li>Kombinirati varijable (npr. PCA)</li>
+<li>Korištenje regularizacije (npr. Ridge, Lasso regresija)</li>
+</ul>
+<pre class="hljs"><code><div>sqrt(vif(model))&gt;<span class="hljs-number">2</span>
+<span class="hljs-comment"># Ako je sve false neme problema multikolinearnosti</span>
+</div></code></pre>
+<h2 id="regresijska-analiza">Regresijska analiza</h2>
+<p>Regresijska analiza omogućuje kvantificiranje veze između promatranih pojava kroz matematički model.</p>
+<ol>
+<li><strong>Objašnjenje odnosa</strong>: Utvrđivanje kako nezavisne varijable utječu na zavisnu varijablu</li>
+<li><strong>Predviđanje vrijednosti</strong>: Procjena budućih vrijednosti zavisne varijable na temelju poznatih vrijednosti nezavisnih varijabli</li>
+</ol>
+<p><em>Tipovi regresije:</em></p>
+<table>
+<thead>
+<tr>
+<th>Tip</th>
+<th>Formula</th>
+<th>Primjena</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Linearna</strong></td>
+<td>(Y = β_0 + β_1X + ε)</td>
+<td>Kontinuirani odnosi</td>
+</tr>
+<tr>
+<td><strong>Logistička</strong></td>
+<td>(ln(\frac{p}{1-p}) = βX)</td>
+<td>Binarni ishodi</td>
+</tr>
+<tr>
+<td><strong>Polinomska</strong></td>
+<td>(Y = β_0 + β_1X + β_2X^2)</td>
+<td>Nelinearni trendovi</td>
+</tr>
+</tbody>
+</table>
+<h3 id="linearna-regresija">Linearna regresija</h3>
+<p><em>Primjer</em>:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Linearna regresija</span>
+model &lt;- lm(mpg ~ wt + hp, data = mtcars)
+summary(model)
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>Call:
+lm(formula = mpg ~ wt + hp, data = mtcars)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-<span class="hljs-number">3.941</span> -<span class="hljs-number">1.600</span> -<span class="hljs-number">0.182</span>  <span class="hljs-number">1.050</span>  <span class="hljs-number">5.854</span> 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) <span class="hljs-number">37.22727</span>    <span class="hljs-number">1.59879</span>  <span class="hljs-number">23.285</span>  &lt; <span class="hljs-number">2e-16</span> ***
+wt          -<span class="hljs-number">3.87783</span>    <span class="hljs-number">0.63273</span>  -<span class="hljs-number">6.129</span> <span class="hljs-number">1.12e-06</span> ***
+hp          -<span class="hljs-number">0.03177</span>    <span class="hljs-number">0.00903</span>  -<span class="hljs-number">3.519</span>  <span class="hljs-number">0.00145</span> ** 
+---
+Signif. codes:  <span class="hljs-number">0</span> ‘***’ <span class="hljs-number">0.001</span> ‘**’ <span class="hljs-number">0.01</span> ‘*’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span>
+
+Residual standard error: <span class="hljs-number">2.593</span> on <span class="hljs-number">29</span> degrees of freedom
+Multiple R-squared:  <span class="hljs-number">0.8268</span>,	Adjusted R-squared:  <span class="hljs-number">0.8148</span> 
+<span class="hljs-literal">F</span>-statistic: <span class="hljs-number">69.21</span> on <span class="hljs-number">2</span> and <span class="hljs-number">29</span> DF,  p-value: <span class="hljs-number">9.109e-12</span>
+</div></code></pre>
+<p>Ova naredba u R-u:</p>
+<pre class="hljs"><code><div>lm(formula = mpg ~ wt + hp, data = mtcars)
+</div></code></pre>
+<p>pokreće <strong>linearnu regresiju</strong> gdje je cilj predvidjeti <strong>potrošnju goriva u miljama po galonu (mpg)</strong> na temelju dvaju prediktora:</p>
+<ul>
+<li><strong>wt</strong>: težina automobila (u tisućama funti),</li>
+<li><strong>hp</strong>: konjske snage automobila.</li>
+</ul>
+<p>Rezultat koji dobivamo sastoji se od nekoliko dijelova:</p>
+<p><strong>1. Reziduali (Residuals):</strong></p>
+<pre class="hljs"><code><div>   Min     1Q Median     3Q    Max 
+-<span class="hljs-number">3.941</span> -<span class="hljs-number">1.600</span> -<span class="hljs-number">0.182</span>  <span class="hljs-number">1.050</span>  <span class="hljs-number">5.854</span> 
+</div></code></pre>
+<p>Reziduali su razlike između stvarnih vrijednosti (<code>mpg</code>) i onih predviđenih modelom:</p>
+<ul>
+<li><strong>Min</strong>: Najveća negativna pogreška</li>
+<li><strong>1Q</strong>: Donji kvartil (25% podataka ima manji rezidual)</li>
+<li><strong>Median</strong>: Srednja vrijednost reziduala (idealno blizu 0)</li>
+<li><strong>3Q</strong>: Gornji kvartil (25% podataka ima veći rezidual)</li>
+<li><strong>Max</strong>: Najveća pozitivna pogreška</li>
+</ul>
+<p><strong>2. Koeficijenti regresije (Coefficients):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Predictor</th>
+<th>Estimate</th>
+<th>Std. Error</th>
+<th>t value</th>
+<th>Pr(|&gt;t|)</th>
+<th>Signif. code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intercept</td>
+<td>37.227</td>
+<td>1.599</td>
+<td>23.285</td>
+<td>&lt; 2e-16</td>
+<td>***</td>
+</tr>
+<tr>
+<td>wt</td>
+<td>-3.878</td>
+<td>0.633</td>
+<td>-6.129</td>
+<td>1.12e-06</td>
+<td>***</td>
+</tr>
+<tr>
+<td>hp</td>
+<td>-0.03177</td>
+<td>0.00903</td>
+<td>-3.519</td>
+<td>0.00145</td>
+<td>**</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Intercept (presjek)</strong>: Kada su težina i snaga 0, očekivana vrijednost <code>mpg</code> je 37.23 (tehnički, nije realna situacija, ali služi kao referentna točka).</li>
+<li><strong>wt</strong>: Svako povećanje težine za 1 (tj. 1000 funti) smanjuje <code>mpg</code> za 3.88 jedinica, pod uvjetom da su ostali prediktori konstantni.</li>
+<li><strong>hp</strong>: Svako povećanje snage za 1 konjsku snagu smanjuje <code>mpg</code> za oko 0.032 jedinice.</li>
+</ul>
+<p><strong>Std. Error (standardna pogreška)</strong>: Predstavlja procjenu nesigurnosti oko vrijednosti koeficijenta. Manja vrijednost znači veću pouzdanost.</p>
+<ul>
+<li>standardna pogreška za <code>wt</code> iznosi 0.633, što ukazuje na relativno stabilnu i pouzdanu procjenu njegovog utjecaja na <code>mpg</code></li>
+</ul>
+<p><strong>t value (t-vrijednost)</strong>: Pokazuje koliko je procijenjeni koeficijent udaljen od nule u jedinicama svoje standardne pogreške. Što je t-vrijednost veća (pozitivno ili negativno), veća je vjerojatnost da koeficijent <strong>nije slučajan</strong>, već ima stvarni utjecaj na zavisnu varijablu (<code>mpg</code>).</p>
+<ul>
+<li>t-vrijednost <code>-6.129</code> za <code>wt</code> znači da je koeficijent vrlo značajan</li>
+</ul>
+<p><strong>Pr(&gt;|t|)</strong> prikazuje <strong>p-vrijednosti</strong> – sve su značajno manje od 0.05 → svi koeficijenti su statistički značajni.</p>
+<pre class="hljs"><code><div>Signif. codes:  <span class="hljs-number">0</span> ‘***’ <span class="hljs-number">0.001</span> ‘**’ <span class="hljs-number">0.01</span> ‘*’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span>
+</div></code></pre>
+<p>Oznake govore koliko je prediktor statistički značajan:</p>
+<ul>
+<li><code>***</code> → vrlo značajan (p &lt; 0.001)</li>
+<li><code>**</code> → značajan (p &lt; 0.01)</li>
+<li><code>*</code> → umjereno značajan (p &lt; 0.05)</li>
+<li><code>.</code> → slabo značajan (p &lt; 0.1)</li>
+<li><code> </code> (prazno) → nije značajan (p ≥ 0.1)</li>
+</ul>
+<p><strong>3. Ostale statističke vrijednosti modela:</strong></p>
+<pre class="hljs"><code><div>Residual standard error: <span class="hljs-number">2.593</span> on <span class="hljs-number">29</span> degrees of freedom
+Multiple R-squared:  <span class="hljs-number">0.8268</span>
+Adjusted R-squared:  <span class="hljs-number">0.8148</span>
+<span class="hljs-literal">F</span>-statistic: <span class="hljs-number">69.21</span> on <span class="hljs-number">2</span> and <span class="hljs-number">29</span> DF,  p-value: <span class="hljs-number">9.109e-12</span>
+</div></code></pre>
+<ul>
+<li><strong>Residual standard error</strong>: Prosječna udaljenost stvarnih vrijednosti <code>mpg</code> od vrijednosti predviđenih modelom. Niža vrijednost znači da su predikcije bliže stvarnim podacima (ovdje: 2.593).</li>
+<li><strong>Multiple R-squared</strong>: Postotak varijance u <code>mpg</code> koji model objašnjava pomoću prediktora <code>wt</code> i <code>hp</code>. Vrijednost 0.8268 znači da model objašnjava 82.68% ukupne varijacije.</li>
+<li><strong>Adjusted R-squared</strong>: Kao R-squared, ali uzima u obzir broj prediktora. Koristi se kako bi se izbjegla umjetna inflacija R-squared vrijednosti kod dodavanja irelevantnih varijabli. Ovdje: 81.48%.</li>
+<li><strong>F-statistic</strong>: Testira cijeli model – provjerava je li barem jedan prediktor značajan. Visoka vrijednost (69.21) i vrlo mala p-vrijednost (9.109e-12) ukazuju da je model statistički značajno bolji od modela bez prediktora.</li>
+</ul>
+<h3 id="logisti%C4%8Dka-regresija">Logistička regresija</h3>
+<p>Logistička regresija se koristi za predviđanje binarnih ishoda, tj. kada zavisna varijabla ima dvije kategorije (npr. da/ne, uspješno/neuspješno). U R-u, za izvođenje logističke regresije koristi se funkcija <code>glm()</code>, a rezultati se analiziraju kroz koeficijente, standardne pogreške, p-vrijednosti i druge metrike.</p>
+<p>Logistička regresija se koristi za predviđanje binarne varijable — u ovom slučaju: ima li osoba prihod veći od <em>50k USD</em> ili <em>ne</em>. Zavisna varijabla je <code>income</code>, s vrijednostima &lt;<code>=50K</code> i <code>&gt;50K</code>.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>adult &lt;- read.csv(<span class="hljs-string">"adult.data"</span>, header = <span class="hljs-literal">FALSE</span>, strip.white = <span class="hljs-literal">TRUE</span>)
+colnames(adult) &lt;- c(<span class="hljs-string">"age"</span>, <span class="hljs-string">"workclass"</span>, <span class="hljs-string">"fnlwgt"</span>, <span class="hljs-string">"education"</span>, <span class="hljs-string">"education.num"</span>,
+                     <span class="hljs-string">"marital.status"</span>, <span class="hljs-string">"occupation"</span>, <span class="hljs-string">"relationship"</span>, <span class="hljs-string">"race"</span>, <span class="hljs-string">"sex"</span>,
+                     <span class="hljs-string">"capital.gain"</span>, <span class="hljs-string">"capital.loss"</span>, <span class="hljs-string">"hours.per.week"</span>, <span class="hljs-string">"native.country"</span>, <span class="hljs-string">"income"</span>)
+
+adult &lt;- na.omit(adult)
+
+adult$income_bin &lt;- ifelse(adult$income == <span class="hljs-string">"&gt;50K"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)
+
+model &lt;- glm(income_bin ~ age + education.num, data = adult, family = binomial)
+summary(model)
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>Call:
+glm(formula = income_bin ~ age + education.num, family = binomial, 
+    data = adult)
+
+Coefficients:
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   -<span class="hljs-number">6.748100</span>   <span class="hljs-number">0.088629</span>  -<span class="hljs-number">76.14</span>   &lt;<span class="hljs-number">2e-16</span> ***
+age            <span class="hljs-number">0.043483</span>   <span class="hljs-number">0.001091</span>   <span class="hljs-number">39.87</span>   &lt;<span class="hljs-number">2e-16</span> ***
+education.num  <span class="hljs-number">0.362109</span>   <span class="hljs-number">0.006366</span>   <span class="hljs-number">56.89</span>   &lt;<span class="hljs-number">2e-16</span> ***
+---
+Signif. codes:  <span class="hljs-number">0</span> ‘***’ <span class="hljs-number">0.001</span> ‘**’ <span class="hljs-number">0.01</span> ‘*’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span>
+
+(Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span>)
+
+    Null deviance: <span class="hljs-number">35948</span>  on <span class="hljs-number">32560</span>  degrees of freedom
+Residual deviance: <span class="hljs-number">30231</span>  on <span class="hljs-number">32558</span>  degrees of freedom
+AIC: <span class="hljs-number">30237</span>
+
+Number of Fisher Scoring iterations: <span class="hljs-number">5</span>
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Predictor</th>
+<th>Estimate</th>
+<th>Std. Error</th>
+<th>z value</th>
+<th>Pr(|&gt;z|)</th>
+<th>Signif. code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intercept</td>
+<td>-6.7481</td>
+<td>0.0886</td>
+<td>-76.14</td>
+<td>&lt; 2e-16</td>
+<td>***</td>
+</tr>
+<tr>
+<td>age</td>
+<td>0.0435</td>
+<td>0.0011</td>
+<td>39.87</td>
+<td>&lt; 2e-16</td>
+<td>***</td>
+</tr>
+<tr>
+<td>education.num</td>
+<td>0.3621</td>
+<td>0.0064</td>
+<td>56.89</td>
+<td>&lt; 2e-16</td>
+<td>***</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><strong>(Intercept)</strong>: Logaritamski omjer vjerojatnosti da osoba zarađuje &gt;50k USD kada su <code>age</code> i <code>education.num</code> jednaki 0. Iako ta situacija nije realna (osoba stara 0 godina s obrazovanjem 0), presjek služi kao referentna točka u modelu.</p>
+</li>
+<li>
+<p><strong>age</strong>: Koeficijent <code>0.0435</code> znači da svaka dodatna godina starosti povećava log-odds za zaradu veću od 50k za 0.0435. Budući da je pozitivan, stariji ljudi imaju veću vjerojatnost da imaju veće prihode — uz pretpostavku da je <code>education.num</code> konstantan.</p>
+</li>
+<li>
+<p><strong>education.num</strong>: Koeficijent <code>0.3621</code> znači da svaka dodatna razina obrazovanja (npr. prelazak s 10 na 11 godina formalnog obrazovanja) povećava log-odds za visoku zaradu za 0.3621. Dakle, veće obrazovanje snažno utječe na vjerojatnost veće plaće.</p>
+</li>
+</ul>
+<h3 id="izra%C4%8Dunavanje-vjerojatnosti">Izračunavanje vjerojatnosti</h3>
+<p>Za predviđanje vjerojatnosti određenog ishoda (npr. <code>outcome = 1</code>), koristimo funkciju <code>predict()</code>:</p>
+<pre class="hljs"><code><div>prob &lt;- predict(model, type = <span class="hljs-string">"response"</span>)
+</div></code></pre>
+<p>Ova funkcija vraća vjerojatnosti (između 0 i 1) za svaki primjerak u datasetu. Ako želimo pretvoriti te vjerojatnosti u kategorije (npr. 1 ako je vjerojatnost veća od 0.5, inače 0), možemo to napraviti ovako:</p>
+<pre class="hljs"><code><div>pred_class &lt;- ifelse(prob &gt; <span class="hljs-number">0.5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)
+</div></code></pre>
+<p>Za procjenu kvalitete modela možemo koristiti nekoliko metrika, uključujući <strong>točnost (accuracy)</strong>, <strong>preciznost (precision)</strong>, <strong>osjetljivost (recall)</strong> i <strong>F1-score</strong>. Također, često se koristi <strong>confusion matrix</strong> za vizualizaciju performansi modela:</p>
+<pre class="hljs"><code><div>table(Predicted = pred_class, Actual = adult$income_bin)
+</div></code></pre>
+<p>Dobivena matrica:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Actual 0 (<code>&lt;=50K</code>)</th>
+<th>Actual 1 (<code>&gt;50K</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Predicted 0</td>
+<td>23,286 (TN)</td>
+<td>5,656 (FN)</td>
+</tr>
+<tr>
+<td>Predicted 1</td>
+<td>1,434 (FP)</td>
+<td>2,185 (TP)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><strong>TN (True Negative)</strong> = 23,286
+→ Model je točno predvidio da osoba <em>nema visoki prihod</em> (<code>&lt;=50K</code>)</p>
+</li>
+<li>
+<p><strong>TP (True Positive)</strong> = 2,185
+→ Model je točno predvidio da osoba <em>ima visoki prihod</em> (<code>&gt;50K</code>)</p>
+</li>
+<li>
+<p><strong>FN (False Negative)</strong> = 5,656
+→ Model je krivo predvidio da osoba <em>nema visoki prihod</em>, iako zapravo ima (<code>&gt;50K</code>)</p>
+</li>
+<li>
+<p><strong>FP (False Positive)</strong> = 1,434
+→ Model je krivo predvidio da osoba <em>ima visoki prihod</em>, iako zapravo nema (<code>&lt;=50K</code>)</p>
+</li>
+</ul>
+<p><em>Izračun metrika:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Vrijednosti iz confusion matrice</span>
+TP &lt;- <span class="hljs-number">2185</span>
+TN &lt;- <span class="hljs-number">23286</span>
+FP &lt;- <span class="hljs-number">1434</span>
+FN &lt;- <span class="hljs-number">5656</span>
+
+<span class="hljs-comment"># Ukupno primjera</span>
+total &lt;- TP + TN + FP + FN  <span class="hljs-comment"># = 32361</span>
+
+<span class="hljs-comment"># Izračun metrika</span>
+accuracy    &lt;- (TP + TN) / total        <span class="hljs-comment"># Točnost</span>
+precision   &lt;- TP / (TP + FP)           <span class="hljs-comment"># Preciznost</span>
+recall      &lt;- TP / (TP + FN)           <span class="hljs-comment"># Osjetljivost (Recall)</span>
+specificity &lt;- TN / (TN + FP)           <span class="hljs-comment"># Specifičnost</span>
+f1_score    &lt;- <span class="hljs-number">2</span> * (precision * recall) / (precision + recall)  <span class="hljs-comment"># F1-score</span>
+</div></code></pre>
+<p><strong>Rezultati:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metrika</th>
+<th>Vrijednost</th>
+<th>Objašnjenje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Točnost</strong></td>
+<td>0.7822</td>
+<td>78.22% ispravnih predikcija</td>
+</tr>
+<tr>
+<td><strong>Preciznost</strong></td>
+<td>0.6037</td>
+<td>Od svih za koje je model rekao <code>&gt;50K</code>, točno je 60.37%</td>
+</tr>
+<tr>
+<td><strong>Osjetljivost</strong></td>
+<td>0.2786</td>
+<td>Od svih koji stvarno imaju <code>&gt;50K</code>, uhvaćeno je 27.86%</td>
+</tr>
+<tr>
+<td><strong>Specifičnost</strong></td>
+<td>0.9419</td>
+<td>Od svih koji stvarno imaju <code>&lt;=50K</code>, točno klasificirano 94.19%</td>
+</tr>
+<tr>
+<td><strong>F1-score</strong></td>
+<td>0.3813</td>
+<td>Harmonična sredina preciznosti i osjetljivosti (za <code>&gt;50K</code>)</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
