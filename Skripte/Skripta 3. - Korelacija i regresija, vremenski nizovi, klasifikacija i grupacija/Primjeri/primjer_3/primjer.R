@@ -165,10 +165,11 @@ pam_result$medoids
 # Prikaz klastera i usporedba sa stvarnim vrstama
 table(pam_result$clustering, iris$Species)
 
+# Vizualizacija rasporeda klastera u 2D prostoru
 clusplot(iris_features, 
-         kmeans_result$cluster, 
-         color = TRUE, shade = TRUE, labels = 2, lines = 0, 
-         main = "Clusplot prikaz K-means klastera")
+         pam_result$cluster, 
+         color = TRUE, shade = TRUE, labels = 3, lines = 0, 
+         main = "Clusplot prikaz PAM klastera")
 
 
 

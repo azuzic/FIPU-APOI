@@ -4,8 +4,7 @@
 
 <img src="Slike/bicycles.png"/>
 
-1. Učitajte podatke iz datoteke `day.csv` u data frame naziva bike uz postavku da se ne izvrši
-automatsko pretvaranje znakovnih nizova u **factor**.
+1. Učitajte podatke iz datoteke `day.csv` u data frame naziva **bike** uz postavku da se ne izvrši automatsko pretvaranje znakovnih nizova u **factor**.
 ```r
 read.csv("day.csv", stringsAsFactors = FALSE)
 ```
