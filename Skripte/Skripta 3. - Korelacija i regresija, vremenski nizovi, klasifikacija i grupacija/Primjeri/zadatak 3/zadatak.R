@@ -59,8 +59,7 @@ dekomp <- stl(bike$cnt.clean, s.window = "periodic")
 idx <- which(bike$dteday == "2011-01-06")
 dekomp$time.series[idx,]
 
-# broj posudbi se smanjio za 961.724
-
+# broj posudbi se smanjio za 1008.54512
 
 # 10. Izvršite multiplikativnu dekompoziciju vremenskog niza kosristeći originalne podatke. Za koliko
 # se promijenio broj posudbi zbog sezonskog utjecaja na dan 1.1.2011.?
@@ -109,7 +108,7 @@ ma7 <- na.omit(bike$cnt.ma7)
 library("tseries")
 
 adf.test(ma7) 
-#p-value = 0.9863 > 0.05
+#p-value = 0.9864 > 0.05
 # ne odbacujemo nul hipotezu da niz nije stacionaran
 
 
@@ -154,74 +153,18 @@ model1
 # ARIMA(1,1,0) 
 # p = 1, d = 1, q = 0
 
-
-# 20. Kako glasi model?
-# y.hat(t) = 0.304*y(t-1) + E
-
-# 21. Koliko iznosi RMSE modela?
+# 20. Koliko iznosi RMSE modela?
 accuracy(model1) 
 # RMSE 153.4622
 
-# 22. Napravite drugi ARIMA model tako da parametre odredite na temelju ACF i PACF. Koristite prvih
-# 700 vrijednosti zaglađenih podataka bez diferenciranja.
-
-model2 <- arima(ma7[1:700], order = c(1,1,7)) 
-model2
-
-# 23. Kako glasi model?
-# y.hat(t) = 0.2671*y(t-1) + 0.1249*e(t-1) + 0.1155*e(t-2) + 
-# + 0.1017*e(t-3) + 0.1110*e(t-4) + 0.1024*e(t-5) + 0.1091*e(t-6) +
-# - 0.8776*e(t-7) + E
-
-# 24. Koliko iznosi RMSE modela?
-accuracy(model2) 
-#RMSE 122.9314
-
-
-# 25. Izvršite provjeru reziduala. Jesu li nezavisni i normalno distribuirani?
-plot(model1$residuals)
-plot(model2$residuals)
-
-qqnorm(model1$residuals)
-qqline(model1$residuals)
-
-qqnorm(model2$residuals)
-qqline(model2$residuals)
-
-
-Box.test(model1$residuals, type = "Ljung-Box")
-# p-value = 0.9571 >0.05 
-# H0 - autokorelacije reziduala su = 0
-# ne moze se odbaciti nul hipoteza da su nezavisni
-
-Box.test(model2$residuals, type = "Ljung-Box")
-# p-value = 0.7459 >0.05 
-# H0 - autokorelacije reziduala su = 0
-# ne moze se odbaciti nul hipoteza da su nezavisni
-
-# za oba modela reziduali su normalno distribuirani i nezavisni
-
-
-# 26. Koristite oba modela za predviđanje 7 dana unaprijed. Prikažite rezultate grafički zajedno sa
+# 21. Koristite model za predviđanje 7 dana unaprijed. Prikažite rezultate grafički zajedno sa
 # stvarnim vrijednostima.
 
 f1 <- forecast(model1, h = 7)
-f2 <- forecast(model2, h = 7)
 
-#par(mfrow = c(2,1))
 par(mfrow = c(1,1))
-
-plot(f1)
+plot(f1, xlim=c(650, 707))
 y <- ma7[701:707]
 x <- 701:707
 points(x, y, col = "red", pch = 16)
-
-
-plot(f2)
-y <- ma7[701:707]
-x <- 701:707
-points(x, y, col = "red", pch = 16)
-
-# 27. Koji je od ova dva modela bolji?
-# Bolje predvidja model2. Parametrom q = 7 uzet je u obzir sezonski utjecaj.
 

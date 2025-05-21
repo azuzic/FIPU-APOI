@@ -412,18 +412,18 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
     <img src="../Logo/fipu_logo.svg" style="height: 96px; box-shadow: none !important;" class="mr-4"></img>
     Fakultet informatike u Puli
 </p>
-<h1 id="3-korelacija-i-regresija-vremenski-nizovi-klasifikacija-i-grupacija">[3] Korelacija i regresija, vremenski nizovi, klasifikacija i grupacija</h1>
+<h1 id="3-korelacija-i-regresija-vremenski-nizovi-klasifikacija-i-grupiranje">[3] Korelacija i regresija, vremenski nizovi, klasifikacija i grupiranje</h1>
 <div style="display: flex; justify-content: space-between; text-align: justify; gap: 32px;">
     <p>
-        <b>Korelacija</b> mjeri linearnu povezanost između varijabli. <b>Regresija</b> modelira odnose za predviđanje vrijednosti. <b>Vremenski nizovi</b> analiziraju podatke ovisne o vremenu. <b>Klasifikacija</b> dodjeljuje podatke unaprijed definiranim kategorijama, dok <b>grupiranje</b> (klasteriranje) automatski identificira prirodne grupe u podacima. U R-u se koriste funkcije poput <code>cor()</code>, <code>lm()</code>, <code>forecast()</code>, <code>caret</code> i <code>kmeans()</code>, a vizualizacija pomaže u interpretaciji rezultata.
+        <b>Korelacija</b> mjeri linearnu povezanost između varijabli. <b>Regresija</b> modelira odnose za predviđanje vrijednosti. <b>Vremenski nizovi</b> analiziraju podatke ovisne o vremenu. <b>Klasifikacija</b> dodjeljuje podatke unaprijed definiranim kategorijama, dok <b>grupiranje</b> (klasteriranje) automatski identificira prirodne grupe u podacima. U R-u se koriste funkcije poput <code>cor()</code>, <code>lm()</code>, <code>forecast()</code>, <code>rpart()</code> i <code>kmeans()</code>, a vizualizacija pomaže u interpretaciji rezultata.
     </p>
-    <img src="../Icons/R_2.svg" style="width: 96px; height: 96px; margin: 0px;"></img>
+    <img src="../Icons/R_3.svg" style="width: 96px; height: 96px; margin: 0px;"></img> 
 </div>
-<p><strong>Posljednje ažurirano:</strong> 11. travnja 2025.</p>
+<p><strong>Posljednje ažurirano:</strong> 21. svibnja 2025.</p>
 <!-- TOC -->
 <ul>
 <li><a href="#analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</a></li>
-<li><a href="#3-korelacija-i-regresija-vremenski-nizovi-klasifikacija-i-grupacija">[3] Korelacija i regresija, vremenski nizovi, klasifikacija i grupacija</a>
+<li><a href="#3-korelacija-i-regresija-vremenski-nizovi-klasifikacija-i-grupiranje">[3] Korelacija i regresija, vremenski nizovi, klasifikacija i grupiranje</a>
 <ul>
 <li><a href="#korelacija">Korelacija</a>
 <ul>
@@ -437,12 +437,55 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <li><a href="#matrica-korelacije">Matrica korelacije</a></li>
 <li><a href="#outlieri-u-korelacijskoj-analizi">Outlieri u korelacijskoj analizi</a></li>
 <li><a href="#kovarijanca">Kovarijanca</a></li>
+<li><a href="#multikolinearnost">Multikolinearnost</a></li>
 </ul>
 </li>
 <li><a href="#regresijska-analiza">Regresijska analiza</a>
 <ul>
 <li><a href="#linearna-regresija">Linearna regresija</a></li>
 <li><a href="#logisti%C4%8Dka-regresija">Logistička regresija</a></li>
+<li><a href="#izra%C4%8Dunavanje-vjerojatnosti">Izračunavanje vjerojatnosti</a></li>
+</ul>
+</li>
+<li><a href="#vremenski-nizovi">Vremenski nizovi</a>
+<ul>
+<li><a href="#analiza-vremenskih-nizova">Analiza vremenskih nizova</a></li>
+<li><a href="#dekompozicija-vremenskog-niza">Dekompozicija vremenskog niza</a>
+<ul>
+<li><a href="#stl-metoda">STL metoda</a></li>
+</ul>
+</li>
+<li><a href="#aditivna-i-multiplikativna-dekompozicija-vremenskog-niza">Aditivna i multiplikativna dekompozicija vremenskog niza</a>
+<ul>
+<li><a href="#aditivna-dekompozicija">Aditivna dekompozicija</a></li>
+<li><a href="#multiplikativna-dekompozicija">Multiplikativna dekompozicija</a></li>
+</ul>
+</li>
+<li><a href="#stacionarnosti-vremenskog-niza">Stacionarnosti vremenskog niza</a>
+<ul>
+<li><a href="#provjera-stacionarnosti">Provjera stacionarnosti</a></li>
+<li><a href="#prilagodba-niza-za-stacionarnost">Prilagodba niza za stacionarnost</a></li>
+</ul>
+</li>
+<li><a href="#acf-i-pacf">ACF i PACF</a>
+<ul>
+<li><a href="#acf-autocorrelation-function">ACF Autocorrelation Function</a></li>
+<li><a href="#pacf-partial-autocorrelation-function">PACF Partial Autocorrelation Function</a></li>
+<li><a href="#kori%C5%A1tenje-acf-i-pacf-u-modeliranju">Korištenje ACF i PACF u modeliranju</a></li>
+</ul>
+</li>
+<li><a href="#arima-model">ARIMA model</a></li>
+</ul>
+</li>
+<li><a href="#klasifikacija">Klasifikacija</a>
+<ul>
+<li><a href="#stablo-odluke">Stablo odluke</a></li>
+<li><a href="#random-forest">Random forest</a></li>
+</ul>
+</li>
+<li><a href="#grupiranje">Grupiranje</a>
+<ul>
+<li><a href="#k-means">K-means</a></li>
 </ul>
 </li>
 </ul>
@@ -456,10 +499,10 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 <blockquote>
 <p>Mogući su slučajevi da dvije varijable istovremeno utječu jedna na drugu, pa su u tom slučaju obje varijable istovremeno i ovisne i neovisne.</p>
 </blockquote>
-<p><em>U R-u korelacija se računa pomoću sljedeće funkcije:</em></p>
+<p><em>U R-u korelacija se računa s pomoću sljedeće funkcije:</em></p>
 <pre class="hljs"><code><div>cor(x, y)
 </div></code></pre>
-<p>Međusoban odnos između dvije varijable, grafički možemo prikazati pomoću dvodimenzionalnog grafa, tzv. <strong>scatter dijagram</strong> (dijagrama raspršenja).</p>
+<p>Međusoban odnos između dvije varijable, grafički možemo prikazati s pomoću dvodimenzionalnog grafa, tzv. <strong>scatter dijagram</strong> (dijagrama raspršenja).</p>
 <div style="width: 100%; display: flex; justify-content: center;">
     <img src="images/korelacija_base.png"  width="75%"/>
 </div>
@@ -523,6 +566,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 </ul>
 </li>
 </ol>
+<div class="page"></div>
 <table>
 <thead>
 <tr>
@@ -686,6 +730,7 @@ corrplot(cor_matrix, method = <span class="hljs-string">"pie"</span>)
 <div style="width: 100%; display: flex; justify-content: center;">
     <img src="images/korelacijska_matrica_pairs.png"/>
 </div>
+<div class="page"></div>
 <h3 id="outlieri-u-korelacijskoj-analizi">Outlieri u korelacijskoj analizi</h3>
 <p><strong>Outlieri</strong> su <strong>ekstremne vrijednosti</strong> koje značajno odstupaju od većine podataka i mogu dramatično utjecati na rezultate korelacijske analize. Budući da <em>Pearsonov koeficijent</em> koristi metode najmanjih kvadrata, samo nekoliko ekstremnih vrijednosti može potpuno iskriviti pravi odnos između varijabli. Vizualna detekcija s pomoću <strong>boxplot</strong>-a jedan je način za vizualnu identifikaciju outliera.</p>
 <p>U praksi se koriste <strong>kvantitativne metode</strong> za identifikaciju outliera, poput:</p>
@@ -707,15 +752,15 @@ corrplot(cor_matrix, method = <span class="hljs-string">"pie"</span>)
 <li><strong>Negativna kovarijanca</strong>: Veće vrijednosti <em>X</em> tendiraju uz manje vrijednosti <em>Y</em></li>
 <li><strong>Nula</strong>: Nema linearne povezanosti</li>
 </ul>
-<p><em>U R-u kovarijanca se računa pomoću sljedeće funkcije:</em></p>
+<p><em>U R-u kovarijanca se računa s pomoću sljedeće funkcije:</em></p>
 <pre class="hljs"><code><div>cov(x, y)
 </div></code></pre>
 <p>Korelacija je standardizirana verzija kovarijance:<br>
-[
+$$
 \rho = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
-]<br>
+$$
 Dok kovarijanca može biti bilo koji realan broj, korelacija je uvijek između -1 i 1.</p>
-<h3 id="multikolearnost">Multikolearnost</h3>
+<h3 id="multikolinearnost">Multikolinearnost</h3>
 <p><strong>Multikolinearnost</strong> nastaje kada su dva ili više prediktora u regresijskom modelu visoko međusobno korelirana, što otežava pouzdano procjenjivanje njihovih pojedinačnih utjecaja.</p>
 <p><strong>Zašto je problematična:</strong></p>
 <ul>
@@ -738,8 +783,9 @@ vif(model)
 <li>Korištenje regularizacije (npr. Ridge, Lasso regresija)</li>
 </ul>
 <pre class="hljs"><code><div>sqrt(vif(model))&gt;<span class="hljs-number">2</span>
-<span class="hljs-comment"># Ako je sve false neme problema multikolinearnosti</span>
+<span class="hljs-comment"># Ako je sve false nema problema multikolinearnosti</span>
 </div></code></pre>
+<div class="page"></div>
 <h2 id="regresijska-analiza">Regresijska analiza</h2>
 <p>Regresijska analiza omogućuje kvantificiranje veze između promatranih pojava kroz matematički model.</p>
 <ol>
@@ -758,17 +804,17 @@ vif(model)
 <tbody>
 <tr>
 <td><strong>Linearna</strong></td>
-<td>(Y = β_0 + β_1X + ε)</td>
+<td>$$Y = β_0 + β_1X + ε$$</td>
 <td>Kontinuirani odnosi</td>
 </tr>
 <tr>
 <td><strong>Logistička</strong></td>
-<td>(ln(\frac{p}{1-p}) = βX)</td>
+<td>$$ln(\frac{p}{1-p}) = βX$$</td>
 <td>Binarni ishodi</td>
 </tr>
 <tr>
 <td><strong>Polinomska</strong></td>
-<td>(Y = β_0 + β_1X + β_2X^2)</td>
+<td>$$Y = β_0 + β_1X + β_2X^2$$</td>
 <td>Nelinearni trendovi</td>
 </tr>
 </tbody>
@@ -891,7 +937,7 @@ Adjusted R-squared:  <span class="hljs-number">0.8148</span>
 </div></code></pre>
 <ul>
 <li><strong>Residual standard error</strong>: Prosječna udaljenost stvarnih vrijednosti <code>mpg</code> od vrijednosti predviđenih modelom. Niža vrijednost znači da su predikcije bliže stvarnim podacima (ovdje: 2.593).</li>
-<li><strong>Multiple R-squared</strong>: Postotak varijance u <code>mpg</code> koji model objašnjava pomoću prediktora <code>wt</code> i <code>hp</code>. Vrijednost 0.8268 znači da model objašnjava 82.68% ukupne varijacije.</li>
+<li><strong>Multiple R-squared</strong>: Postotak varijance u <code>mpg</code> koji model objašnjava s pomoću prediktora <code>wt</code> i <code>hp</code>. Vrijednost 0.8268 znači da model objašnjava 82.68% ukupne varijacije.</li>
 <li><strong>Adjusted R-squared</strong>: Kao R-squared, ali uzima u obzir broj prediktora. Koristi se kako bi se izbjegla umjetna inflacija R-squared vrijednosti kod dodavanja irelevantnih varijabli. Ovdje: 81.48%.</li>
 <li><strong>F-statistic</strong>: Testira cijeli model – provjerava je li barem jedan prediktor značajan. Visoka vrijednost (69.21) i vrlo mala p-vrijednost (9.109e-12) ukazuju da je model statistički značajno bolji od modela bez prediktora.</li>
 </ul>
@@ -1031,6 +1077,7 @@ Number of Fisher Scoring iterations: <span class="hljs-number">5</span>
 → Model je krivo predvidio da osoba <em>ima visoki prihod</em>, iako zapravo nema (<code>&lt;=50K</code>)</p>
 </li>
 </ul>
+<div class="page"></div>
 <p><em>Izračun metrika:</em></p>
 <pre class="hljs"><code><div><span class="hljs-comment"># Vrijednosti iz confusion matrice</span>
 TP &lt;- <span class="hljs-number">2185</span>
@@ -1085,6 +1132,883 @@ f1_score    &lt;- <span class="hljs-number">2</span> * (precision * recall) / (p
 </tr>
 </tbody>
 </table>
+<h2 id="vremenski-nizovi">Vremenski nizovi</h2>
+<p>Vremenski nizovi predstavljaju <strong>nizove podataka</strong> prikupljenih u <strong>redovitim vremenskim intervalima</strong>. Analiza vremenskih nizova omogućava prepoznavanje obrazaca, trendova i sezonalnosti te predviđanje budućih vrijednosti.</p>
+<blockquote>
+<p>Vremenski niz je skup opažanja indeksiranih vremenskih trenutaka, obično <strong>ekvidistantnim</strong> (<em>jednako razmaknutim</em>).</p>
+</blockquote>
+<p>Dvije glavne karakteristike vremenskih nizova su <strong>vremenski period</strong> i <strong>frekvencija</strong>. Ove karakteristike pružaju osnovne informacije o strukturi i prirodi podataka te omogućavajući da bolje razumijemo dinamiku promjena koje se odvijaju kroz vrijeme.</p>
+<ul>
+<li><strong>Vremenski period</strong> - nema ograničenja u pogledu ukupnog trajanja vremenskog niza. To može biti minuta, dan, mjesec ili čak stoljeće. Sve što je potrebno su <em>početna</em> i <em>završna</em> točka.
+<ul>
+<li>npr. ako su podaci prikupljeni jednom dnevno od 1. siječnja 2000. do 31. prosinca 2009., razmak od jednog dana predstavlja <strong>vremenski trenutak</strong>, dok je skup vremenskih trenutaka cijelo desetljeće</li>
+</ul>
+</li>
+<li><strong>Frekvencija</strong> - označava koliko često se bilježe vrijednosti skupa podataka. Da bi analiza vremenskog niza bila smislena, svi vremenski trenutci moraju biti jednaki i jasno definirani. To rezultira <strong>ekvidistantnim</strong> rasporedom vremenskih trenutaka, što pokazuje pravilnost u bilježenju podataka.
+<ul>
+<li>npr. frekvencija se može kretati od nekoliko milisekundi do nekoliko desetljeća, ali najčešće se pojavljuju dnevni, mjesečni, kvartalni i godišnji podaci</li>
+</ul>
+</li>
+</ul>
+<p><strong>Ključne komponente</strong>:</p>
+<ul>
+<li><strong>Trend</strong> - dugoročni smjer promjena (rast, pad, stabilnost)</li>
+<li><strong>Sezonalnost</strong> - pravilne fluktuacije povezane s periodima (dnevno, mjesečno, godišnje)</li>
+<li><strong>Cikličke varijacije</strong> - dugotrajne fluktuacije bez fiksnog perioda</li>
+<li><strong>Nasumične varijacije</strong> - nepredvidivi šum u podacima</li>
+</ul>
+<p><em>Paketi za rad s vremenskim nizovima:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># install.packages(c("ggplot2", "forecast", "tseries"))</span>
+<span class="hljs-keyword">library</span>(ggplot2)    <span class="hljs-comment"># Za naprednu vizualizaciju grafova</span>
+<span class="hljs-keyword">library</span>(forecast)   <span class="hljs-comment"># Alati za analizu i predikciju vremenskih nizova (ARIMA, ETS, STL, itd.)</span>
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"tseries"</span>)  <span class="hljs-comment"># Statistički testovi i alati za vremenske nizove (ADF test, KPSS test i dr.)</span>
+</div></code></pre>
+<p>U R-u se vremenski nizovi prikazuju s pomoću funkcije <code>ts()</code> (<em>time series</em>):</p>
+<pre class="hljs"><code><div>podaci &lt;- c(<span class="hljs-number">23</span>,<span class="hljs-number">45</span>,<span class="hljs-number">67</span>,<span class="hljs-number">34</span>,<span class="hljs-number">56</span>,<span class="hljs-number">78</span>,<span class="hljs-number">89</span>,<span class="hljs-number">45</span>,<span class="hljs-number">67</span>,<span class="hljs-number">89</span>,<span class="hljs-number">43</span>,<span class="hljs-number">56</span>, 
+            <span class="hljs-number">34</span>,<span class="hljs-number">67</span>,<span class="hljs-number">89</span>,<span class="hljs-number">54</span>,<span class="hljs-number">76</span>,<span class="hljs-number">88</span>,<span class="hljs-number">91</span>,<span class="hljs-number">52</span>,<span class="hljs-number">71</span>,<span class="hljs-number">85</span>,<span class="hljs-number">49</span>,<span class="hljs-number">63</span>)
+vremenski_niz &lt;- ts(podaci, start = c(<span class="hljs-number">2020</span>, <span class="hljs-number">1</span>), frequency = <span class="hljs-number">12</span>)
 
+<span class="hljs-comment"># čišćenje od nedostajućih vrijednosti i outliera</span>
+vremenski_niz &lt;- tsclean(vremenski_niz)
+</div></code></pre>
+<p><img src="images/vremenski_niz.png" alt="alt text"></p>
+<p>Gdje:</p>
+<ul>
+<li><code>start</code> - početni vremenski trenutak (godina, period)</li>
+<li><code>frequency</code> - broj opažanja po vremenskoj jedinici (365 za dnevne podatke, 12 za mjesečne, 4 za kvartalne, 1 za godišnje)</li>
+</ul>
+<p>Vizualizacija s pomoću <code>plot()</code> funkcije:</p>
+<pre class="hljs"><code><div>data(<span class="hljs-string">"AirPassengers"</span>) <span class="hljs-comment"># Monthly totals of international airline passengers, 1949 to 1960.</span>
+vremenski_niz &lt;- AirPassengers
+</div></code></pre>
+<p><img src="images/AirPassengers.png" alt="alt text"></p>
+<pre class="hljs"><code><div>plot(vremenski_niz, main = <span class="hljs-string">"Vremenski niz sa trend linijom"</span>)
+abline(lm(vremenski_niz ~ time(vremenski_niz)), col = <span class="hljs-string">"red"</span>)
+</div></code></pre>
+<p><img src="images/putnici_plot.png" alt="alt text"></p>
+<p>Vizualizacija s pomoću <code>ma()</code> (<em>moving average</em>) funkcije, za glađi prikaz podataka:</p>
+<pre class="hljs"><code><div>par(mfrow=c(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>))
+vremenski_niz_ma3 &lt;- ma(vremenski_niz, order = <span class="hljs-number">3</span>)
+vremenski_niz_ma5 &lt;- ma(vremenski_niz, order = <span class="hljs-number">9</span>)
+vremenski_niz_ma7 &lt;- ma(vremenski_niz, order = <span class="hljs-number">27</span>)
+plot(vremenski_niz, main = <span class="hljs-string">"Bez pomičnog prosjeka"</span>)
+plot(vremenski_niz_ma3, main = <span class="hljs-string">"Pomični prosjek (red 3)"</span>)
+plot(vremenski_niz_ma5, main = <span class="hljs-string">"Pomični prosjek (red 9)"</span>)
+plot(vremenski_niz_ma7, main = <span class="hljs-string">"Pomični prosjek (red 27)"</span>)
+</div></code></pre>
+<p><img src="images/tsplotma.png" alt="alt text"></p>
+<h3 id="analiza-vremenskih-nizova">Analiza vremenskih nizova</h3>
+<p><strong>Analiza vremenskih nizova</strong> je ključna u upravljanju, posebno za predviđanje ishoda kao što su prodaja, troškovi ili uspjeh projekata. Koristi povijesne podatke za predviđanje budućih rezultata i procjenu utjecaja upravljačkih odluka. Podaci se bilježe u redovitim vremenskim intervalima, što omogućuje praćenje promjena varijabli tijekom vremena. Vrijeme postaje ključna varijabla koja pokazuje trendove, sezonske utjecaje i obrasce ponašanja. Za pouzdanu analizu potrebno je dovoljno podataka kako bi se izbjegle pogreške uzrokovane iznimnim vrijednostima. Što je skup podataka veći, to su rezultati pouzdaniji. Analiza vremenskih nizova pomaže u donošenju informiranih odluka na temelju jasnih vremenskih ovisnosti.</p>
+<h3 id="dekompozicija-vremenskog-niza">Dekompozicija vremenskog niza</h3>
+<p>Dekompozicija vremenskog niza je ključna tehnika u analizi vremenskih serija koja omogućuje razdvajanje kompleksnog niza podataka na njegove osnovne komponente. Ova metoda pruža jasniji uvid u strukturu podataka i olakšava interpretaciju.</p>
+<ol>
+<li>
+<p><strong>Originalni podaci (observed)</strong>: predstavljaju neobrađene podatke koji su izravno prikupljeni iz izvora. Ovi podaci sadrže sve informacije u svom izvornom obliku, bez ikakvih modifikacija ili transformacija.</p>
+</li>
+<li>
+<p><strong>Trend komponenta (trend)</strong>: pokazuje osnovni pravac kretanja podataka. Može biti uzlazan, silazan ili stabilan. Na primjer, ako analiziramo prodaju nekog proizvoda, trend će vjerojatno pokazivati postupni rast kroz godine. Ova komponenta nam pomaže uočiti osnovni smjer razvoja bez sporednih utjecaja.</p>
+</li>
+<li>
+<p><strong>Sezonska komponenta (seasonal)</strong>: otkriva ponavljajuće obrasce koji se javljaju u redovitim intervalima. To mogu biti dnevne, tjedne, mjesečne ili godišnje varijacije. Tipičan primjer je povećana prodaja božićnih ukrasa u prosincu ili veća potrošnja električne energije tijekom zimskih mjeseci. Ova komponenta je posebno važna za planiranje u poslovnim aktivnostima.</p>
+</li>
+<li>
+<p><strong>Slučajna komponenta (random)</strong>: sadrži sve one promjene koje ne možemo objasniti trendom niti sezonalnosti. To su nepredvidive fluktuacije koje mogu biti posljedica iznenadnih događaja, mjernih pogrešaka ili drugih neplaniranih čimbenika. Iako često smetaju analizi, njihovo praćenje može biti korisno za otkrivanje neuobičajenih pojava.</p>
+</li>
+</ol>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>dekompozicija &lt;- decompose(AirPassengers)
+
+plot(dekompozicija)
+</div></code></pre>
+<p><img src="images/dekompozicija.png" alt="alt text"></p>
+<h4 id="stl-metoda">STL metoda</h4>
+<p><strong>STL</strong> (<em>Seasonal Decomposition of Time Series by Loess</em>) je naprednija metoda dekompozicije koja koristi lokalnu regresiju (<em>LOESS</em>) za razdvajanje komponenti.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Primjer STL dekompozicije</span>
+stl_dekomp &lt;- stl(AirPassengers, s.window = <span class="hljs-string">"periodic"</span>)
+
+<span class="hljs-comment"># Vizualizacija</span>
+plot(stl_dekomp, main = <span class="hljs-string">"STL dekompozicija AirPassengers dataseta"</span>)
+
+</div></code></pre>
+<h3 id="aditivna-i-multiplikativna-dekompozicija-vremenskog-niza">Aditivna i multiplikativna dekompozicija vremenskog niza</h3>
+<h4 id="1-aditivna-dekompozicija">1. <strong>Aditivna dekompozicija</strong></h4>
+<p>Koristi se kada amplitude sezonskih fluktuacija ostaju konstantne kroz vrijeme.</p>
+<p><strong>Model:</strong><br>
+<code>Y(t) = Trend(t) + Sezonska(t) + Slučajna(t)</code></p>
+<p><strong>Karakteristike:</strong></p>
+<ul>
+<li>Sezonske varijacije su konstantne magnitude</li>
+<li>Trend linearni ili polinomijalni</li>
+<li>Pogodna za nizove s konstantnom varijancom</li>
+</ul>
+<p><strong>Primjer u R:</strong></p>
+<pre class="hljs"><code><div>decomp_add &lt;- decompose(AirPassengers, type = <span class="hljs-string">"additive"</span>)
+plot(decomp_add)
+
+stl_add &lt;- stl(AirPassengers, s.window = <span class="hljs-string">"periodic"</span>)
+plot(stl_add, main = <span class="hljs-string">"STL Aditivna dekompozicija"</span>)
+</div></code></pre>
+<p><img src="images/add.png" alt="alt text"></p>
+<p><img src="images/stl.png" alt="alt text"></p>
+<h4 id="2-multiplikativna-dekompozicija">2. <strong>Multiplikativna dekompozicija</strong></h4>
+<p>Koristi se kada sezonske fluktuacije rastu/smanjuju s trendom.</p>
+<p><strong>Model:</strong><br>
+<code>Y(t) = Trend(t) * Sezonska(t) * Slučajna(t)</code></p>
+<p><strong>Karakteristike:</strong></p>
+<ul>
+<li>Sezonske varijacije proporcionalne trendu</li>
+<li>Često kod ekonomskih nizova s eksponencijalnim rastom</li>
+<li>Zahtijeva log transformaciju ako postoje negativne vrijednosti</li>
+</ul>
+<p><strong>Primjer u R:</strong></p>
+<pre class="hljs"><code><div>decomp_mult &lt;- decompose(AirPassengers, type = <span class="hljs-string">"multiplicative"</span>)
+plot(decomp_mult)
+
+log_ap &lt;- log(AirPassengers)
+stl_mult &lt;- stl(log_ap, s.window = <span class="hljs-string">"periodic"</span>)
+plot(stl_mult, main = <span class="hljs-string">"STL Multiplikativna dekompozicija"</span>)
+</div></code></pre>
+<p><img src="images/multi.png" alt="alt text"></p>
+<p><img src="images/STLmulti.png" alt="alt text"></p>
+<h3 id="stacionarnosti-vremenskog-niza">Stacionarnosti vremenskog niza</h3>
+<p>Stacionarnost je ključni koncept u analizi vremenskih nizova. Vremenski niz se smatra stacionarnim ako njegove statističke karakteristike, kao što su srednja vrijednost, varijanca i kovarijanca, ne ovise o vremenu. Drugim riječima, stacionarni niz ne pokazuje dugoročne trendove i sezonske promjene, te je moguće predvidjeti njegove buduće vrijednosti na temelju prošlih podataka. Ako niz nije stacionaran, može biti potrebno primijeniti transformacije poput diferenciranja kako bi se postigla stacionarnost.</p>
+<p>Vrste stacionarnosti:</p>
+<ol>
+<li><strong>Striktna stacionarnost</strong>:
+<ul>
+<li>Niz je striktno stacionaran ako su sve njegove distribucije u svim vremenskim točkama identične. Ovo uključuje ne samo srednju vrijednost, varijancu i kovarijancu, nego i sve više statističke momente.</li>
+</ul>
+</li>
+<li><strong>Slaba stacionarnost</strong>:
+<ul>
+<li>Niz je slabo stacionaran ako su samo prva dva statistička momenta (srednja vrijednost i varijanca) konstantni kroz vrijeme, a kovarijanca između vrijednosti u različitim vremenskim točkama ovisi samo o vremenskom razmaku, a ne o apsolutnim vremenskim točkama.</li>
+</ul>
+</li>
+</ol>
+<h4 id="provjera-stacionarnosti">Provjera stacionarnosti</h4>
+<p>Jedan od najpoznatijih testova za provjeru stacionarnosti vremenskog niza je <strong>Augmented Dickey-Fuller (ADF)</strong> test, koji testira hipotezu da niz ima jedinčasti korijen, odnosno da nije stacionaran. Ako p-vrijednost testa bude manja od 0.05, možemo odbaciti hipotezu da niz nije stacionaran i zaključiti da je niz stacionaran.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">library</span>(tseries)
+
+data(<span class="hljs-string">"AirPassengers"</span>)
+vremenski_niz &lt;- AirPassengers
+
+adf_test &lt;- adf.test(vremenski_niz)
+adf_test
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>Warning message:
+In adf.test(vremenski_niz) : p-value smaller than printed p-value
+&gt; adf_test
+
+	Augmented Dickey-Fuller Test
+
+data:  vremenski_niz
+Dickey-Fuller = -<span class="hljs-number">7.3186</span>, Lag order = <span class="hljs-number">5</span>, p-value = <span class="hljs-number">0.01</span>
+alternative hypothesis: stationary
+</div></code></pre>
+<p><strong>p-vrijednost</strong>: <code>0.01</code>
+Ovaj rezultat znači da je p-vrijednost manja od 0.05, što sugerira da možemo odbaciti nultu hipotezu da vremenski niz nije stacionaran. Dakle, vremenski niz je stacionaran.</p>
+<ul>
+<li>
+<p><strong>Dickey-Fuller</strong>: Vrijednost test statistike je -7.3186. Ova statistika mjeri koliko su podaci u skladu s hipotezom o postojanju jedinčastog korijena (ne-stacionarnosti). Manje negativne vrijednosti obično ukazuju na veću vjerojatnost da niz nije stacionaran, dok negativne vrijednosti poput ove sugeriraju da je niz vjerojatno stacionaran.</p>
+</li>
+<li>
+<p><strong>Lag order = 5</strong>: Test je korišten s 5 vremenskih kašnjenja (lags), što znači da su uzeti u obzir prethodni podaci na 5 vremenskih razmaka u analizi.</p>
+</li>
+<li>
+<p><strong>Alternative hypothesis</strong>: Hipoteza je da je niz stacionaran, što je u skladu s rezultatima p-vrijednosti.</p>
+</li>
+</ul>
+<p><strong>Zaključak</strong>: Budući da je p-vrijednost manja od 0.05, možemo zaključiti da je vremenski niz stacionaran, odnosno da ne pokazuje dugoročne trendove ili sezonske promjene koje bi ometale daljnju analizu i modeliranje.</p>
+<blockquote>
+<p>Ako je p-vrijednost manja od 0.05, možemo zaključiti da je niz stacionaran.</p>
+</blockquote>
+<h4 id="prilagodba-niza-za-stacionarnost">Prilagodba niza za stacionarnost</h4>
+<p>Ako vremenski niz nije stacionaran, možemo primijeniti nekoliko metoda za njegovu prilagodbu:</p>
+<ol>
+<li>
+<p><strong>Diferenciranje</strong>:</p>
+<ul>
+<li>Diferenciranje je najčešće korištena tehnika za postizanje stacionarnosti. To znači da od svakog podatka oduzimamo prethodnu vrijednost, čime se uklanjaju trendovi i sezonske promjene. U R-u to možemo postići s funkcijom <code>diff()</code>.</li>
+</ul>
+<p>Funkcija <code>diff()</code> koristi se za izračun razlike između uzastopnih vrijednosti vremenskog niza, što pomaže u uklanjanju trenda i postizanju stacionarnosti.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>diferencirani_niz &lt;- diff(vremenski_niz, <span class="hljs-number">1</span>)
+adf.test(diferencirani_niz)
+</div></code></pre>
+<p>Funkcija <code>ndiffs()</code> automatski određuje broj diferencijacija potrebnih za postizanje stacionarnosti vremenskog niza.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>num_diffs &lt;- ndiffs(ap)
+num_diffs  <span class="hljs-comment"># Vraća broj potrebnih diferencijacija za stacionarnost, 1 u ovom slučaju</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Logaritamska transformacija</strong>:</p>
+<ul>
+<li>Ako niz pokazuje eksponencijalni rast, primjena logaritamske transformacije može pomoći u stabilizaciji varijance i postizanju stacionarnosti.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Logaritamska transformacija</span>
+log_niz &lt;- log(vremenski_niz)
+adf.test(log_niz)
+</div></code></pre>
+</li>
+</ol>
+<h3 id="acf-i-pacf">ACF i PACF</h3>
+<p><strong>ACF (<em>Autocorrelation Function</em>)</strong> i <strong>PACF (<em>Partial Autocorrelation Function</em>)</strong> su dva ključna alata za analizu vremenskih nizova. Ove funkcije pomažu u razumijevanju odnosa između različitih vremenskih točaka unutar niza i korištene su u identifikaciji odgovarajućih modela za vremenske nizove, poput ARIMA modela.</p>
+<h4 id="acf-autocorrelation-function">ACF (Autocorrelation Function)</h4>
+<p>ACF mjeri ukupnu korelaciju između trenutnih i prošlih vrijednosti vremenskog niza. To pokazuje kako su prošle vrijednosti povezane s trenutnim stanjem. Na primjer, ako se promjena u prošlim vrijednostima negativno ili pozitivno odražava na trenutne vrijednosti, ACF će to pokazati.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>data(<span class="hljs-string">"AirPassengers"</span>)
+ap &lt;- AirPassengers
+
+acf(ap, main = <span class="hljs-string">"ACF - AirPassengers"</span>)
+</div></code></pre>
+<p><img src="images/acf.png" alt="alt text"></p>
+<ul>
+<li>Ako ACF prikazuje visoke korelacije u početnim vremenskim pomacima, to može značiti da je niz značajno <em>autocorrelated</em>, tj. da postoje značajni trendovi ili sezonske komponente.</li>
+</ul>
+<h4 id="pacf-partial-autocorrelation-function">PACF (Partial Autocorrelation Function)</h4>
+<p>PACF mjeri korelaciju između trenutne i prošle vrijednosti vremenskog niza, uzimajući u obzir sve intermedijarne vremenske točke. To je korisno za utvrđivanje koji broj prethodnih vrijednosti je potrebno uključiti u model. PACF je koristan kada želimo razumjeti utjecaj točno određene vremenske točke bez &quot;smetnji&quot; drugih vremenskih točaka.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>pacf(ap, main = <span class="hljs-string">"PACF - AirPassengers"</span>)
+</div></code></pre>
+<p><img src="images/pacf.png" alt="alt text"></p>
+<ul>
+<li>Ako PACF pokazuje značajnu korelaciju samo na početnim pomacima, to može ukazivati na to da se model treba fokusirati samo na te početne vrijednosti, dok kasniji pomaci nemaju značajan utjecaj.</li>
+</ul>
+<h4 id="kori%C5%A1tenje-acf-i-pacf-u-modeliranju">Korištenje ACF i PACF u modeliranju</h4>
+<ul>
+<li><strong>ACF</strong> je koristan za odabir redova MA (Moving Average) dijela ARIMA modela, dok <strong>PACF</strong> pomaže u odabiru redova <strong>AR</strong> (<em>AutoRegressive</em>) dijela.</li>
+<li>Ako <strong>ACF</strong> pokazuje značajnu korelaciju na početnim pomacima, ali brzo opada, to može sugerirati da je <strong>MA</strong> model prikladan.</li>
+<li>Ako <strong>PACF</strong> pokazuje značajnu korelaciju na početnim pomacima, a zatim opada, to može sugerirati da je <strong>AR</strong> model prikladan.</li>
+</ul>
+<blockquote>
+<p>Ovisno o vizualizaciji ACF-a i PACF-a, možemo odlučiti koje parametre AR i MA odabrati za ARIMA model.</p>
+</blockquote>
+<h3 id="arima-model">ARIMA model</h3>
+<p><strong>ARIMA</strong> (<em>AutoRegressive Integrated Moving Averag</em>e) je model koji kombinira autoregresiju, diferenciranje i pomični prosjek kako bi predvidio buduće vrijednosti vremenskog niza.</p>
+<p><em>Primjer:</em></p>
+<pre class="hljs"><code><div>data(<span class="hljs-string">"AirPassengers"</span>)
+ap &lt;- AirPassengers
+
+ap_arima &lt;- auto.arima(ap)
+
+summary(ap_arima)
+</div></code></pre>
+<div class="page"></div>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>Series: ap 
+ARIMA(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)[<span class="hljs-number">12</span>] 
+
+Coefficients:
+         ar1     ar2      ma1
+      <span class="hljs-number">0.5960</span>  <span class="hljs-number">0.2143</span>  -<span class="hljs-number">0.9819</span>
+s.e.  <span class="hljs-number">0.0888</span>  <span class="hljs-number">0.0880</span>   <span class="hljs-number">0.0292</span>
+
+sigma^<span class="hljs-number">2</span> = <span class="hljs-number">132.3</span>:  log likelihood = -<span class="hljs-number">504.92</span>
+AIC=<span class="hljs-number">1017.85</span>   AICc=<span class="hljs-number">1018.17</span>   BIC=<span class="hljs-number">1029.35</span>
+
+Training set error measures:
+                 ME     RMSE     MAE      MPE     MAPE     MASE        ACF1
+Training set <span class="hljs-number">1.3423</span> <span class="hljs-number">10.84619</span> <span class="hljs-number">7.86754</span> <span class="hljs-number">0.420698</span> <span class="hljs-number">2.800458</span> <span class="hljs-number">0.245628</span> -<span class="hljs-number">0.00124847</span>
+</div></code></pre>
+<p><strong>ARIMA(2,1,1)(0,1,0)[12]</strong>: Ovaj model koristi dva autoregresivna parametra (AR(2)), jedan pomični prosjek (MA(1)), s prvim diferenciranjem i sezonskim diferenciranjem na 12 mjeseci. Model je optimiziran za predviđanje vremenskih nizova sa sezonskim obrazcima.</p>
+<p><strong>AR1</strong>: Koeficijent <code>0.5960</code> znači da vrijednost vremenskog niza u trenutnom mjesecu ima značajnu pozitivnu korelaciju sa stanjem prije mjesec dana. Za svaki porast prethodne vrijednosti, trenutna vrijednost će se povećati za 0.5960.</p>
+<p><strong>AR2</strong>: Koeficijent <code>0.2143</code> pokazuje umjerenu pozitivnu korelaciju između trenutne vrijednosti i vrijednosti dva mjeseca prije. Za svaku promjenu u vrijednosti prije dva mjeseca, trenutna vrijednost se mijenja za 0.2143.</p>
+<p><strong>MA1</strong>: Koeficijent <code>-0.9819</code> označava da postoji snažna negativna korelacija između trenutne vrijednosti i pogreške koja je nastala prije mjesec dana. To znači da velike pogreške iz prošlih razdoblja snažno utječu na trenutnu vrijednost, ali u suprotnom smjeru.</p>
+<p><strong>AIC (<em>Akaike Information Criterion</em>)</strong>: Vrijednost <code>1017.85</code> pokazuje kvalitetu modela, pri čemu niže vrijednosti AIC označavaju bolji model. AIC je koristan za usporedbu različitih modela.</p>
+<p><strong>BIC (<em>Bayesian Information Criterion</em>)</strong>: BIC je sličan AIC-u, ali uključuje i kaznu za broj parametara u modelu. Vrijednost <code>1029.35</code> pomaže u odabiru modela s nižim rizikom od pretreniranja.</p>
+<ul>
+<li>
+<p><strong>Training set error measures</strong>:</p>
+<ul>
+<li><strong>ME (Mean Error)</strong>: <code>1.3423</code>, što znači da je prosječna pogreška modela u predviđanju 1.34</li>
+<li><strong>RMSE (Root Mean Squared Error)</strong>: <code>10.84619</code> ukazuje na veličinu pogreške u modelu</li>
+<li><strong>MAE (Mean Absolute Error)</strong>: <code>7.86754</code> označava prosječnu apsolutnu pogrešku predviđanja</li>
+<li><strong>MPE (Mean Percentage Error)</strong>: <code>0.420698</code> označava postotnu pogrešku modela</li>
+<li><strong>MAPE (Mean Absolute Percentage Error)</strong>: <code>2.800458</code> pokazuje postotak pogreške u modelu</li>
+<li><strong>MASE (Mean Absolute Scaled Error)</strong>: <code>0.245628</code> ukazuje na skaliranu pogrešku u modelu u odnosu na osnovni model</li>
+<li><strong>ACF1</strong>: <code>-0.00124847</code> označava nisku korelaciju između pogrešaka modela i prethodnih pogrešaka, što sugerira da model ima dobar fit</li>
+</ul>
+</li>
+</ul>
+<p><em><strong>ARIMA predikcija</strong> putnika:</em></p>
+<pre class="hljs"><code><div>ap_forecast_arima &lt;- forecast(ap_arima, h = <span class="hljs-number">36</span>)
+
+autoplot(ap_forecast_arima) +
+  ggtitle(<span class="hljs-string">"ARIMA predikcija broja putnika"</span>) +
+  xlab(<span class="hljs-string">"Godina"</span>) + ylab(<span class="hljs-string">"Broj putnika"</span>)
+</div></code></pre>
+<p><img src="images/ARIMA prediction.png" alt="alt text"></p>
+<div class="page"></div>
+<h2 id="klasifikacija">Klasifikacija</h2>
+<p>Klasifikacija je nadzirana tehnika strojnog učenja koja se koristi za predviđanje kategoričkih vrijednosti. Cilj je dodijeliti ulazne podatke unaprijed definiranim klasama na temelju značajki (<em>features</em>). U R-u se klasifikacija može provoditi korištenjem različitih algoritama, ovisno o prirodi problema i podataka.</p>
+<ul>
+<li><strong>Klasa</strong>: Kategorija ili skupina u koju se podatak svrstava (npr. &quot;bolest&quot; / &quot;nema bolesti&quot;)</li>
+<li><strong>Značajke (features)</strong>: Varijable koje se koriste za predviđanje klase</li>
+<li><strong>Model</strong>: Algoritam koji uči vezu između značajki i ciljne varijable</li>
+</ul>
+<p><strong>Tipovi klasifikacijskih problema:</strong></p>
+<ol>
+<li>
+<p><strong>Binarna klasifikacija</strong>:</p>
+<ul>
+<li>Samo dvije moguće klase (<em>npr. spam/ne-spam</em>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Multiklasna klasifikacija</strong>:</p>
+<ul>
+<li>Više od dvije klase (<em>npr. prepoznavanje znamenki 0-9</em>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Multilabelna klasifikacija</strong>:</p>
+<ul>
+<li>Jedan primjer može pripadati više klasama istovremeno</li>
+</ul>
+</li>
+</ol>
+<p><em>Algoritmi klasifikacije:</em></p>
+<table>
+<thead>
+<tr>
+<th>Algoritam</th>
+<th>Paket u R-u</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stabla odluke</strong></td>
+<td><code>rpart()</code></td>
+<td>Hijerarhijska struktura za donošenje odluka koja dijeli podatke prema značajkama.</td>
+</tr>
+<tr>
+<td><strong>Slučajna šuma</strong></td>
+<td><code>randomForest()</code></td>
+<td>Ansambl metoda koja koristi više stabala odluke za poboljšanje točnosti i robusnosti.</td>
+</tr>
+<tr>
+<td><strong>Naivni Bayes</strong></td>
+<td><code>e1071</code></td>
+<td>Probabilistički klasifikator temeljen na Bayesovom teoremu i pretpostavci nezavisnosti značajki.</td>
+</tr>
+<tr>
+<td><strong>K-najbližih susjeda</strong></td>
+<td><code>class::knn()</code></td>
+<td>Metoda koja klasificira primjer prema većinskoj klasi njegovih najbližih susjeda.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stablo-odluke">Stablo odluke</h3>
+<p><strong>Stablo odluke</strong> je <strong>model za prediktivnu analizu</strong> koji koristi strukturu nalik stablu za donošenje odluka i predviđanje ishoda. Sastoji se od:</p>
+<ul>
+<li><strong>Čvorova odluke</strong> (<em>unutarnji čvorovi</em>) koji predstavljaju testiranje neke značajke (<em>npr. je li visina &gt; 170 cm</em>),</li>
+<li><strong>Grana</strong> koje vode do sljedećih čvorova ovisno o ishodu testa</li>
+<li><strong>Listova</strong> (<em>krajnjih čvorova</em>) koji predstavljaju konačne odluke ili predikcije (<em>npr. klasa „da“ ili „ne“</em>).</li>
+</ul>
+<p>Prednosti su što je model <strong>lako razumljiv i vizualno jasan</strong>, dok je glavni nedostatak <strong>osjetljivost na pretreniravanje</strong>, posebno kada je stablo duboko i složeno.</p>
+<p>U R-u se može izraditi pomoću funkcije <code>rpart()</code> iz paketa <code>rpart</code>, a vizualizirati s <code>rpart.plot</code>.</p>
+<p><em>Primjer: Stablo odluke za iris dataset</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment">#install.packages("rpart")</span>
+<span class="hljs-comment">#install.packages("rpart.plot")</span>
+<span class="hljs-keyword">library</span>(rpart)
+<span class="hljs-keyword">library</span>(rpart.plot)
+
+<span class="hljs-comment"># Podjela podataka na trening i test skup</span>
+set.seed(<span class="hljs-number">123</span>)
+indeksi &lt;- sample(<span class="hljs-number">1</span>:nrow(iris), <span class="hljs-number">0.7</span>*nrow(iris))
+train &lt;- iris[indeksi,]
+test &lt;- iris[-indeksi,]
+
+<span class="hljs-comment"># Izgradnja stabla</span>
+stablo &lt;- rpart(Species ~ ., data = train, method = <span class="hljs-string">"class"</span>)
+
+<span class="hljs-comment"># Vizualizacija</span>
+rpart.plot(stablo)
+</div></code></pre>
+<p><img src="images/stablo.png" alt="alt text"></p>
+<div class="page"></div>
+<p><em>Primjer: Analiza stabla</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># najvažnije varijable</span>
+stablo$variable.importance
+<span class="hljs-comment"># Petal.Width Petal.Length Sepal.Length  Sepal.Width </span>
+<span class="hljs-comment">#     60.83978     56.37649     37.31876     23.48140 </span>
+
+<span class="hljs-comment"># najvažnije varijable</span>
+stablo$cptable
+<span class="hljs-comment">#          CP nsplit  rel error    xerror       xstd</span>
+<span class="hljs-comment"># 1 0.5294118      0 1.00000000 1.2058824 0.06232572</span>
+<span class="hljs-comment"># 2 0.3970588      1 0.47058824 0.5441176 0.07198662</span>
+<span class="hljs-comment"># 3 0.0100000      2 0.07352941 0.1176471 0.03997857</span>
+</div></code></pre>
+<ul>
+<li><code>variable.importance</code> prikazuje važnost varijabli korištenih u stablu. Veće vrijednosti znači da je varijabla više puta korištena u granama koje su najviše doprinijele smanjenju nečistoće.</li>
+<li><code>cptable</code> sadrži tablicu parametara rezanja stabla (<em>complexity parameter table</em>), Koristi se za odabir optimalne veličine stabla, tj. koliko jako &quot;rezati&quot; stablo da se izbjegne pretreniranost</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Stupac</th>
+<th>Značenje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CP</code></td>
+<td>Complexity parameter – veće vrijednosti znače <strong>jače rezanje</strong> stabla</td>
+</tr>
+<tr>
+<td><code>nsplit</code></td>
+<td>Broj podjela (<em>čvorova</em>) u stablu</td>
+</tr>
+<tr>
+<td><code>rel error</code></td>
+<td>Relativna pogreška – greška trenutnog stabla u odnosu na početnu</td>
+</tr>
+<tr>
+<td><code>xerror</code></td>
+<td>Križno-validacijska greška (procjena pogreške na novim podacima)</td>
+</tr>
+<tr>
+<td><code>xstd</code></td>
+<td>Standardna pogreška križno-validacijske greške</td>
+</tr>
+</tbody>
+</table>
+<p><em>Primjer: Rezanje stabla</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># uzimamo cp s velikom nsplit vrijednosti</span>
+podreznao_stablo &lt;- prune(stablo, cp=<span class="hljs-number">0.0100000</span>)
+</div></code></pre>
+<p><em>Primjer: Predikcija i evaluacija</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment">#install.packages("caret")</span>
+<span class="hljs-keyword">library</span>(caret)
+
+<span class="hljs-comment"># Predikcija</span>
+predikcije &lt;- predict(stablo, test, type = <span class="hljs-string">"class"</span>)
+
+<span class="hljs-comment"># Evaluacija</span>
+confusionMatrix(predikcije, test$Species)
+</div></code></pre>
+<div class="page"></div>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>Confusion Matrix and Statistics
+
+            Reference
+Prediction   setosa versicolor virginica
+  setosa         <span class="hljs-number">14</span>          <span class="hljs-number">0</span>         <span class="hljs-number">0</span>
+  versicolor      <span class="hljs-number">0</span>         <span class="hljs-number">18</span>         <span class="hljs-number">1</span>
+  virginica       <span class="hljs-number">0</span>          <span class="hljs-number">0</span>        <span class="hljs-number">12</span>
+
+Overall Statistics
+                                          
+               Accuracy : <span class="hljs-number">0.9778</span>          
+                 <span class="hljs-number">95</span>% CI : (<span class="hljs-number">0.8823</span>, <span class="hljs-number">0.9994</span>)
+    No Information Rate : <span class="hljs-number">0.4</span>             
+    P-Value [Acc &gt; NIR] : &lt; <span class="hljs-number">2.2e-16</span>       
+                                          
+                  Kappa : <span class="hljs-number">0.9662</span>          
+                                          
+ Mcnemar<span class="hljs-string">'s Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: setosa Class: versicolor Class: virginica
+Sensitivity                 1.0000            1.0000           0.9231
+Specificity                 1.0000            0.9630           1.0000
+Pos Pred Value              1.0000            0.9474           1.0000
+Neg Pred Value              1.0000            1.0000           0.9697
+Prevalence                  0.3111            0.4000           0.2889
+Detection Rate              0.3111            0.4000           0.2667
+Detection Prevalence        0.3111            0.4222           0.2667
+Balanced Accuracy           1.0000            0.9815           0.9615
+</span></div></code></pre>
+<p>Konfuzijska matrica prikazuje koliko je model točno ili pogrešno klasificirao primjere za svaku klasu:</p>
+<ul>
+<li><strong>Setosa:</strong> svih 14 primjera su ispravno klasificirani</li>
+<li><strong>Versicolor:</strong> 18 ispravno, 1 pogrešno klasificiran kao <em>virginica</em></li>
+<li><strong>Virginica:</strong> 12 ispravno, nijedan pogrešno klasificiran</li>
+</ul>
+<p><strong>Overall Statistics</strong>:</p>
+<ul>
+<li>
+<p><strong>Accuracy: 0.9778</strong>
+Točnost modela: ~97.78%. Od svih primjera, gotovo svi su točno klasificirani.</p>
+</li>
+<li>
+<p><strong>95% CI: (0.8823, 0.9994)</strong>
+Interval pouzdanosti: pravi rezultat točnosti u populaciji je između 88.23% i 99.94%, s 95% sigurnošću.</p>
+</li>
+<li>
+<p><strong>No Information Rate (NIR): 0.4</strong>
+Točnost koju bismo dobili da <strong>uvijek pogodimo najčešću klasu</strong> (<em>versicolor u ovom slučaju</em>).
+→ Modelova točnost (97.78%) je <strong>znatno bolja</strong> od NIR-a (40%).</p>
+</li>
+<li>
+<p><strong>P-Value [Acc &gt; NIR]: &lt; 2.2e-16</strong>
+Statistički značajna razlika između modelove točnosti i NIR-a
+→ Model je <strong>puno bolji od slučajnog pogađanja</strong></p>
+</li>
+<li>
+<p><strong>Kappa: 0.9662</strong>
+Mjera slaganja između predikcije i stvarnih vrijednosti <strong>korekcijom za slučajnost</strong>.</p>
+<ul>
+<li>1 = savršena točnost, 0 = pogađanje nasumično
+→ 0.9662 označava <strong>izvrsnu pouzdanost</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>McNemar's Test P-Value: NA</strong>
+Ova statistika se koristi za binarnu klasifikaciju; ovdje nije primjenjiva jer imamo 3 klase.</li>
+</ul>
+<p>Za svaku klasu (<em>setosa, versicolor, virginica</em>):</p>
+<table>
+<thead>
+<tr>
+<th>Metrika</th>
+<th>Značenje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sensitivity</strong></td>
+<td>Tj. <em>recall</em>, koliko stvarnih primjera klase je ispravno prepoznato.</td>
+</tr>
+<tr>
+<td><strong>Specificity</strong></td>
+<td>Koliko ostalih klasa je točno klasificirano kao &quot;ne-ta klasa&quot;.</td>
+</tr>
+<tr>
+<td><strong>Pos Pred Value</strong></td>
+<td>Tj. <em>precision</em>, koliko predviđenih pripadnika klase je stvarno točno.</td>
+</tr>
+<tr>
+<td><strong>Neg Pred Value</strong></td>
+<td>Koliko negativnih predikcija je točno (npr. ono što nije setosa – nije).</td>
+</tr>
+<tr>
+<td><strong>Prevalence</strong></td>
+<td>Udio te klase u cijelom skupu podataka.</td>
+</tr>
+<tr>
+<td><strong>Detection Rate</strong></td>
+<td>Udio ispravno klasificiranih instanci određene klase.</td>
+</tr>
+<tr>
+<td><strong>Detection Prev.</strong></td>
+<td>Koliko je puta model predvidio tu klasu, podijeljeno sa svim primjerima.</td>
+</tr>
+<tr>
+<td><strong>Balanced Accuracy</strong></td>
+<td>Prosjek između Sensitivity i Specificity.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="random-forest">Random forest</h3>
+<p><strong>Random forest</strong> je ansambl metoda za strojno učenje koja kombinira više stabala odluke kako bi poboljšala točnost i robusnost modela. Svako stablo se trenira na slučajnom podskupu podataka i značajki (tzv. <em>bagging</em>), a konačna odluka donosi se glasanjem (<em>za klasifikaciju</em>) ili prosjekom (<em>za regresiju</em>).</p>
+<ul>
+<li><strong>Robustan na šum i outliere</strong> — jer kombinira više modela</li>
+<li><strong>Smanjuje pretreniranost</strong> u odnosu na pojedinačna stabla</li>
+<li><strong>Manje interpretabilan</strong> — jer je teško vizualizirati mnogo stabala zajedno</li>
+</ul>
+<p><em>Primjer: Random forest za PimaIndiansDiabetes</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># install.packages("randomForest")</span>
+<span class="hljs-comment"># install.packages("caret")</span>
+<span class="hljs-keyword">library</span>(randomForest)
+<span class="hljs-keyword">library</span>(caret)
+
+<span class="hljs-comment"># Učitavanje podataka</span>
+data(<span class="hljs-string">"PimaIndiansDiabetes"</span>)
+diabetes &lt;- PimaIndiansDiabetes
+
+<span class="hljs-comment"># Podjela podataka (70% trening, 30% test)</span>
+set.seed(<span class="hljs-number">123</span>)
+indeksi &lt;- sample(<span class="hljs-number">1</span>:nrow(diabetes), <span class="hljs-number">0.7</span>*nrow(diabetes))
+train &lt;- diabetes[indeksi, ]
+test &lt;- diabetes[-indeksi, ]
+
+<span class="hljs-comment"># Izgradnja modela (ciljna varijabla je 'diabetes')</span>
+model &lt;- randomForest(diabetes ~ ., data = train)
+
+<span class="hljs-comment"># Broj stabala</span>
+forest$ntree <span class="hljs-comment"># 500</span>
+
+<span class="hljs-comment"># Broj varijabli (prediktora)</span>
+forest$mtry <span class="hljs-comment"># 2</span>
+
+<span class="hljs-comment"># Važnost varijabli</span>
+importance(model)
+<span class="hljs-comment">#          MeanDecreaseGini</span>
+<span class="hljs-comment"># pregnant         19.86030</span>
+<span class="hljs-comment"># glucose          62.96948</span>
+<span class="hljs-comment"># pressure         21.92756</span>
+<span class="hljs-comment"># triceps          17.33345</span>
+<span class="hljs-comment"># insulin          19.09810</span>
+<span class="hljs-comment"># mass             42.21571</span>
+<span class="hljs-comment"># pedigree         29.56443</span>
+<span class="hljs-comment"># age              29.14090</span>
+
+<span class="hljs-comment"># grafički prikaz</span>
+varImpPlot(model)
+</div></code></pre>
+<p><img src="images/randomforesetvars.png" alt="alt text"></p>
+<div class="page"></div>
+<p><em>Predikcija i evaluacija:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Predikcija na testnom skupu</span>
+predikcije &lt;- predict(model, test)
+
+<span class="hljs-comment"># Evaluacija - matrica konfuzije</span>
+confusionMatrix(predikcije, test$diabetes)
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>Confusion Matrix and Statistics
+
+          Reference
+Prediction neg pos
+       neg <span class="hljs-number">126</span>  <span class="hljs-number">36</span>
+       pos  <span class="hljs-number">24</span>  <span class="hljs-number">45</span>
+                                          
+               Accuracy : <span class="hljs-number">0.7403</span>          
+                 <span class="hljs-number">95</span>% CI : (<span class="hljs-number">0.6787</span>, <span class="hljs-number">0.7956</span>)
+    No Information Rate : <span class="hljs-number">0.6494</span>          
+    P-Value [Acc &gt; NIR] : <span class="hljs-number">0.001953</span>        
+                                          
+                  Kappa : <span class="hljs-number">0.4095</span>          
+                                          
+ Mcnemar<span class="hljs-string">'s Test P-Value : 0.155580        
+                                          
+            Sensitivity : 0.8400          
+            Specificity : 0.5556          
+         Pos Pred Value : 0.7778          
+         Neg Pred Value : 0.6522          
+             Prevalence : 0.6494          
+         Detection Rate : 0.5455          
+   Detection Prevalence : 0.7013          
+      Balanced Accuracy : 0.6978          
+                                          
+       '</span>Positive<span class="hljs-string">' Class : neg      
+</span></div></code></pre>
+<p>Oznaka <code>'Positive' Class : neg</code> znači da je u evaluaciji modela kao <em>&quot;pozitivna&quot;</em> klasa definirana klasa <em>&quot;neg&quot;</em></p>
+<ul>
+<li><strong>Pozitivna klasa</strong> je ona na koju se računaju mjere kao što su senzitivnost (<em>sensitivity</em>), pozitivna prediktivna vrijednost (<em>precision</em>) i dr.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Reference (stvarno)</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prediction</strong></td>
+<td>neg</td>
+<td>pos</td>
+</tr>
+<tr>
+<td>neg</td>
+<td>126</td>
+<td>36</td>
+</tr>
+<tr>
+<td>pos</td>
+<td>24</td>
+<td>45</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>126</strong>: model je točno predvidio &quot;neg&quot; (<em>negativne primjere</em>)</li>
+<li><strong>36</strong>: model je pogrešno predvidio &quot;neg&quot; umjesto &quot;pos&quot;</li>
+<li><strong>24</strong>: model je pogrešno predvidio &quot;pos&quot; umjesto &quot;neg&quot;</li>
+<li><strong>45</strong>: model je točno predvidio &quot;pos&quot;</li>
+</ul>
+<p><strong>McNemarov test</strong> se koristi za procjenu razlike između dvije povezane klasifikacije, najčešće u binarnoj klasifikaciji.</p>
+<ul>
+<li><strong>P-vrijednost &gt; 0.05</strong> (<em>npr. 0.155580</em>) znači da nema dovoljno dokaza da se razlikuju dvije klasifikacije u smislu pogrešaka.</li>
+<li>Drugim riječima, <strong>ne odbacujemo hipotezu</strong> da su pogreške modela i referentnog modela (<em>ili dvije metode</em>) slične.</li>
+</ul>
+<h2 id="grupiranje">Grupiranje</h2>
+<p><strong>Grupiranje (<em>engl. clustering</em>)</strong> je tehnika nenadziranog učenja (<em>engl. unsupervised learning</em>). koja služi za grupiranje sličnih primjera u skupine, odnosno <em>klastere</em>, na temelju njihovih značajki. Za razliku od klasifikacije, kod grupiranja ne postoji unaprijed zadana <em>ciljna varijabla</em> — algoritam sam otkriva prirodne skupine unutar podataka.</p>
+<p><strong>Klaster</strong> je skup sličnih objekata koji su međusobno što sličniji, a različiti od objekata u drugim klasterima. Dobri klasteri imaju:</p>
+<ul>
+<li>Veliku sličnost unutar klastera (<em>homogenost</em>),</li>
+<li>Mali stupanj sličnosti između klastera (<em>separabilnost</em>).</li>
+</ul>
+<p><strong>Mjere sličnosti</strong>:</p>
+<ul>
+<li>Euklidska udaljenost: $$\sqrt{\sum_{i=1}^n (x_i - y_i)^2}$$</li>
+<li>Manhattan udaljenost: $$\sum_{i=1}^n |x_i - y_i|$$</li>
+<li>Kosinusna sličnost: $$\frac{x \cdot y}{|x| |y|}$$</li>
+</ul>
+<h3 id="k-means">K-means</h3>
+<p><strong>K-means</strong> je jedan od najpopularnijih algoritama za grupiranje podataka. Cilj mu je podijeliti podatke u <code>K</code> klastera tako da se <strong>minimizira zbroj kvadrata udaljenosti</strong> između elemenata i njihovih centara klastera, odnosno da se smanji varijanca unutar svakog klastera.</p>
+<div class="page"></div>
+<p><em>Traženje optimalnog broja klastera:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># install.packages("NbClust")</span>
+<span class="hljs-keyword">library</span>(NbClust)
+
+data(iris)
+iris_features &lt;- iris[, <span class="hljs-number">1</span>:<span class="hljs-number">4</span>]
+
+set.seed(<span class="hljs-number">123</span>)
+
+<span class="hljs-comment"># Traženje optimalnog broja klastera</span>
+nb &lt;- NbClust(data = iris_features, distance = <span class="hljs-string">"euclidean"</span>, method = <span class="hljs-string">"kmeans"</span>)
+
+<span class="hljs-comment"># ******************************************************************* </span>
+<span class="hljs-comment"># * Among all indices:                                                </span>
+<span class="hljs-comment"># * 11 proposed 2 as the best number of clusters </span>
+<span class="hljs-comment"># * 11 proposed 3 as the best number of clusters </span>
+<span class="hljs-comment"># * 1 proposed 8 as the best number of clusters </span>
+<span class="hljs-comment"># * 1 proposed 12 as the best number of clusters </span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment">#                    ***** Conclusion *****                            </span>
+<span class="hljs-comment">#  </span>
+<span class="hljs-comment"># * According to the majority rule, the best number of clusters is  2 </span>
+<span class="hljs-comment">#  </span>
+<span class="hljs-comment">#  </span>
+<span class="hljs-comment"># ******************************************************************* </span>
+
+<span class="hljs-comment"># Prikaz optimalnog broja klastera prema većini kriterija</span>
+bestnc &lt;- nb$Best.nc[<span class="hljs-number">1</span>, ] 
+table(bestnc)
+
+<span class="hljs-comment"># bestnc</span>
+<span class="hljs-comment">#  0  2  3  8 12 </span>
+<span class="hljs-comment">#  2 11 11  1  1 </span>
+</div></code></pre>
+<p><img src="images/find_k_clusters.png" alt="alt text"></p>
+<p><em>Primjena kmeans():</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Primjena K-means s K=3</span>
+set.seed(<span class="hljs-number">123</span>)
+kmeans_result &lt;- kmeans(iris_features, centers = <span class="hljs-number">2</span>)
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>K-means clustering with <span class="hljs-number">3</span> clusters of sizes <span class="hljs-number">50</span>, <span class="hljs-number">62</span>, <span class="hljs-number">38</span>
+
+Cluster means:
+  Sepal.Length Sepal.Width Petal.Length Petal.Width
+<span class="hljs-number">1</span>     <span class="hljs-number">5.006000</span>    <span class="hljs-number">3.428000</span>     <span class="hljs-number">1.462000</span>    <span class="hljs-number">0.246000</span>
+<span class="hljs-number">2</span>     <span class="hljs-number">5.901613</span>    <span class="hljs-number">2.748387</span>     <span class="hljs-number">4.393548</span>    <span class="hljs-number">1.433871</span>
+<span class="hljs-number">3</span>     <span class="hljs-number">6.850000</span>    <span class="hljs-number">3.073684</span>     <span class="hljs-number">5.742105</span>    <span class="hljs-number">2.071053</span>
+
+Clustering vector:
+  [<span class="hljs-number">1</span>] <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span>
+ [<span class="hljs-number">43</span>] <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span>
+ [<span class="hljs-number">85</span>] <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span>
+[<span class="hljs-number">127</span>] <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span>
+
+Within cluster sum of squares by cluster:
+[<span class="hljs-number">1</span>] <span class="hljs-number">15.15100</span> <span class="hljs-number">39.82097</span> <span class="hljs-number">23.87947</span>
+ (between_SS / total_SS =  <span class="hljs-number">88.4</span> %)
+</div></code></pre>
+<p>K-means grupiranje s <strong>2</strong> klastera:</p>
+<ul>
+<li><strong>Veličine klastera</strong>: 53 i 97 primjera</li>
+<li><strong>Centroidi</strong>: srednje vrijednosti za svaki atribut po klasterima.</li>
+<li><strong>Clustering vector</strong>: vektor koji prikazuje kojem klasteru pripada svaki primjerak.</li>
+<li><strong>Within-cluster sum of squares</strong>: mjera homogenosti klastera. Manja vrijednost znači da su primjeri bliže centru klastera.</li>
+<li><strong>between_SS / total_SS = 77.6 %</strong>: 77.6 % ukupne varijance u podacima je objašnjeno ovom podjelom – što ukazuje na dobru separaciju.</li>
+</ul>
+<p><em>Stavke K-means:</em></p>
+<pre class="hljs"><code><div>kmeans_result$cluster 
+<span class="hljs-comment">#   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class="hljs-comment">#  [43] 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2</span>
+<span class="hljs-comment">#  [85] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3</span>
+<span class="hljs-comment"># [127] 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3 3 2</span>
+
+kmeans_result$size
+<span class="hljs-comment"># [1] 50 62 38</span>
+
+kmeans_result$withinss
+<span class="hljs-comment"># [1] 15.15100 39.82097 23.87947</span>
+
+kmeans_result$betweenss
+<span class="hljs-comment"># [1] 602.5192</span>
+
+<span class="hljs-comment"># Prikaz rezultata</span>
+table(kmeans_result$cluster, iris$Species)
+
+<span class="hljs-comment">#    setosa versicolor virginica</span>
+<span class="hljs-comment">#  1     50          0         0</span>
+<span class="hljs-comment">#  2      0         48        14</span>
+<span class="hljs-comment">#  3      0          2        36</span>
+</div></code></pre>
+<ul>
+<li><strong><code>kmeans_result$cluster</code></strong> – vektor koji pokazuje kojem klasteru pripada svaki primjerak iz skupa podataka.</li>
+<li><strong><code>kmeans_result$size</code></strong> – broj elemenata u svakom klasteru.</li>
+<li><strong><code>kmeans_result$withinss</code></strong> – unutar-klasterska suma kvadrata za svaki klaster (<em>mjera koliko su podaci unutar klastera blizu svom centru</em>).</li>
+<li><strong><code>kmeans_result$betweenss</code></strong> – između-klasterska suma kvadrata (<em>mjera koliko su klasteri međusobno udaljeni; viša vrijednost znači bolju razdvojenost</em>).</li>
+</ul>
+<p><em>K-means vizualizacija:</em></p>
+<pre class="hljs"><code><div>plot(iris_features[, c(<span class="hljs-string">"Sepal.Length"</span>, <span class="hljs-string">"Sepal.Width"</span>)], 
+     col = kmeans_result$cluster, 
+     main = <span class="hljs-string">"K-means grupiranje (K=3)"</span>)
+points(kmeans_result$centers[, c(<span class="hljs-string">"Sepal.Length"</span>, <span class="hljs-string">"Sepal.Width"</span>)], 
+       col = <span class="hljs-number">1</span>:<span class="hljs-number">3</span>, pch = <span class="hljs-number">8</span>, cex = <span class="hljs-number">2</span>)
+</div></code></pre>
+<p><img src="images/kmeangraph.png" alt="alt text"></p>
+<p><em>Evaluacija i usporedba:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># install.packages("flexclust")</span>
+<span class="hljs-keyword">library</span>(flexclust)
+
+<span class="hljs-comment"># Pretvaranje rezultata u Kcentroids objekt</span>
+kcca_model &lt;- as.kcca(kmeans_result, iris_features)
+
+<span class="hljs-comment"># Dodjela klastera pomoću flexclust metode</span>
+clusters_flex &lt;- predict(kcca_model)
+
+<span class="hljs-comment"># Evaluacija točnosti u odnosu na stvarne klase</span>
+table(clusters_flex, iris$Species)
+<span class="hljs-comment"># clusters_flex setosa versicolor virginica</span>
+<span class="hljs-comment">#             1     50          0         0</span>
+<span class="hljs-comment">#             2      0         48        14</span>
+<span class="hljs-comment">#             3      0          2        36</span>
+
+<span class="hljs-comment"># Preciznost klasifikacije</span>
+randIndex(table(clusters_flex, iris$Species))
+<span class="hljs-comment">#       ARI </span>
+<span class="hljs-comment"># 0.7302383 </span>
+</div></code></pre>
+<ul>
+<li><strong>Tablica klastera</strong> pokazuje da je <em>setosa</em> savršeno prepoznata, dok su <em>versicolor</em> i <em>virginica</em> djelomično izmiješane</li>
+<li><strong>Rand indeks (ARI = 0.73)</strong> pokazuje <strong>dobru usklađenost</strong> klastera s pravim klasama</li>
+</ul>
+<p><em>Partitioning Around Medoids (PAM) algoritam:</em></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># install.packages("cluster")</span>
+<span class="hljs-keyword">library</span>(cluster)
+
+<span class="hljs-comment"># Primjena pam algoritma s 3 klastera</span>
+set.seed(<span class="hljs-number">123</span>)
+pam_result &lt;- pam(iris_features, k = <span class="hljs-number">3</span>)
+
+<span class="hljs-comment"># Prikaz medoida</span>
+pam_result$medoids
+<span class="hljs-comment">#      Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
+<span class="hljs-comment"># [1,]          5.0         3.4          1.5         0.2</span>
+<span class="hljs-comment"># [2,]          6.0         2.9          4.5         1.5</span>
+<span class="hljs-comment"># [3,]          6.8         3.0          5.5         2.1</span>
+
+<span class="hljs-comment"># Prikaz klastera i usporedba sa stvarnim vrstama</span>
+table(pam_result$clustering, iris$Species)
+<span class="hljs-comment">#   setosa versicolor virginica</span>
+<span class="hljs-comment"># 1     50          0         0</span>
+<span class="hljs-comment"># 2      0         48        14</span>
+<span class="hljs-comment"># 3      0          2        36</span>
+
+
+clusplot(iris_features, 
+         kmeans_result$cluster, 
+         color = <span class="hljs-literal">TRUE</span>, shade = <span class="hljs-literal">TRUE</span>, labels = <span class="hljs-number">2</span>, lines = <span class="hljs-number">0</span>, 
+         main = <span class="hljs-string">"Clusplot prikaz K-means klastera"</span>)
+</div></code></pre>
+<p><strong>PAM algoritam</strong> (Partitioning Around Medoids) sličan K-meansu, ali koristi <strong>medoide</strong> umjesto sredina (<em>otporniji na šum i outliere</em>)</p>
+<p><img src="images/clusplot.png" alt="alt text"></p>
+</div>
 </body>
 </html>
