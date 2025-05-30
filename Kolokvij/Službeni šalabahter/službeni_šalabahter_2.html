@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>R osnove</title>
+		<meta
+			http-equiv="Content-type"
+			content="text/html;charset=UTF-8" />
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet" />
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+			/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+			/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+ :not(code *, .hljs *, .MathJax *) {
+				font-family: "Poppins", sans-serif;
+			}
+            html {
+                display: flex;
+                justify-content: center;
+            }
+			body {
+				font-family: var(
+					--vscode-markdown-font-family,
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe WPC",
+					"Segoe UI",
+					"Ubuntu",
+					"Droid Sans",
+					sans-serif
+				);
+				font-size: var(--vscode-markdown-font-size, 14px);
+				line-height: var(--vscode-markdown-line-height, 22px);
+				word-wrap: break-word;
+				color: #3b3b3b;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                width: full;
+			}
+			.body {
+                max-width: 1012px;
+			}
+
+			#code-csp-warning {
+				position: fixed;
+				top: 0;
+				right: 0;
+				color: white;
+				margin: 16px;
+				text-align: center;
+				font-size: 12px;
+				font-family: sans-serif;
+				background-color: #444444;
+				cursor: pointer;
+				padding: 6px;
+				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			}
+
+			#code-csp-warning:hover {
+				text-decoration: none;
+				background-color: #007acc;
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+			}
+
+			body.scrollBeyondLastLine {
+				margin-bottom: calc(100vh - 22px);
+			}
+
+			body.showEditorSelection .code-line {
+				position: relative;
+			}
+
+			body.showEditorSelection .code-active-line:before,
+			body.showEditorSelection .code-line:hover:before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0;
+				left: -12px;
+				height: 100%;
+			}
+
+			body.showEditorSelection li.code-active-line:before,
+			body.showEditorSelection li.code-line:hover:before {
+				left: -30px;
+			}
+
+			.vscode-light.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.15);
+			}
+
+			.vscode-light.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(0, 0, 0, 0.4);
+			}
+
+			.vscode-light.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-dark.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.4);
+			}
+
+			.vscode-dark.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 255, 255, 0.6);
+			}
+
+			.vscode-dark.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-active-line:before {
+				border-left: 3px solid rgba(255, 160, 0, 0.7);
+			}
+
+			.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+				border-left: 3px solid rgba(255, 160, 0, 1);
+			}
+
+			.vscode-high-contrast.showEditorSelection
+				.code-line
+				.code-line:hover:before {
+				border-left: none;
+			}
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+				border-radius: 8px;
+				filter: drop-shadow(-0 2px 2px rgba(0, 0, 0, 0.07));
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+
+			a:focus,
+			input:focus,
+			select:focus,
+			textarea:focus {
+				outline: 1px solid -webkit-focus-ring-color;
+				outline-offset: -1px;
+			}
+
+			hr {
+				border: 0;
+				height: 2px;
+				border-bottom: 2px solid;
+			}
+
+			h1 {
+				padding-bottom: 0.3em;
+				line-height: 1.2;
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+			}
+
+			h1,
+			h2,
+			h3 {
+				font-weight: normal;
+			}
+
+			table {
+				border-collapse: collapse;
+			}
+
+			table > thead > tr > th {
+				text-align: left;
+				border-bottom: 1px solid;
+			}
+
+			table > thead > tr > th,
+			table > thead > tr > td,
+			table > tbody > tr > th,
+			table > tbody > tr > td {
+				padding: 5px 10px;
+			}
+
+			table > tbody > tr + tr > td {
+				border-top: 1px solid;
+			}
+
+			blockquote {
+				margin: 0 7px 0 5px;
+				padding: 0 16px 0 10px;
+				border-left-width: 5px;
+				border-left-style: solid;
+			}
+
+			code {
+				font-family: Menlo, Monaco, Consolas, "Droid Sans Mono",
+					"Courier New", monospace, "Droid Sans Fallback";
+				font-size: 1em;
+				line-height: 1.357em;
+			}
+
+			body.wordWrap pre {
+				white-space: pre-wrap;
+			}
+
+			pre:not(.hljs),
+			pre.hljs code > div {
+				padding: 16px;
+				border-radius: 3px;
+				overflow: auto;
+			}
+
+			pre code {
+				color: var(--vscode-editor-foreground);
+				tab-size: 4;
+			}
+
+			/** Theming */
+
+			.vscode-light pre {
+				background-color: rgba(220, 220, 220, 0.4);
+			}
+
+			.vscode-dark pre {
+				background-color: rgba(10, 10, 10, 0.4);
+			}
+
+			.vscode-high-contrast pre {
+				background-color: rgb(0, 0, 0);
+			}
+
+			.vscode-high-contrast h1 {
+				border-color: rgb(0, 0, 0);
+			}
+
+			.vscode-light table > thead > tr > th {
+				border-color: rgba(0, 0, 0, 0.69);
+			}
+
+			.vscode-dark table > thead > tr > th {
+				border-color: rgba(255, 255, 255, 0.69);
+			}
+
+			.vscode-light h1,
+			.vscode-light hr,
+			.vscode-light table > tbody > tr + tr > td {
+				border-color: rgba(0, 0, 0, 0.18);
+			}
+
+			.vscode-dark h1,
+			.vscode-dark hr,
+			.vscode-dark table > tbody > tr + tr > td {
+				border-color: rgba(255, 255, 255, 0.18);
+			}
+		</style>
+
+		<style>
+			/*
+
+Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+
+*/
+			.hljs {
+				background: white;
+				color: black;
+			}
+
+			.hljs-comment,
+			.hljs-quote,
+			.hljs-variable {
+				color: #008000;
+			}
+
+			.hljs-keyword,
+			.hljs-selector-tag,
+			.hljs-built_in,
+			.hljs-name,
+			.hljs-tag {
+				color: #00f;
+			}
+
+			.hljs-string,
+			.hljs-title,
+			.hljs-section,
+			.hljs-attribute,
+			.hljs-literal,
+			.hljs-template-tag,
+			.hljs-template-variable,
+			.hljs-type,
+			.hljs-addition {
+				color: #a31515;
+			}
+
+			.hljs-deletion,
+			.hljs-selector-attr,
+			.hljs-selector-pseudo,
+			.hljs-meta {
+				color: #2b91af;
+			}
+
+			.hljs-doctag {
+				color: #808080;
+			}
+
+			.hljs-attr {
+				color: #f00;
+			}
+
+			.hljs-symbol,
+			.hljs-bullet,
+			.hljs-link {
+				color: #00b0e8;
+			}
+
+			.hljs-emphasis {
+				font-style: italic;
+			}
+
+			.hljs-strong {
+				font-weight: bold;
+			}
+		</style>
+
+		<style>
+			/*
+ * Markdown PDF CSS
+ */
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC",
+					"Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+			}
+
+			pre {
+				background-color: #f8f8f8;
+				border: 1px solid #cccccc;
+				border-radius: 3px;
+				overflow-x: auto;
+				white-space: pre-wrap;
+				overflow-wrap: break-word;
+			}
+
+			pre:not(.hljs) {
+				padding: 23px;
+				line-height: 19px;
+			}
+
+			blockquote {
+				background: rgba(127, 127, 127, 0.1);
+				border-color: rgba(0, 122, 204, 0.5);
+			}
+
+			.emoji {
+				height: 1.4em;
+			}
+
+			code {
+				font-size: 14px;
+				line-height: 19px;
+			}
+
+			/* for inline code */
+			:not(pre):not(.hljs) > code {
+				color: #3b3b3b; /* Change the old color so it seems less like an error */
+				font-size: inherit;
+				background: #e0e0e0;
+				border-radius: 4px;
+				padding: 1px 2px;
+				margin: -1px -2px;
+			}
+
+			/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+			.page {
+				page-break-after: always;
+			}
+		</style>
+
+		<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+	</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div>
+<h2 id="analiza-podataka-i-obrada-informacija---slu%C5%BEbeni-%C5%A1alabahter-2">Analiza podataka i obrada informacija - službeni šalabahter #2</h2>
+<p><strong>Učitavanje podataka</strong></p>
+<pre class="hljs"><code><div>data(<span class="hljs-string">"mtcars"</span>) <span class="hljs-comment"># učitavanje ugrađenih R podataka</span>
+cars &lt;- mtcars
+
+getwd() <span class="hljs-comment"># vraća aktivni radni direktorij</span>
+podaci &lt;- read.csv(<span class="hljs-string">"data/primjer.csv"</span>) <span class="hljs-comment"># učitavanje CSV datoteke</span>
+
+podaci &lt;- read.table(<span class="hljs-string">"data/primjer.txt"</span>, header = <span class="hljs-literal">TRUE</span>, sep = <span class="hljs-string">" "</span>) <span class="hljs-comment"># učitavanje TXT datoteke</span>
+
+install.packages(<span class="hljs-string">"readxl"</span>)
+<span class="hljs-keyword">library</span>(readxl)
+podaci &lt;- read_excel(<span class="hljs-string">"data/primjer.xlsx"</span>, sheet = <span class="hljs-number">1</span>) <span class="hljs-comment"># učitavanje XLSX datoteke</span>
+</div></code></pre>
+<p><strong>Kreiranje i korištenje slučajnog uzorka</strong></p>
+<pre class="hljs"><code><div>SEED &lt;- <span class="hljs-number">1234567890</span>
+set.seed(SEED)
+
+podaci &lt;- c(<span class="hljs-string">"Marko"</span>, <span class="hljs-string">"Ana"</span>, <span class="hljs-string">"Ivan"</span>) 
+imena &lt;- sample(podaci, <span class="hljs-number">2</span>) <span class="hljs-comment"># biranje 2 nasumična podatka</span>
+
+redci &lt;- sample(nrow(podaci), <span class="hljs-number">20</span>) <span class="hljs-comment"># biranje 20 nasumičnih redaka</span>
+stupci &lt;- sample(ncol(podaci), <span class="hljs-number">5</span>)  <span class="hljs-comment"># biranje 5 nasumičnih stupaca</span>
+
+<span class="hljs-comment"># izdvajanje % redaka za train/test podatke</span>
+indeksi &lt;- sample(<span class="hljs-number">1</span>:nrow(podaci), <span class="hljs-number">0.7</span> * nrow(podaci))
+train &lt;- podaci[indeksi, ]
+test &lt;- podaci[-indeksi, ]
+</div></code></pre>
+<p><strong>Provjera i čiščenje podataka</strong></p>
+<pre class="hljs"><code><div>is.na(podaci) <span class="hljs-comment"># provjera nedostajućih vrijednosti</span>
+colSums(is.na(podaci)) <span class="hljs-comment"># broj nedostajućih vrijednosti po stupcima</span>
+
+podaci_clean &lt;- na.omit(podaci) <span class="hljs-comment"># uklanjanje redaka s nedostajućim vrijednostima</span>
+podaci_clean2 &lt;- podaci[complete.cases(podaci),] <span class="hljs-comment"># uklanjanje redaka s nedostajućim vrijednostima</span>
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Korelacija</strong></p>
+<pre class="hljs"><code><div>cor(x, y) <span class="hljs-comment"># izračun korelacije (Pearson)</span>
+
+cor(x, y, method = <span class="hljs-string">"pearson"</span>)  <span class="hljs-comment"># Pearsonov koeficijent korelacije</span>
+cor(x, y, method = <span class="hljs-string">"spearman"</span>) <span class="hljs-comment"># Spearmanov koeficijent korelacije</span>
+
+cor(podaci) <span class="hljs-comment"># korelacijska matrica</span>
+pairs(podaci) <span class="hljs-comment"># vizualizacija korelacijske matrice</span>
+
+<span class="hljs-comment"># ostale vizualizacije korelacijske matrice</span>
+<span class="hljs-keyword">library</span>(corrplot) <span class="hljs-comment"># install.packages("corrplot")</span>
+
+corrplot(cor_matrix) <span class="hljs-comment"># method = "circle" - ako nije postavljeno</span>
+corrplot(cor_matrix, method = <span class="hljs-string">"color"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"number"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"square"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"ellipse"</span>)
+corrplot(cor_matrix, method = <span class="hljs-string">"pie"</span>)
+
+cov(x, y) <span class="hljs-comment"># izračun kovarijance</span>
+</div></code></pre>
+<p><strong>Regresijska analiza</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Linearna regresija</span>
+model &lt;- lm(mpg ~ wt + hp, data = mtcars) 
+summary(model)
+<span class="hljs-comment"># *** → vrlo značajno (p &lt; 0.001)</span>
+<span class="hljs-comment"># ** → značajno (p &lt; 0.01)</span>
+<span class="hljs-comment"># * → umjereno značajno (p &lt; 0.05)</span>
+<span class="hljs-comment"># . → slabo značajno (p &lt; 0.1)</span>
+<span class="hljs-comment"># (prazno) → nije značajno (p ≥ 0.1)</span>
+
+<span class="hljs-comment"># Logistička regresija</span>
+model &lt;- glm(income_bin ~ age + education.num, data = adult, family = binomial)
+
+<span class="hljs-comment"># Provjera multikolearnosti</span>
+<span class="hljs-keyword">library</span>(car) <span class="hljs-comment"># install.packages("car")</span>
+vif(model)
+
+sqrt(vif(model)) &gt; <span class="hljs-number">2</span> <span class="hljs-comment"># Ako je sve false nema problema multikolinearnosti</span>
+
+<span class="hljs-comment"># Izračunavanje vjerojatnosti</span>
+prob &lt;- predict(model, type = <span class="hljs-string">"response"</span>)
+
+pred_class &lt;- ifelse(prob &gt; <span class="hljs-number">0.5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)
+table(Predicted = pred_class, Actual = adult$income_bin)
+</div></code></pre>
+<div class="page"></div>
+<p><strong>Vremenski nizovi</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">library</span>(tseries) <span class="hljs-comment"># install.packages("tseries")</span>
+podaci &lt;- c(<span class="hljs-number">23</span>,<span class="hljs-number">45</span>,<span class="hljs-number">67</span>,<span class="hljs-number">34</span>,<span class="hljs-number">56</span>,<span class="hljs-number">78</span>,<span class="hljs-number">89</span>,<span class="hljs-number">45</span>,<span class="hljs-number">67</span>,<span class="hljs-number">89</span>,<span class="hljs-number">43</span>,<span class="hljs-number">56</span>, 
+            <span class="hljs-number">34</span>,<span class="hljs-number">67</span>,<span class="hljs-number">89</span>,<span class="hljs-number">54</span>,<span class="hljs-number">76</span>,<span class="hljs-number">88</span>,<span class="hljs-number">91</span>,<span class="hljs-number">52</span>,<span class="hljs-number">71</span>,<span class="hljs-number">85</span>,<span class="hljs-number">49</span>,<span class="hljs-number">63</span>)
+
+<span class="hljs-comment"># stvaranje vremenskog niza</span>
+vremenski_niz &lt;- ts(podaci, start = c(<span class="hljs-number">2020</span>, <span class="hljs-number">1</span>), frequency = <span class="hljs-number">12</span>)
+
+<span class="hljs-comment"># čišćenje od nedostajućih vrijednosti i outliera</span>
+vremenski_niz &lt;- tsclean(vremenski_niz)
+
+<span class="hljs-comment"># vizualizacija vremenskog niza</span>
+plot(vremenski_niz)
+
+<span class="hljs-comment"># Vizualizacija s pomoću moving average funkcije</span>
+vremenski_niz_ma3 &lt;- ma(vremenski_niz, order = <span class="hljs-number">3</span>)
+plot(vremenski_niz_ma3, main = <span class="hljs-string">"Pomični prosjek (red 3)"</span>)
+
+<span class="hljs-comment"># &lt;===============| Dekompozicija vremenskog niza |===============&gt;</span>
+dekompozicija &lt;- decompose(vremenski_niz)
+plot(dekompozicija)
+
+<span class="hljs-comment"># STL dekompozicija</span>
+stl_dekomp &lt;- stl(vremenski_niz, s.window = <span class="hljs-string">"periodic"</span>)
+plot(stl_dekomp, main = <span class="hljs-string">"STL dekompozicija"</span>)
+
+<span class="hljs-comment"># Aditivna dekompozicija</span>
+decomp_add &lt;- decompose(vremenski_niz, type = <span class="hljs-string">"additive"</span>)
+plot(decomp_add)
+
+<span class="hljs-comment"># Multiplikativna dekompozicija</span>
+decomp_mult &lt;- decompose(vremenski_niz, type = <span class="hljs-string">"multiplicative"</span>)
+plot(decomp_mult)
+
+<span class="hljs-comment"># &lt;===============| Stacionarnosti vremenskog niza |===============&gt;</span>
+<span class="hljs-keyword">library</span>(tseries) <span class="hljs-comment"># install.packages("tseries")</span>
+
+<span class="hljs-comment"># Provjera stacionarnosti</span>
+adf_test &lt;- adf.test(vremenski_niz)
+adf_test <span class="hljs-comment"># ako je p-vrijednost &gt; 0.05 -&gt; niz nije stacionaran</span>
+
+<span class="hljs-comment"># Prilagodba niza za stacionarnost</span>
+diferencirani_niz &lt;- diff(vremenski_niz, <span class="hljs-number">1</span>) <span class="hljs-comment"># Diferenciranje</span>
+adf.test(diferencirani_niz)
+
+ndiffs(vremenski_niz) <span class="hljs-comment"># Vraća broj potrebnih diferencijacija za stacionarnost</span>
+
+<span class="hljs-comment"># Autokorelacijske funkcije - ACF i PACF</span>
+acf(vremenski_niz, main = <span class="hljs-string">"ACF - vremenski_niz"</span>)
+pacf(vremenski_niz, main = <span class="hljs-string">"PACF - vremenski_niz"</span>)
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># &lt;===============| ARIMA model |===============&gt;</span>
+ap_arima &lt;- auto.arima(vremenski_niz)
+summary(ap_arima)
+
+<span class="hljs-comment"># ARIMA predikcija</span>
+<span class="hljs-keyword">library</span>(forecast) <span class="hljs-comment"># install.packages("forecast") </span>
+ap_forecast_arima &lt;- forecast(ap_arima, h = <span class="hljs-number">36</span>)
+
+<span class="hljs-comment"># Vizualizacija ARIMA predikcije</span>
+<span class="hljs-keyword">library</span>(ggplot2)  <span class="hljs-comment"># install.packages("ggplot2")</span>
+autoplot(ap_forecast_arima) + ggtitle(<span class="hljs-string">"ARIMA predikcija"</span>)
+</div></code></pre>
+<p><strong>Klasifikacija</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">library</span>(rpart) <span class="hljs-comment">#install.packages("rpart")</span>
+<span class="hljs-keyword">library</span>(rpart.plot) <span class="hljs-comment">#install.packages("rpart.plot")</span>
+
+<span class="hljs-comment"># Podjela podataka na trening i test skup</span>
+set.seed(<span class="hljs-number">123</span>)
+indeksi &lt;- sample(<span class="hljs-number">1</span>:nrow(iris), <span class="hljs-number">0.7</span>*nrow(iris))
+train &lt;- iris[indeksi,]
+test &lt;- iris[-indeksi,]
+
+<span class="hljs-comment"># Izgradnja stabla</span>
+stablo &lt;- rpart(varijabla ~ ., data = train, method = <span class="hljs-string">"class"</span>)
+
+<span class="hljs-comment"># Vizualizacija</span>
+rpart.plot(stablo)
+
+<span class="hljs-comment"># najvažnije varijable</span>
+stablo$variable.importance
+
+<span class="hljs-comment"># tablica parametara rezanja stabla</span>
+stablo$cptable
+
+<span class="hljs-comment"># podrezivanje stabla</span>
+podreznao_stablo &lt;- prune(stablo, cp=<span class="hljs-number">0.0100000</span>)
+
+<span class="hljs-comment"># &lt;===============| Predikcija i evaluacija |===============&gt;</span>
+<span class="hljs-keyword">library</span>(caret) <span class="hljs-comment">#install.packages("caret")</span>
+
+predikcije &lt;- predict(stablo, test, type = <span class="hljs-string">"class"</span>) <span class="hljs-comment"># Predikcija</span>
+
+confusionMatrix(predikcije, test$varijabla) <span class="hljs-comment"># Evaluacija</span>
+</div></code></pre>
+<div class="page"></div>
+<pre class="hljs"><code><div><span class="hljs-comment"># &lt;===============| Random Forest |===============&gt;</span>
+<span class="hljs-keyword">library</span>(randomForest) <span class="hljs-comment"># install.packages("randomForest")</span>
+<span class="hljs-keyword">library</span>(caret) <span class="hljs-comment"># install.packages("caret")</span>
+
+<span class="hljs-comment"># Izgradnja stabla</span>
+forest &lt;- randomForest(podaci ~ ., data = train)
+
+forest$ntree       <span class="hljs-comment"># Broj stabala</span>
+forest$mtry        <span class="hljs-comment"># Broj varijabli (prediktora)</span>
+importance(forest) <span class="hljs-comment"># Važnost varijabli</span>
+
+varImpPlot(forest) <span class="hljs-comment"># grafički prikaz</span>
+
+<span class="hljs-comment"># &lt;===============| Predikcija i evaluacija |===============&gt;</span>
+predikcije &lt;- predict(forest, test)  <span class="hljs-comment"># Predikcija</span>
+
+confusionMatrix(predikcije, test$varijabla) <span class="hljs-comment"># Evaluacija</span>
+</div></code></pre>
+</div>
+</body>
+</html>
