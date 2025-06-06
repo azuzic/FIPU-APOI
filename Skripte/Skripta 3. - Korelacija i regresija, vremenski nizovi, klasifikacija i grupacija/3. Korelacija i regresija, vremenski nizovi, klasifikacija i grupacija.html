@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>R osnove</title>
+		<title>3. Korelacija i regresija, vremenski nizovi, klasifikacija i grupacija.md</title>
 		<meta
 			http-equiv="Content-type"
 			content="text/html;charset=UTF-8" />
@@ -419,7 +419,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
     </p>
     <img src="../Icons/R_3.svg" style="width: 96px; height: 96px; margin: 0px;"></img> 
 </div>
-<p><strong>Posljednje ažurirano:</strong> 21. svibnja 2025.</p>
+<p><strong>Posljednje ažurirano:</strong> 30. svibnja 2025.</p>
 <!-- TOC -->
 <ul>
 <li><a href="#analiza-podataka-i-obrada-informacija">Analiza podataka i obrada informacija</a></li>
@@ -755,6 +755,7 @@ corrplot(cor_matrix, method = <span class="hljs-string">"pie"</span>)
 <p><em>U R-u kovarijanca se računa s pomoću sljedeće funkcije:</em></p>
 <pre class="hljs"><code><div>cov(x, y)
 </div></code></pre>
+<div class="page"></div>
 <p>Korelacija je standardizirana verzija kovarijance:<br>
 $$
 \rho = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
@@ -944,6 +945,7 @@ Adjusted R-squared:  <span class="hljs-number">0.8148</span>
 <h3 id="logisti%C4%8Dka-regresija">Logistička regresija</h3>
 <p>Logistička regresija se koristi za predviđanje binarnih ishoda, tj. kada zavisna varijabla ima dvije kategorije (npr. da/ne, uspješno/neuspješno). U R-u, za izvođenje logističke regresije koristi se funkcija <code>glm()</code>, a rezultati se analiziraju kroz koeficijente, standardne pogreške, p-vrijednosti i druge metrike.</p>
 <p>Logistička regresija se koristi za predviđanje binarne varijable — u ovom slučaju: ima li osoba prihod veći od <em>50k USD</em> ili <em>ne</em>. Zavisna varijabla je <code>income</code>, s vrijednostima &lt;<code>=50K</code> i <code>&gt;50K</code>.</p>
+<div class="page"></div>
 <p><em>Primjer:</em></p>
 <pre class="hljs"><code><div>adult &lt;- read.csv(<span class="hljs-string">"adult.data"</span>, header = <span class="hljs-literal">FALSE</span>, strip.white = <span class="hljs-literal">TRUE</span>)
 colnames(adult) &lt;- c(<span class="hljs-string">"age"</span>, <span class="hljs-string">"workclass"</span>, <span class="hljs-string">"fnlwgt"</span>, <span class="hljs-string">"education"</span>, <span class="hljs-string">"education.num"</span>,
@@ -951,7 +953,6 @@ colnames(adult) &lt;- c(<span class="hljs-string">"age"</span>, <span class="hlj
                      <span class="hljs-string">"capital.gain"</span>, <span class="hljs-string">"capital.loss"</span>, <span class="hljs-string">"hours.per.week"</span>, <span class="hljs-string">"native.country"</span>, <span class="hljs-string">"income"</span>)
 
 adult &lt;- na.omit(adult)
-
 adult$income_bin &lt;- ifelse(adult$income == <span class="hljs-string">"&gt;50K"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)
 
 model &lt;- glm(income_bin ~ age + education.num, data = adult, family = binomial)
@@ -1137,13 +1138,14 @@ f1_score    &lt;- <span class="hljs-number">2</span> * (precision * recall) / (p
 <blockquote>
 <p>Vremenski niz je skup opažanja indeksiranih vremenskih trenutaka, obično <strong>ekvidistantnim</strong> (<em>jednako razmaknutim</em>).</p>
 </blockquote>
-<p>Dvije glavne karakteristike vremenskih nizova su <strong>vremenski period</strong> i <strong>frekvencija</strong>. Ove karakteristike pružaju osnovne informacije o strukturi i prirodi podataka te omogućavajući da bolje razumijemo dinamiku promjena koje se odvijaju kroz vrijeme.</p>
+<p>Dvije glavne karakteristike vremenskih nizova su <strong>period</strong> i <strong>frekvencija</strong>. Ove karakteristike pružaju osnovne informacije o strukturi i prirodi podataka te omogućavajući da bolje razumijemo dinamiku promjena koje se odvijaju kroz vrijeme.</p>
 <ul>
-<li><strong>Vremenski period</strong> - nema ograničenja u pogledu ukupnog trajanja vremenskog niza. To može biti minuta, dan, mjesec ili čak stoljeće. Sve što je potrebno su <em>početna</em> i <em>završna</em> točka.
+<li><strong>Period</strong> - nema ograničenja u pogledu ukupnog trajanja vremenskog niza. To može biti minuta, dan, mjesec ili čak stoljeće. Sve što je potrebno su <em>početna</em> i <em>završna</em> točka.
 <ul>
 <li>npr. ako su podaci prikupljeni jednom dnevno od 1. siječnja 2000. do 31. prosinca 2009., razmak od jednog dana predstavlja <strong>vremenski trenutak</strong>, dok je skup vremenskih trenutaka cijelo desetljeće</li>
 </ul>
 </li>
+<div class="page"></div>
 <li><strong>Frekvencija</strong> - označava koliko često se bilježe vrijednosti skupa podataka. Da bi analiza vremenskog niza bila smislena, svi vremenski trenutci moraju biti jednaki i jasno definirani. To rezultira <strong>ekvidistantnim</strong> rasporedom vremenskih trenutaka, što pokazuje pravilnost u bilježenju podataka.
 <ul>
 <li>npr. frekvencija se može kretati od nekoliko milisekundi do nekoliko desetljeća, ali najčešće se pojavljuju dnevni, mjesečni, kvartalni i godišnji podaci</li>
@@ -1182,7 +1184,7 @@ vremenski_niz &lt;- tsclean(vremenski_niz)
 vremenski_niz &lt;- AirPassengers
 </div></code></pre>
 <p><img src="images/AirPassengers.png" alt="alt text"></p>
-<pre class="hljs"><code><div>plot(vremenski_niz, main = <span class="hljs-string">"Vremenski niz sa trend linijom"</span>)
+<pre class="hljs"><code><div>plot(vremenski_niz, main = <span class="hljs-string">"Vremenski niz s trend linijom"</span>)
 abline(lm(vremenski_niz ~ time(vremenski_niz)), col = <span class="hljs-string">"red"</span>)
 </div></code></pre>
 <p><img src="images/putnici_plot.png" alt="alt text"></p>
@@ -1230,6 +1232,7 @@ stl_dekomp &lt;- stl(AirPassengers, s.window = <span class="hljs-string">"period
 plot(stl_dekomp, main = <span class="hljs-string">"STL dekompozicija AirPassengers dataseta"</span>)
 
 </div></code></pre>
+<div class="page"></div>
 <h3 id="aditivna-i-multiplikativna-dekompozicija-vremenskog-niza">Aditivna i multiplikativna dekompozicija vremenskog niza</h3>
 <h4 id="1-aditivna-dekompozicija">1. <strong>Aditivna dekompozicija</strong></h4>
 <p>Koristi se kada amplitude sezonskih fluktuacija ostaju konstantne kroz vrijeme.</p>
@@ -1286,7 +1289,7 @@ plot(stl_mult, main = <span class="hljs-string">"STL Multiplikativna dekompozici
 </li>
 </ol>
 <h4 id="provjera-stacionarnosti">Provjera stacionarnosti</h4>
-<p>Jedan od najpoznatijih testova za provjeru stacionarnosti vremenskog niza je <strong>Augmented Dickey-Fuller (ADF)</strong> test, koji testira hipotezu da niz ima jedinčasti korijen, odnosno da nije stacionaran. Ako p-vrijednost testa bude manja od 0.05, možemo odbaciti hipotezu da niz nije stacionaran i zaključiti da je niz stacionaran.</p>
+<p>Jedan od najkorištenijih testova za provjeru stacionarnosti vremenskog niza je <strong>Augmentirani Dickey-Fullerov (ADF)</strong> test, koji provjerava hipotezu da niz sadrži jedinični korijen, odnosno da nije stacionaran. Ako je p-vrijednost testa manja od <code>0.05</code>, možemo odbaciti hipotezu da niz nije stacionaran i zaključiti da je niz stacionaran.</p>
 <p><em>Primjer:</em></p>
 <pre class="hljs"><code><div><span class="hljs-keyword">library</span>(tseries)
 
@@ -1311,7 +1314,7 @@ alternative hypothesis: stationary
 Ovaj rezultat znači da je p-vrijednost manja od 0.05, što sugerira da možemo odbaciti nultu hipotezu da vremenski niz nije stacionaran. Dakle, vremenski niz je stacionaran.</p>
 <ul>
 <li>
-<p><strong>Dickey-Fuller</strong>: Vrijednost test statistike je -7.3186. Ova statistika mjeri koliko su podaci u skladu s hipotezom o postojanju jedinčastog korijena (ne-stacionarnosti). Manje negativne vrijednosti obično ukazuju na veću vjerojatnost da niz nije stacionaran, dok negativne vrijednosti poput ove sugeriraju da je niz vjerojatno stacionaran.</p>
+<p><strong>Dickey-Fuller</strong>: Vrijednost test statistike je -7.3186. Ova statistika mjeri koliko su podaci u skladu s hipotezom o postojanju jediničnog korijena (ne-stacionarnosti). Manje negativne vrijednosti obično ukazuju na veću vjerojatnost da niz nije stacionaran, dok negativne vrijednosti poput ove sugeriraju da je niz vjerojatno stacionaran.</p>
 </li>
 <li>
 <p><strong>Lag order = 5</strong>: Test je korišten s 5 vremenskih kašnjenja (lags), što znači da su uzeti u obzir prethodni podaci na 5 vremenskih razmaka u analizi.</p>
@@ -1357,7 +1360,7 @@ adf.test(log_niz)
 <h3 id="acf-i-pacf">ACF i PACF</h3>
 <p><strong>ACF (<em>Autocorrelation Function</em>)</strong> i <strong>PACF (<em>Partial Autocorrelation Function</em>)</strong> su dva ključna alata za analizu vremenskih nizova. Ove funkcije pomažu u razumijevanju odnosa između različitih vremenskih točaka unutar niza i korištene su u identifikaciji odgovarajućih modela za vremenske nizove, poput ARIMA modela.</p>
 <h4 id="acf-autocorrelation-function">ACF (Autocorrelation Function)</h4>
-<p>ACF mjeri ukupnu korelaciju između trenutnih i prošlih vrijednosti vremenskog niza. To pokazuje kako su prošle vrijednosti povezane s trenutnim stanjem. Na primjer, ako se promjena u prošlim vrijednostima negativno ili pozitivno odražava na trenutne vrijednosti, ACF će to pokazati.</p>
+<p>ACF mjeri ukupnu korelaciju između trenutačnih i prošlih vrijednosti vremenskog niza. To pokazuje kako su prošle vrijednosti povezane s trenutačnim stanjem. Na primjer, ako se promjena u prošlim vrijednostima negativno ili pozitivno odražava na trenutačne vrijednosti, ACF će to pokazati.</p>
 <p><em>Primjer:</em></p>
 <pre class="hljs"><code><div>data(<span class="hljs-string">"AirPassengers"</span>)
 ap &lt;- AirPassengers
@@ -1369,7 +1372,7 @@ acf(ap, main = <span class="hljs-string">"ACF - AirPassengers"</span>)
 <li>Ako ACF prikazuje visoke korelacije u početnim vremenskim pomacima, to može značiti da je niz značajno <em>autocorrelated</em>, tj. da postoje značajni trendovi ili sezonske komponente.</li>
 </ul>
 <h4 id="pacf-partial-autocorrelation-function">PACF (Partial Autocorrelation Function)</h4>
-<p>PACF mjeri korelaciju između trenutne i prošle vrijednosti vremenskog niza, uzimajući u obzir sve intermedijarne vremenske točke. To je korisno za utvrđivanje koji broj prethodnih vrijednosti je potrebno uključiti u model. PACF je koristan kada želimo razumjeti utjecaj točno određene vremenske točke bez &quot;smetnji&quot; drugih vremenskih točaka.</p>
+<p>PACF mjeri korelaciju između trenutačne i prošle vrijednosti vremenskog niza, uzimajući u obzir sve intermedijarne vremenske točke. To je korisno za utvrđivanje koji broj prethodnih vrijednosti je potrebno uključiti u model. PACF je koristan kada želimo razumjeti utjecaj točno određene vremenske točke bez &quot;smetnji&quot; drugih vremenskih točaka.</p>
 <p><em>Primjer:</em></p>
 <pre class="hljs"><code><div>pacf(ap, main = <span class="hljs-string">"PACF - AirPassengers"</span>)
 </div></code></pre>
@@ -1387,7 +1390,7 @@ acf(ap, main = <span class="hljs-string">"ACF - AirPassengers"</span>)
 <p>Ovisno o vizualizaciji ACF-a i PACF-a, možemo odlučiti koje parametre AR i MA odabrati za ARIMA model.</p>
 </blockquote>
 <h3 id="arima-model">ARIMA model</h3>
-<p><strong>ARIMA</strong> (<em>AutoRegressive Integrated Moving Averag</em>e) je model koji kombinira autoregresiju, diferenciranje i pomični prosjek kako bi predvidio buduće vrijednosti vremenskog niza.</p>
+<p><strong>ARIMA</strong> (<em>AutoRegressive Integrated Moving Average</em>) je model koji kombinira autoregresiju, diferenciranje i pomični prosjek kako bi predvidio buduće vrijednosti vremenskog niza.</p>
 <p><em>Primjer:</em></p>
 <pre class="hljs"><code><div>data(<span class="hljs-string">"AirPassengers"</span>)
 ap &lt;- AirPassengers
@@ -1413,10 +1416,10 @@ Training set error measures:
                  ME     RMSE     MAE      MPE     MAPE     MASE        ACF1
 Training set <span class="hljs-number">1.3423</span> <span class="hljs-number">10.84619</span> <span class="hljs-number">7.86754</span> <span class="hljs-number">0.420698</span> <span class="hljs-number">2.800458</span> <span class="hljs-number">0.245628</span> -<span class="hljs-number">0.00124847</span>
 </div></code></pre>
-<p><strong>ARIMA(2,1,1)(0,1,0)[12]</strong>: Ovaj model koristi dva autoregresivna parametra (AR(2)), jedan pomični prosjek (MA(1)), s prvim diferenciranjem i sezonskim diferenciranjem na 12 mjeseci. Model je optimiziran za predviđanje vremenskih nizova sa sezonskim obrazcima.</p>
-<p><strong>AR1</strong>: Koeficijent <code>0.5960</code> znači da vrijednost vremenskog niza u trenutnom mjesecu ima značajnu pozitivnu korelaciju sa stanjem prije mjesec dana. Za svaki porast prethodne vrijednosti, trenutna vrijednost će se povećati za 0.5960.</p>
-<p><strong>AR2</strong>: Koeficijent <code>0.2143</code> pokazuje umjerenu pozitivnu korelaciju između trenutne vrijednosti i vrijednosti dva mjeseca prije. Za svaku promjenu u vrijednosti prije dva mjeseca, trenutna vrijednost se mijenja za 0.2143.</p>
-<p><strong>MA1</strong>: Koeficijent <code>-0.9819</code> označava da postoji snažna negativna korelacija između trenutne vrijednosti i pogreške koja je nastala prije mjesec dana. To znači da velike pogreške iz prošlih razdoblja snažno utječu na trenutnu vrijednost, ali u suprotnom smjeru.</p>
+<p><strong>ARIMA(2,1,1)(0,1,0)[12]</strong>: Ovaj model koristi dva autoregresivna parametra (AR(2)), jedan pomični prosjek (MA(1)), s prvim diferenciranjem i sezonskim diferenciranjem na 12 mjeseci. Model je optimiziran za predviđanje vremenskih nizova sa sezonskim obrascima.</p>
+<p><strong>AR1</strong>: Koeficijent <code>0.5960</code> znači da vrijednost vremenskog niza u trenutačnom mjesecu ima značajnu pozitivnu korelaciju sa stanjem prije mjesec dana. Za svaki porast prethodne vrijednosti, trenutačna vrijednost će se povećati za 0.5960.</p>
+<p><strong>AR2</strong>: Koeficijent <code>0.2143</code> pokazuje umjerenu pozitivnu korelaciju između trenutačne vrijednosti i vrijednosti dva mjeseca prije. Za svaku promjenu u vrijednosti prije dva mjeseca, trenutačna vrijednost se mijenja za 0.2143.</p>
+<p><strong>MA1</strong>: Koeficijent <code>-0.9819</code> označava da postoji snažna negativna korelacija između trenutačne vrijednosti i pogreške koja je nastala prije mjesec dana. To znači da velike pogreške iz prošlih razdoblja snažno utječu na trenutačnu vrijednost, ali u suprotnom smjeru.</p>
 <p><strong>AIC (<em>Akaike Information Criterion</em>)</strong>: Vrijednost <code>1017.85</code> pokazuje kvalitetu modela, pri čemu niže vrijednosti AIC označavaju bolji model. AIC je koristan za usporedbu različitih modela.</p>
 <p><strong>BIC (<em>Bayesian Information Criterion</em>)</strong>: BIC je sličan AIC-u, ali uključuje i kaznu za broj parametara u modelu. Vrijednost <code>1029.35</code> pomaže u odabiru modela s nižim rizikom od pretreniranja.</p>
 <ul>
@@ -1510,7 +1513,7 @@ autoplot(ap_forecast_arima) +
 <li><strong>Listova</strong> (<em>krajnjih čvorova</em>) koji predstavljaju konačne odluke ili predikcije (<em>npr. klasa „da“ ili „ne“</em>).</li>
 </ul>
 <p>Prednosti su što je model <strong>lako razumljiv i vizualno jasan</strong>, dok je glavni nedostatak <strong>osjetljivost na pretreniravanje</strong>, posebno kada je stablo duboko i složeno.</p>
-<p>U R-u se može izraditi pomoću funkcije <code>rpart()</code> iz paketa <code>rpart</code>, a vizualizirati s <code>rpart.plot</code>.</p>
+<p>U R-u se može izraditi s pomoću funkcije <code>rpart()</code> iz paketa <code>rpart</code>, a vizualizirati s <code>rpart.plot</code>.</p>
 <p><em>Primjer: Stablo odluke za iris dataset</em></p>
 <pre class="hljs"><code><div><span class="hljs-comment">#install.packages("rpart")</span>
 <span class="hljs-comment">#install.packages("rpart.plot")</span>
@@ -1566,7 +1569,7 @@ stablo$cptable
 </tr>
 <tr>
 <td><code>rel error</code></td>
-<td>Relativna pogreška – greška trenutnog stabla u odnosu na početnu</td>
+<td>Relativna pogreška – greška trenutačnog stabla u odnosu na početnu</td>
 </tr>
 <tr>
 <td><code>xerror</code></td>
@@ -1960,7 +1963,7 @@ points(kmeans_result$centers[, c(<span class="hljs-string">"Sepal.Length"</span>
 <span class="hljs-comment"># Pretvaranje rezultata u Kcentroids objekt</span>
 kcca_model &lt;- as.kcca(kmeans_result, iris_features)
 
-<span class="hljs-comment"># Dodjela klastera pomoću flexclust metode</span>
+<span class="hljs-comment"># Dodjela klastera s pomoću flexclust metode</span>
 clusters_flex &lt;- predict(kcca_model)
 
 <span class="hljs-comment"># Evaluacija točnosti u odnosu na stvarne klase</span>
@@ -2001,13 +2004,13 @@ table(pam_result$clustering, iris$Species)
 <span class="hljs-comment"># 2      0         48        14</span>
 <span class="hljs-comment"># 3      0          2        36</span>
 
-
+<span class="hljs-comment"># D</span>
 clusplot(iris_features, 
          kmeans_result$cluster, 
          color = <span class="hljs-literal">TRUE</span>, shade = <span class="hljs-literal">TRUE</span>, labels = <span class="hljs-number">2</span>, lines = <span class="hljs-number">0</span>, 
          main = <span class="hljs-string">"Clusplot prikaz K-means klastera"</span>)
 </div></code></pre>
-<p><strong>PAM algoritam</strong> (Partitioning Around Medoids) sličan K-meansu, ali koristi <strong>medoide</strong> umjesto sredina (<em>otporniji na šum i outliere</em>)</p>
+<p><strong>PAM algoritam</strong> (Partitioning Around Medoids) sličan K-means, ali koristi <strong>medoide</strong> umjesto sredina (<em>otporniji na šum i outliere</em>)</p>
 <p><img src="images/clusplot.png" alt="alt text"></p>
 </div>
 </body>
